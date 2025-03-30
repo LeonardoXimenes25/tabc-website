@@ -1,0 +1,31 @@
+/* hero */
+.hero {
+    height: 100vh; /* Mengatur tinggi hero section ke 100% dari tinggi layar */
+    overflow: hidden; /* Menyembunyikan elemen yang melampaui batas */
+    position: relative; /* Agar ornamen bola atau elemen lain bisa diposisikan secara absolut */
+}
+
+.hero .container {
+    height: 100%; /* Agar container menutupi seluruh tinggi hero */
+}
+
+.hero h1, .hero p {
+    color: #333; /* Warna teks untuk h1 dan p */
+}
+
+.colorful-ball {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff7f00, #ff1493, #00bfff, #32cd32);
+    animation: spin 3s infinite linear;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
