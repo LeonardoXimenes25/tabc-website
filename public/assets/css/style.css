@@ -13,3 +13,150 @@
   .list-group-item-action:hover {
     background-color: #f8f9fa;
   }
+
+  /* lirik lagu */
+  /* Related Songs - Darker Style */
+/* Tighter spacing for song info */
+.song-info {
+    line-height: 1.5;
+  }
+  
+  .song-info h2 {
+    margin-bottom: 0.2rem;
+  }
+  
+  /* Tighter lyrics spacing */
+  .lyrics-content {
+    line-height: 1.8; /* Reduced from 2.2 */
+  }
+  
+  .lyrics-section {
+    margin-bottom: 1rem; /* Reduced from 1.5rem */
+  }
+  
+  .lyrics-section h4 {
+    margin-bottom: 0.5rem; /* Reduced from 1rem */
+  }
+  
+  .lyrics-section p {
+    margin-bottom: 0.3rem; /* Tighter paragraph spacing */
+  }
+  
+  /* Related songs adjustments */
+  .related-song-item {
+    background-color: #2c3e50;
+    border-radius: 5px;
+    padding: 0.8rem !important; /* Slightly reduced */
+    margin-bottom: 0.8rem !important;
+  }
+  
+  .related-song-item h5 {
+    font-size: 0.95rem;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .lyrics-content {
+      line-height: 1.7;
+    }
+    
+    .song-info div {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  /* song index */
+  /* Song Card Styles */
+.song-card {
+    position: relative;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+  
+  .song-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-color: #adb5bd;
+  }
+  
+  .song-card .card-body {
+    padding: 1rem;
+  }
+  
+  .song-card .stretched-link::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+  
+  /* Popular Songs Styles */
+ /* Song Grid Styles */
+.song-item {
+    position: relative;
+    padding: 1rem;
+    transition: transform 0.2s ease;
+  }
+  
+  .song-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .song-item img {
+    transition: transform 0.3s ease;
+  }
+  
+  .song-item:hover img {
+    transform: scale(1.05);
+  }
+  
+  /* Popular Songs Styles */
+  .popular-song-item {
+    position: relative;
+    padding: 0.75rem;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .popular-song-item:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .popular-song-rank {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 50%;
+    font-size: 0.8rem;
+  }
+  
+  /* Pagination Styles */
+  .pagination .page-item.active .page-link {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+  }
+  
+  .pagination .page-link {
+    color: #0d6efd;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .row-cols-2 > * {
+      flex: 0 0 auto;
+      width: 50%;
+    }
+    
+    .col-lg-4 {
+      margin-top: 2rem;
+    }
+  }
