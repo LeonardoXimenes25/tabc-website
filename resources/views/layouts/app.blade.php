@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-    @include('layouts.head')
-
+@include('partials/head')
 <body>
-    @include('partials.navbar')
+    @include('partials/navbar')
 
-   <main class="py-4">
-    @yield('content')
-   </main>
+    <main class="container py-4">
+        @yield('content')
+    </main>
 
-    {{-- bootstrap --}}
+    @include('partials/footer')
+    
+    {{-- js bootstrap --}}
     <script src="{{asset('assets/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 </body>
 </html>
