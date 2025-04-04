@@ -5,7 +5,7 @@
   <div class="row">
     <!-- Main Content Column -->
     <div class="col-lg-8 pe-lg-4">
-      <h1 class="mb-4">Daftar Lirik Lagu</h1>
+      <h2 class="mb-4">Daftar Lirik Lagu</h2>
       
       <!-- Song Grid -->
       <div class="row row-cols-2 row-cols-md-4 g-4 mb-4">

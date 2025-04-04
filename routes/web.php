@@ -26,3 +26,8 @@ Route::get('/lyrics', function () {
 Route::get('/lyrics/{id}', function ($id) {
     return view('lyrics.show');
 });
+
+// about
+Route::get('/about', function () {
+    return view('about');
+});
