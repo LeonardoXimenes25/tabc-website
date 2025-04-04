@@ -6,6 +6,9 @@
     {{-- css --}}
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 
+    {{-- css --}}
+    <link rel="stylesheet" href="{{asset('assets/css/hero.css')}}">
+
     {{-- bootstrap --}}
     <link rel="stylesheet" href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}">
 

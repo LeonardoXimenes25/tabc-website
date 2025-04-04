@@ -1,44 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container my-4">
+<div class="container my-4 pt-5">
   <div class="row">
     <!-- Column 1: Song Info (Tighter spacing) -->
     <div class="col-lg-3 pe-lg-4">
       <div class="song-info">
         <div class="d-flex align-items-center mb-2">
-          <h2 class="h5 text-muted me-2">Artist:</h2>
-          <span class="h5">JPCC Worship</span>
+          <h6 class="text me-2 fw-bold">Artist:</h6>
+          <h6 class="text-muted">JPCC Worship</h6>
         </div>
         
         <div class="d-flex mb-2">
-          <h2 class="h5 text-muted me-2">Genre:</h2>
-          <span>Modern Worship</span>
+          <h6 class="text me-2 fw-bold">Genre:</h6>
+          <h6 class="text-muted">Modern Worship</h6>
         </div>
         
         <div class="d-flex mb-2">
-          <h2 class="h5 text-muted me-2">Theme:</h2>
-          <span>Iman Dan Pengharapan</span>
+          <h6 class="text me-2 fw-bold">Album:</h6>
+          <h6 class="text-muted">Made Alive</h6>
         </div>
         
         <div class="d-flex mb-2">
-          <h2 class="h5 text-muted me-2">Tempo:</h2>
-          <span>Cepat (120 BPM)</span>
-        </div>
-        
-        <div class="d-flex mb-2">
-          <h2 class="h5 text-muted me-2">Key:</h2>
-          <span>D Major</span>
-        </div>
-        
-        <div class="d-flex mb-2">
-          <h2 class="h5 text-muted me-2">Album:</h2>
-          <span>Made Alive</span>
-        </div>
-        
-        <div class="d-flex mb-2">
-          <h2 class="h5 text-muted me-2">Year:</h2>
-          <span>2017</span>
+          <h6 class="text me-2 fw-bold">Year:</h6>
+          <h6 class="text-muted">2017</h6>
         </div>
         
         <div class="tags mt-3">
@@ -58,13 +43,13 @@
     </div>
     
     <!-- Column 2: Lyrics (Tighter line height) -->
-    <div class="col-lg-5 px-lg-3">
+    <div class="col-lg-5 px-lg-4">
       <article class="lyrics-content">
-        <h1 class="display-5 mb-2">Made Alive</h1>
+        <h1 class="display-6 mb-4 fw">Made Alive</h1>
         
         <!-- Verse 1 -->
         <div class="lyrics-section mb-3">
-          <h4 class="text-muted mb-2">[Verse 1]</h4>
+          <h6 class="text-muted mb-2">Verse 1</h6>
           <p>Ku dib'ri hidup yang kekal</p>
           <p>Ku dipanggil anak Tuhan</p>
           <p>Di dalam Dia ku berdiri</p>
@@ -73,7 +58,7 @@
         
         <!-- Chorus -->
         <div class="lyrics-section mb-3">
-          <h4 class="text-muted mb-2">[Chorus]</h4>
+          <h6 class="text-muted mb-2">Chorus</h6>
           <p>Ku dibuat hidup dalam Kristus</p>
           <p>Ku dib'ri hati yang baru</p>
           <p>Ku dipanggil untuk bersinar</p>

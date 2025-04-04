@@ -4,7 +4,7 @@
 <body>
     @include('partials/navbar')
 
-    <main class="mt-5 pt-3">
+    <main class="mt-5 pt-4">
         @yield('content')
     </main>
 
