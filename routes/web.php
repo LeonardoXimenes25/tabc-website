@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+// artikel
 // Home
 Route::get('/', function () {
     return view('home');
@@ -15,4 +15,14 @@ Route::get('/articles', function () {
 // Single Post
 Route::get('/articles/{id}', function ($id) {
     return view('articles.show');
+});
+
+// lirik lagu
+// Static routes for lyrics
+Route::get('/lyrics', function () {
+    return view('lyrics.index');
+});
+
+Route::get('/lyrics/{id}', function ($id) {
+    return view('lyrics.show');
 });
