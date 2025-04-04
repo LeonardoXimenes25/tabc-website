@@ -17,6 +17,11 @@
             </a>
           </li>
           <li class="nav-item mx-2">
+            <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">
+              <i class="bi bi-info-circle me-1"></i> Tentang
+            </a>
+          </li>
+          <li class="nav-item mx-2">
             <a class="nav-link {{ request()->is('articles') ? 'active' : '' }}" href="/articles">
               <i class="bi bi-journal-text me-1"></i> Artikel
             </a>
@@ -24,11 +29,6 @@
           <li class="nav-item mx-2">
             <a class="nav-link {{ request()->is('lyrics') ? 'active' : '' }}" href="/lyrics">
               <i class="bi bi-music-note-list me-1"></i> Lirik Lagu
-            </a>
-          </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">
-              <i class="bi bi-info-circle me-1"></i> Tentang
             </a>
           </li>
         </ul>

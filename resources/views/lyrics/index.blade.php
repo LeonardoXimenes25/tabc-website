@@ -12,7 +12,7 @@
         <!-- Song 1 -->
         <div class="col">
           <div class="song-item text-center">
-            <img src="{{asset('images/church-hero.jpg')}}" class="img-fluid rounded mb-2" alt="Song Cover">
+            <img src="{{asset('images/church-hero.jpg')}}" class="img-fluid mb-2" alt="Song Cover">
             <h3 class="h6 mb-1">Made Alive</h3>
             <p class="text-muted small">JPCC Worship</p>
             <a href="/lyrics/1" class="stretched-link"></a>
@@ -22,7 +22,7 @@
         <!-- Song 2 -->
         <div class="col">
           <div class="song-item text-center">
-            <img src="{{asset('images/church-hero.jpg')}}" class="img-fluid rounded mb-2" alt="Song Cover">
+            <img src="{{asset('images/church-hero.jpg')}}" class="img-fluid mb-2" alt="Song Cover">
             <h3 class="h6 mb-1">God of Victory</h3>
             <p class="text-muted small">JPCC Worship</p>
             <a href="/lyrics/2" class="stretched-link"></a>
@@ -32,7 +32,7 @@
         <!-- Song 3 -->
         <div class="col">
           <div class="song-item text-center">
-            <img src="{{asset('images/church-hero.jpg')}}" class="img-fluid rounded mb-2" alt="Song Cover">
+            <img src="{{asset('images/church-hero.jpg')}}" class="img-fluid mb-2" alt="Song Cover">
             <h3 class="h6 mb-1">Percaya</h3>
             <p class="text-muted small">JPCC Worship</p>
             <a href="/lyrics/3" class="stretched-link"></a>
@@ -42,7 +42,7 @@
         <!-- Song 4 -->
         <div class="col">
           <div class="song-item text-center">
-            <img src="{{asset('images/church-hero.jpg')}}" class="img-fluid rounded mb-2" alt="Song Cover">
+            <img src="{{asset('images/church-hero.jpg')}}" class="img-fluid mb-2" alt="Song Cover">
             <h3 class="h6 mb-1">All Heaven Declares</h3>
             <p class="text-muted small">JPCC Worship</p>
             <a href="/lyrics/4" class="stretched-link"></a>
