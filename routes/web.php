@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// artikel
-// Home
+// home
 Route::get('/', function () {
     return view('home');
 });
@@ -30,4 +29,9 @@ Route::get('/lyrics/{id}', function ($id) {
 // about
 Route::get('/about', function () {
     return view('about');
+});
+
+// Schedule
+Route::get('/schedule', function () {
+    return view('schedule.index');
 });

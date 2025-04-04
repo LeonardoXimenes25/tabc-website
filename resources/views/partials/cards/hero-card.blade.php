@@ -8,7 +8,7 @@
                 <h1 class="display-4 fw-bold mb-4 welcome-text">Selamat Datang di Website TABC</h1>
                 <p class="lead mb-4">Bergabunglah bersama kami dalam ibadah dan persekutuan. Mari tumbuh bersama dalam iman dan kasih.</p>
                 <div class="d-flex align-items-center">
-                    <a href="#jadwal-ibadah" class="btn btn-primary btn-lg me-3">
+                    <a href="" class="btn btn-primary btn-lg me-3">
                         <i class="fas fa-calendar-alt me-2"></i> Jadwal Ibadah
                     </a>
                     <a href="#" class="text-decoration-none d-flex align-items-center">

@@ -22,6 +22,11 @@
             </a>
           </li>
           <li class="nav-item mx-2">
+            <a class="nav-link {{ request()->is('schedule') ? 'active' : '' }}" href="/schedule">
+              <i class="bi bi-info-circle me-1"></i> Jadwal Ibadah
+            </a>
+          </li>
+          <li class="nav-item mx-2">
             <a class="nav-link {{ request()->is('articles') ? 'active' : '' }}" href="/articles">
               <i class="bi bi-journal-text me-1"></i> Artikel
             </a>

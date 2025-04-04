@@ -118,6 +118,128 @@ body {
 }
 
 
+/* Schedule */
+.schedule-section {
+  padding: 5rem 0;
+  background-color: #f8f9fa;
+}
+
+.schedule-card {
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+.schedule-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-sunday {
+  border-top: 5px solid #3498db;
+}
+
+.card-sunday-school {
+  border-top: 5px solid #2ecc71;
+}
+
+.card-wednesday {
+  border-top: 5px solid #9b59b6;
+}
+
+.card-upcoming {
+  border-top: 5px solid #e74c3c;
+}
+
+.schedule-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-sunday {
+  background-color: #3498db;
+}
+
+.icon-sunday-school {
+  background-color: #2ecc71;
+}
+
+.icon-wednesday {
+  background-color: #9b59b6;
+}
+
+.icon-upcoming {
+  background-color: #e74c3c;
+}
+
+.schedule-time {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.schedule-title {
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.schedule-detail {
+  color: #7f8c8d;
+  margin-bottom: 0.5rem;
+}
+
+.section-title {
+  position: relative;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.section-title:after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: #3498db;
+}
+
+.upcoming-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 50px;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.btn-outline-primary {
+  border-color: #3498db;
+  color: #3498db;
+  border-radius: 50px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: #3498db;
+  color: white;
+}
+
 /* article-section */
 .article-content {
     line-height: 1.8;
