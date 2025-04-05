@@ -6,7 +6,7 @@
                 <h5 class="text-uppercase mb-4" style="color: #e6b800;">
                     <i class="fas fa-church me-2"></i> The Alliance Bible Church
                 </h5>
-                <p class="text-muted">
+                <p class="text-white">
                     <i class="fas fa-cross me-2" style="color: #e6b800;"></i> 
                     Sebuah komunitas orang percaya yang berkomitmen untuk menyembah Tuhan, membangun sesama.
                 </p>
