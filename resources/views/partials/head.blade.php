@@ -6,8 +6,8 @@
     {{-- css --}}
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 
-    {{-- css --}}
-    <link rel="stylesheet" href="{{asset('assets/css/hero.css')}}">
+    {{-- icons --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     {{-- bootstrap --}}
     <link rel="stylesheet" href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}">
