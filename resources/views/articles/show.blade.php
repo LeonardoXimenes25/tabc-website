@@ -1,27 +1,66 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container my-5">
+<!-- Full-width Breadcrumb Background -->
+<div class="bg-light border-bottom py-2">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <!-- Breadcrumb (Kiri) -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0" style="background-color: transparent; padding: 0;">
+          <li class="breadcrumb-item">
+            <a href="/" class="text-decoration-none">
+              <i class="fas fa-home text-primary"></i>
+            </a>
+          </li>
+          <li class="breadcrumb-item"><a href="/articles" class="text-decoration-none text-dark">Artikel</a></li>
+          <li class="breadcrumb-item active text-muted" aria-current="page">Laravel 10</li>
+        </ol>
+      </nav>
+      
+      <!-- Search Bar (Kanan) -->
+      <form action="/articles/search" method="GET" class="ms-3">
+        <div class="input-group" style="width: 250px;">
+          <input 
+            type="search" 
+            name="q"
+            class="form-control border-end-0"
+            placeholder="Cari artikel..."
+            aria-label="Search"
+          >
+          <span class="input-group-text bg-white border-start-0">
+            <i class="fas fa-search text-muted"></i>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Main Container -->
+<div class="container my-4">
   <div class="row">
     <!-- Main Content -->
     <div class="col-lg-8">
+      <!-- Konten artikel tetap sama seperti sebelumnya -->
       <article>
         <!-- Article Header -->
         <div class="mb-4">
-          <h1 class="display-4 mb-3">Cara Install Laravel 10</h1>
+          <h1 class="fw-bold mb-3" style="font-size: 2rem;">Cara Install Laravel 10</h1>
           <div class="d-flex align-items-center">
             <img src="https://via.placeholder.com/50" alt="Author" class="rounded-circle me-3">
             <div>
               <div class="fw-bold">Admin</div>
               <div class="text-muted small">
-                Published on May 15, 2023 • 5 min read
+                <i class="far fa-calendar-alt me-1"></i> May 15, 2023 • 
+                <i class="far fa-clock me-1"></i> 5 min read
               </div>
             </div>
           </div>
         </div>
 
         <!-- Featured Image -->
-        <img src="https://via.placeholder.com/800x450?text=Laravel" class="img-fluid rounded mb-4" alt="Featured Image">
+        <img src="https://via.placeholder.com/800x450?text=Laravel" class="img-fluid rounded-3 mb-4 shadow-sm" alt="Featured Image">
 
         <!-- Article Content -->
         <div class="article-content mb-5">
@@ -125,4 +164,45 @@
     </div>
   </div>
 </div>
+
+<style>
+/* Custom Styles */
+.breadcrumb {
+  padding: 0;
+  margin: 0;
+}
+.breadcrumb-item a {
+  transition: color 0.2s;
+}
+.breadcrumb-item a:hover {
+  color: #0d6efd !important;
+}
+.input-group-text {
+  transition: all 0.3s;
+}
+.form-control:focus {
+  box-shadow: none;
+  border-color: #dee2e6;
+}
+.article-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+.article-content pre {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border-left: 4px solid #0d6efd;
+}
+</style>
+
+<script>
+// Search functionality
+document.querySelector('input[name="q"]').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    this.form.submit();
+  }
+});
+</script>
 @endsection

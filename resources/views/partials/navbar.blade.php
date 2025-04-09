@@ -13,27 +13,27 @@
         <ul class="navbar-nav mx-auto">
           <li class="nav-item mx-2">
             <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">
-              <i class="bi bi-house-door me-1"></i> Home
+               Home
             </a>
           </li>
           <li class="nav-item mx-2">
             <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">
-              <i class="bi bi-info-circle me-1"></i> Tentang
+              Tentang
             </a>
           </li>
           <li class="nav-item mx-2">
             <a class="nav-link {{ request()->is('schedule') ? 'active' : '' }}" href="/schedule">
-              <i class="bi bi-info-circle me-1"></i> Jadwal Ibadah
+               Jadwal Ibadah
             </a>
           </li>
           <li class="nav-item mx-2">
             <a class="nav-link {{ request()->is('articles') ? 'active' : '' }}" href="/articles">
-              <i class="bi bi-journal-text me-1"></i> Artikel
+               Artikel
             </a>
           </li>
           <li class="nav-item mx-2">
             <a class="nav-link {{ request()->is('lyrics') ? 'active' : '' }}" href="/lyrics">
-              <i class="bi bi-music-note-list me-1"></i> Lirik Lagu
+               Lirik Lagu
             </a>
           </li>
         </ul>
@@ -44,7 +44,6 @@
         @auth
           <div class="dropdown">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown">
-              <img src="https://via.placeholder.com/32x32?text=U" width="32" height="32" class="rounded-circle me-2">
               <span class="d-none d-lg-inline">{{ Auth::user()->name }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end shadow">
@@ -61,8 +60,7 @@
             </ul>
           </div>
         @else
-          <a href="/login" class="btn btn-outline-light">
-            <i class="bi bi-box-arrow-in-right me-1"></i> Login
+          <a href="/login" class="btn btn-outline-light"> Login
           </a>
         @endauth
       </div>

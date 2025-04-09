@@ -579,3 +579,22 @@ body {
   border-radius: 50%;
   margin-right: 10px;
 }
+
+
+
+/* Article home */
+.hover-effect {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+}
+.hover-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+  border-color: #0d6efd !important;
+}
+.card-title {
+  transition: color 0.2s;
+}
+.hover-effect:hover .card-title {
+  color: #0d6efd !important;
+}

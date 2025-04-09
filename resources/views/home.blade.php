@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('partials/cards/hero-card')
+@include('components.hero-card')
 {{-- article section --}}
-@include('partials/cards/article-card')
+@include('components.article-card')
 @endsection
