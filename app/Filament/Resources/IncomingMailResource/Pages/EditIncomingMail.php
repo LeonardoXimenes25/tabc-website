@@ -16,4 +16,11 @@ class EditIncomingMail extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function getSaveButtonLabel(): string
+    {
+        return 'Simpan Perubahan';
+    }
+
 }
+

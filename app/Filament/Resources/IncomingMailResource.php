@@ -9,11 +9,14 @@ use Filament\Tables\Table;
 use App\Models\IncomingMail;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
+use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\Select;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\IncomingMailResource\Pages;
@@ -46,22 +49,25 @@ class IncomingMailResource extends Resource
             ->schema([
                 Card::make()
                     ->schema([
-                        TextInput::make('letter_number')
-                        ->label('No. Surat')
-                        ->required(),
                         DatePicker::make('received_date')
                         ->label('Tanggal Diterima')
                         ->required()
                         ->displayFormat('d/m/Y')
                         ->native(false),
+                        TextInput::make('letter_number')
+                        ->label('No. Surat')
+                        ->required(),
                         TextInput::make('sender')
                         ->label('Pengirim')
                         ->required(),
                         TextInput::make('subject')
                         ->label('Perihal')
                         ->required(),
-                        TextInput::make('attachment')
-                        ->label('Lampiran'),
+                        FileUpload::make('attachment')
+                        ->label('Lampiran')
+                        ->disk('public')
+                        ->directory('surat_lampiran')
+                        ->nullable(),
                         TextInput::make('receiver')
                         ->label('Penerima')
                         ->required(),
@@ -83,19 +89,41 @@ class IncomingMailResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->label('No. ')->sortable()->searchable(),
-                TextColumn::make('letter_number')->label('No. Surat')->sortable()->searchable(),
                 TextColumn::make('received_date')->label('Tanggal Diterima')->date('d/m/y')->sortable()->searchable(),
+                TextColumn::make('letter_number')->label('No. Surat')->sortable()->searchable(),
                 TextColumn::make('sender')->label('Pengirim')->sortable()->searchable(),
                 TextColumn::make('subject')->label('Perihal')->sortable()->searchable(),
                 TextColumn::make('attachment')->label('Lampiran')->sortable()->searchable(),
-                TextColumn::make('status')->label('Status'),
-                
+                TextColumn::make('receiver')->label('Penerima')->sortable()->searchable(),
+                BadgeColumn::make('status')
+                ->label('Status')
+                ->colors([
+                    'success' => 'accepted',
+                    'warning' => 'in progress',
+                    'secondary' => 'pending',
+                ])
+                ->formatStateUsing(function ($state) {
+                    return match ($state) {
+                        'accepted' => 'Diterima',
+                        'in progress' => 'Dalam Proses',
+                        'pending' => 'Belum',
+                        default => $state,
+                    };
+                })
+                ->sortable()
+                ->searchable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Action::make('preview')
+                    ->label('Download')
+                    ->url(fn (IncomingMail $record) => route('filament.admin.incoming-mails.preview', $record))
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-o-arrow-down-tray')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

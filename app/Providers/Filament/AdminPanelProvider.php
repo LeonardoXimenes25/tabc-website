@@ -99,10 +99,11 @@ class IncomingMailResource extends Resource
                     ->label('Receiver'),
                 Forms\Components\Select::make('status')
                     ->options([
-                        IncomingMail::STATUS_RECEIVED => 'Received',
-                        IncomingMail::STATUS_DRAFT => 'Draft',
+                        IncomingMail::STATUS_ACCEPTED => 'accepted',
+                        IncomingMail::STATUS_IN_PROGRESS => 'in progress',
+                        IncomingMail::STATUS_PEDNING => 'pending'
                     ])
-                    ->default(IncomingMail::STATUS_RECEIVED)
+                    ->default(IncomingMail::STATUS_ACCEPTED)
                     ->label('Status'),
             ]);
     }
@@ -128,22 +129,23 @@ class IncomingMailResource extends Resource
                     ->searchable(),
                 Tables\Columns\BadgeColumn::make('status')
                     ->enum([
-                        IncomingMail::STATUS_RECEIVED => 'Received',
-                        IncomingMail::STATUS_DRAFT => 'Draft',
+                        IncomingMail::STATUS_ACCEPTED => 'Accepted',
+                        IncomingMail::STATUS_IN_PROGRESS => 'In Progress',
                     ])
                     ->label('Status')
                     ->colors([
-                        IncomingMail::STATUS_RECEIVED => 'success',
-                        IncomingMail::STATUS_DRAFT => 'warning',
+                        IncomingMail::STATUS_ACCEPTED => 'success',
+                        IncomingMail::STATUS_IN_PROGRESS => 'warning',
                     ]),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->options([
-                        IncomingMail::STATUS_RECEIVED => 'Received',
-                        IncomingMail::STATUS_DRAFT => 'Draft',
+                        IncomingMail::STATUS_ACCEPTED => 'Accepted',
+                        IncomingMail::STATUS_IN_PROGRESS => 'In Progress',
+                        IncomingMail::STATUS_PEDNING => 'Pending',
                     ])
-                    ->default(IncomingMail::STATUS_RECEIVED)
+                    ->default(IncomingMail::STATUS_ACCEPTED)
                     ->label('Status'),
             ])
             ->actions([

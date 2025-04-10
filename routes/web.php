@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\IncomingMailExportController;
 // home
 Route::get('/', function () {
     return view('home');
@@ -35,3 +36,7 @@ Route::get('/about', function () {
 Route::get('/schedule', function () {
     return view('schedule.index');
 });
+
+// export-pdf for incoming_mail and outcoming_mail
+Route::get('/admin/incoming-mails/{record}/preview', [IncomingMailExportController::class, 'preview'])
+    ->name('filament.admin.incoming-mails.preview');
