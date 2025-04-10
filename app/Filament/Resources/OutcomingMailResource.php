@@ -23,23 +23,10 @@ use App\Filament\Resources\OutcomingMailResource\RelationManagers;
 class OutcomingMailResource extends Resource
 {
     protected static ?string $model = OutcomingMail::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
-    public static function getModelLabel(): string
-    {
-        return 'Surat Keluar';
-    }
-
-    public static function getPluralModelLabel(): string
-    {
-        return 'Surat Keluar';
-    }
-
-    public static function getNavigationLabel(): string
-    {
-        return 'Surat Keluar';
-    }
+    protected static ?string $modelLabel = 'Surat Keluar';
+    protected static ?string $pluralModelLabel = 'Surat Keluar';
+    protected static ?string $navigationLabel = 'Surat Keluar';
 
     public static function form(Form $form): Form
     {

@@ -38,5 +38,6 @@ Route::get('/schedule', function () {
 });
 
 // export-pdf for incoming_mail and outcoming_mail
-Route::get('/admin/incoming-mails/{record}/preview', [IncomingMailExportController::class, 'preview'])
-    ->name('filament.admin.incoming-mails.preview');
+Route::get('/incoming-mails/pdf', IncomingMailExportController::class)
+    ->name('incoming-mails.pdf');
+
