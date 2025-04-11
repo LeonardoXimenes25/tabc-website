@@ -17,7 +17,7 @@
             <!-- Bagian Tentang Gereja -->
             <div class="col-md-5 mb-4">
                 <h5 class="text-uppercase mb-4" style="color: #0d6efd;">
-                    <i class="fas fa-church me-2"></i> The Alliance Bible Church
+                    <i class="fas fa-church me-2"></i> The Alliance Bible Church Timor Leste
                 </h5>
                 <p class="text-white">
                     <i class="fas fa-cross me-2" style="color: #0d6efd;"></i> 
@@ -26,14 +26,14 @@
             </div>
 
             <!-- Kontak Info -->
-            <div class="col-md-4 mb-4">
+            <div class="col-md-3 mb-4">
                 <h5 class="text-uppercase mb-4" style="color: #0d6efd;">
                     <i class="fas fa-address-book me-2"></i> Hubungi Kami
                 </h5>
                 <ul class="list-unstyled">
                     <li class="mb-3">
                         <i class="fas fa-map-marker-alt me-2" style="color: #0d6efd;"></i> 
-                        <span>Rua de Vila Verde, Dili, Timor Leste</span>
+                        <span>Avenida Audian, Dili Timor Leste</span>
                     </li>
                     <li class="mb-3">
                         <i class="fas fa-phone-alt me-2" style="color: #0d6efd;"></i> 
@@ -41,28 +41,28 @@
                     </li>
                     <li class="mb-3">
                         <i class="fas fa-envelope me-2" style="color: #0d6efd;"></i> 
-                        <span>info@alliancebiblechurch.tl</span>
+                        <span>tacbtl1990@gmail.com</span>
                     </li>
                 </ul>
             </div>
 
             <!-- Jam Pelayanan -->
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 mb-4">
                 <h5 class="text-uppercase mb-4" style="color: #0d6efd;">
                     <i class="fas fa-clock me-2"></i> Jam Pelayanan
                 </h5>
                 <ul class="list-unstyled">
                     <li class="mb-3">
                         <i class="fas fa-sun me-2" style="color: #0d6efd;"></i> 
-                        <strong>Minggu:</strong> 08:00 - 12:00
+                        <strong>Ibadah Minggu:</strong> 08:00 - 10:00
                     </li>
                     <li class="mb-3">
-                        <i class="fas fa-cloud-sun me-2" style="color: #0d6efd;"></i> 
-                        <strong>Rabu:</strong> 18:00 - 20:00
+                        <i class="fas fa-sun me-2" style="color: #0d6efd;"></i> 
+                        <strong>Sekolah Minggu:</strong> 10:00 - 11:30
                     </li>
                     <li class="mb-3">
                         <i class="fas fa-bible me-2" style="color: #0d6efd;"></i> 
-                        <strong>Sekolah Minggu:</strong> 09:00 - 11:00
+                        <strong>Persekutuan Doa Rabu:</strong> 19:00 - 21:00
                     </li>
                 </ul>
             </div>
@@ -79,7 +79,7 @@
                 </p>
             </div>
             <div class="col-md-6 text-md-end mt-3">
-                <p style="display: inline-block">Follow Kami di : </p>
+                <p style="display: inline-block" class="me-3">Follow Kami di : </p>
                 <a href="#" class="text-white me-3 icon-hover"><i class="fab fa-facebook-f fa-lg"></i></a>
                 <a href="#" class="text-white me-3 icon-hover"><i class="fab fa-youtube fa-lg"></i></a>
                 <a href="#" class="text-white me-3 icon-hover"><i class="fab fa-instagram fa-lg"></i></a>

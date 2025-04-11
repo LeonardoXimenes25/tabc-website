@@ -1,7 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container my-4 pt-5">
+<div class="container my-4">
+
+  {{-- Header --}}
+  <div class="row mb-4 bg-light rounded-3 p-3 shadow-sm">
+    <div class="col-md-8">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="/" class="text-decoration-none d-flex align-items-center">
+                        <i class="fas fa-home me-2"></i>
+                        Home
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Lirik Lagu</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="col-md-4">
+        <form class="d-flex">
+            <input class="form-control form-control-sm shadow-sm" type="search" placeholder="Cari artikel..." aria-label="Search">
+        </form>
+    </div>
+</div>
+
   <div class="row">
     <!-- Column 1: Song Info (Tighter spacing) -->
     <div class="col-lg-3 pe-lg-4">

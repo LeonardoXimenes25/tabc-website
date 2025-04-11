@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Beranda | TABCTL')
+    
 @section('content')
 @include('components.hero-card')
 

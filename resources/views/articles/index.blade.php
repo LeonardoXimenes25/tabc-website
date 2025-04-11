@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Artikel | TABCTL')
+
 @section('content')
 <div class="container my-4">
     <!-- Header dengan breadcrumb dan search - dengan background -->

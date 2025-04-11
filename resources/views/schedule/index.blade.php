@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Jadwal-Ibadah | TABCTL')
+    
 @section('content')
     <section class="schedule-section" id="jadwal-ibadah">
             <div class="container my-4">
