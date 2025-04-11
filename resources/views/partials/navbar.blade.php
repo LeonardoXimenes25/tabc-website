@@ -36,6 +36,11 @@
                Lirik Lagu
             </a>
           </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link {{ request()->is('lyrics') ? 'active' : '' }}" href="/lyrics">
+               Kontak Kami
+            </a>
+          </li>
         </ul>
       </div>
   

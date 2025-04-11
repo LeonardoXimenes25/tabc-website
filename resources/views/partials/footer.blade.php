@@ -78,7 +78,8 @@
                     <span class="d-block d-md-inline">All rights reserved.</span>
                 </p>
             </div>
-            <div class="col-md-6 text-md-center mt-3">
+            <div class="col-md-6 text-md-end mt-3">
+                <p style="display: inline-block">Follow Kami di : </p>
                 <a href="#" class="text-white me-3 icon-hover"><i class="fab fa-facebook-f fa-lg"></i></a>
                 <a href="#" class="text-white me-3 icon-hover"><i class="fab fa-youtube fa-lg"></i></a>
                 <a href="#" class="text-white me-3 icon-hover"><i class="fab fa-instagram fa-lg"></i></a>

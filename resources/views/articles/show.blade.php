@@ -1,44 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Full-width Breadcrumb Background -->
-<div class="bg-light border-bottom py-2">
-  <div class="container">
-    <div class="d-flex justify-content-between align-items-center">
-      <!-- Breadcrumb (Kiri) -->
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb mb-0" style="background-color: transparent; padding: 0;">
-          <li class="breadcrumb-item">
-            <a href="/" class="text-decoration-none">
-              <i class="fas fa-home text-primary"></i>
-            </a>
-          </li>
-          <li class="breadcrumb-item"><a href="/articles" class="text-decoration-none text-dark">Artikel</a></li>
-          <li class="breadcrumb-item active text-muted" aria-current="page">Laravel 10</li>
-        </ol>
-      </nav>
-      
-      <!-- Search Bar (Kanan) -->
-      <form action="/articles/search" method="GET" class="ms-3">
-        <div class="input-group" style="width: 250px;">
-          <input 
-            type="search" 
-            name="q"
-            class="form-control border-end-0"
-            placeholder="Cari artikel..."
-            aria-label="Search"
-          >
-          <span class="input-group-text bg-white border-start-0">
-            <i class="fas fa-search text-muted"></i>
-          </span>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-
 <!-- Main Container -->
 <div class="container my-4">
+  <div class="row mb-4 bg-light rounded-3 p-3 shadow-sm">
+    <div class="col-md-8">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a href="/" class="text-decoration-none d-flex align-items-center">
+                        <i class="fas fa-home me-2"></i>
+                        Home
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Artikel</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="col-md-4">
+        <form class="d-flex">
+            <input class="form-control form-control-sm shadow-sm" type="search" placeholder="Cari artikel..." aria-label="Search">
+        </form>
+    </div>
+</div>
+
   <div class="row">
     <!-- Main Content -->
     <div class="col-lg-8">

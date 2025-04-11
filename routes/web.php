@@ -38,6 +38,4 @@ Route::get('/schedule', function () {
 });
 
 // export-pdf for incoming_mail and outcoming_mail
-Route::get('/incoming-mails/pdf', IncomingMailExportController::class)
-    ->name('incoming-mails.pdf');
 
