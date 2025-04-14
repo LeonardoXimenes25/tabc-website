@@ -1,23 +1,30 @@
 <?php
 
+use App\Models\Post;
+use App\Models\Article;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\IncomingMailExportController;
+
 // home
 Route::get('/', function () {
     return view('home');
 });
 
-// Daftar Artikel
+// daftar artikel
 Route::get('/articles', function () {
-    return view('articles.index');
+    $posts = Article::latest()->paginate(8); // 8 artikel per halaman
+    return view('articles.posts', ['posts' => $posts]);
 });
 
-// Single Post
-Route::get('/articles/{id}', function ($id) {
-    return view('articles.show');
+// single post
+Route::get('/articles/{article:slug}', function (Article $post) {
+    return view('articles.show', ['post' => $post]);
 });
 
-// lirik lagu
+
+
 // Static routes for lyrics
 Route::get('/lyrics', function () {
     return view('lyrics.index');

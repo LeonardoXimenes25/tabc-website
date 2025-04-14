@@ -27,7 +27,7 @@
             </a>
           </li>
           <li class="nav-item mx-2">
-            <a class="nav-link {{ request()->is('articles') ? 'active' : '' }}" href="/articles">
+            <a class="nav-link {{ request()->is('articles.posts') ? 'active' : '' }}" href="/articles">
                Artikel
             </a>
           </li>
