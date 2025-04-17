@@ -8,20 +8,28 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\IncomingMailExportController;
 
 // home
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('home');
 });
 
-// daftar artikel
-Route::get('/articles', function () {
-    $posts = Article::latest()->paginate(8); // 8 artikel per halaman
-    return view('articles.posts', ['posts' => $posts]);
-});
+// Daftar artikel
+Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 
-// single post
-Route::get('/articles/{article:slug}', function (Article $post) {
-    return view('articles.show', ['post' => $post]);
-});
+// Artikel tunggal berdasarkan slug
+Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
+
+Route::get('/search', [ArticleController::class, 'search'])->name('articles.search');
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -92,23 +92,7 @@
       </section>
     </div>
 
-    <!-- Sidebar -->
-    <div class="col-lg-4">
-      <div class="card mb-4 shadow-sm">
-        <div class="card-header bg-primary text-white">
-          <h5 class="mb-0">Artikel Terbaru</h5>
-        </div>
-        <div class="list-group list-group-flush">
-          @foreach($recentPosts as $recent)
-          <a href="{{ route('articles.show', $recent->slug) }}" class="list-group-item list-group-item-action">
-            <div class="fw-bold">{{ $recent->title }}</div>
-            <small class="text-muted">{{ $recent->created_at->diffForHumans() }}</small>
-          </a>
-          @endforeach
-        </div>
-      </div>
-    </div>
-  </div>
+    
   {{-- artikel section end --}}
 </div>
 @endsection

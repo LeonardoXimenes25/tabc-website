@@ -4,7 +4,6 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -45,29 +44,5 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    /**
-     * Relasi ke artikel yang ditulis user
-     */
-    public function articles(): HasMany
-    {
-        return $this->hasMany(Article::class);
-    }
-
-    /**
-     * Relasi ke komentar yang dibuat user
-     */
-    public function comments(): HasMany
-    {
-        return $this->hasMany(Comment::class);
-    }
-
-    /**
-     * Cek apakah user admin
-     */
-    public function isAdmin(): bool
-    {
-        return $this->is_admin === true;
     }
 }
