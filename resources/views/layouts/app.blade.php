@@ -12,5 +12,8 @@
     
     {{-- js bootstrap --}}
     <script src="{{asset('assets/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+    {{-- livewire --}}
+    @livewireScripts
 </body>
 </html>

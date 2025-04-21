@@ -2,85 +2,70 @@
   <!-- Header Section -->
   <div class="d-flex justify-content-between align-items-center mb-4">
       <h3 class="m-0">Artikel Terbaru</h3>
-      <a href="/articles" class="btn btn-link text-decoration-none">Lihat Semua →</a>
+      <a href="{{route('articles.index')}}" class="btn btn-link text-decoration-none">Lihat Semua →</a>
   </div>
   
-  <!-- Articles Grid -->
   <div class="row">
-      <!-- Article 1 -->
-      <div class="col-md-6 col-lg-3 mb-4">
-          <div class="card h-100 shadow-sm border-0 hover-effect"> <!-- Tambah class hover-effect -->
-              <a href="/articles/1" class="stretched-link text-decoration-none" aria-label="Baca artikel: Cara Install Laravel 10"></a> <!-- Link menutupi seluruh card -->
-              <img src="{{asset('images/church-hero.jpg')}}" class="card-img-top" alt="Article Image" style="height: 180px; object-fit: cover;">
-              <div class="card-body">
-                  <h2 class="card-title h5 text-dark">Cara Install Laravel 10</h2> <!-- Judul tetap terlihat seperti teks biasa -->
-                  <div class="d-flex align-items-center mb-3">
-                      <img src="{{asset('images/church-hero.jpg')}}" alt="Author" class="rounded-circle me-2" width="30" height="30">
-                      <div>
-                          <div class="text-muted small">By <strong>Admin</strong></div>
-                          <div class="text-muted small">May 15, 2023</div>
-                      </div>
-                  </div>
-                  <p class="card-text text-muted">Panduan lengkap install Laravel 10...</p>
-              </div>
-          </div>
-      </div>
+    @foreach ($posts as $post)
+    <div class="col-md-3 mb-4">
+        <div class="card h-100 border-0 shadow-sm transition-card">
+            <!-- Featured Image -->
+            <img src="{{ asset($post->image_url) }}" class="card-img-top" alt="{{ $post->title }}">
 
-      <!-- Article 2 -->
-      <div class="col-md-6 col-lg-3 mb-4">
-          <div class="card h-100 shadow-sm border-0 hover-effect">
-              <a href="/articles/2" class="stretched-link text-decoration-none" aria-label="Baca artikel: Tips Bootstrap 5"></a>
-              <img src="{{asset('images/church-hero.jpg')}}" class="card-img-top" alt="Article Image" style="height: 180px; object-fit: cover;">
-              <div class="card-body">
-                  <h2 class="card-title h5 text-dark">Tips Bootstrap 5</h2>
-                  <div class="d-flex align-items-center mb-3">
-                      <img src="{{asset('images/church-hero.jpg')}}" alt="Author" class="rounded-circle me-2" width="30" height="30">
-                      <div>
-                          <div class="text-muted small">By <strong>Jane Doe</strong></div>
-                          <div class="text-muted small">May 10, 2023</div>
-                      </div>
-                  </div>
-                  <p class="card-text text-muted">Rahasia layout responsive...</p>
-              </div>
-          </div>
-      </div>
-      
-      <!-- Tambahkan 2 card lainnya di sini -->
-      <div class="col-md-6 col-lg-3 mb-4">
-        <div class="card h-100 shadow-sm border-0 hover-effect"> <!-- Tambah class hover-effect -->
-            <a href="/articles/1" class="stretched-link text-decoration-none" aria-label="Baca artikel: Cara Install Laravel 10"></a> <!-- Link menutupi seluruh card -->
-            <img src="{{asset('images/church-hero.jpg')}}" class="card-img-top" alt="Article Image" style="height: 180px; object-fit: cover;">
             <div class="card-body">
-                <h2 class="card-title h5 text-dark">Cara Install Laravel 10</h2> <!-- Judul tetap terlihat seperti teks biasa -->
-                <div class="d-flex align-items-center mb-3">
-                    <img src="{{asset('images/church-hero.jpg')}}" alt="Author" class="rounded-circle me-2" width="30" height="30">
-                    <div>
-                        <div class="text-muted small">By <strong>Admin</strong></div>
-                        <div class="text-muted small">May 15, 2023</div>
-                    </div>
+                <!-- Artikel Title sebagai Link -->
+                <a href="{{ route('articles.show', $post->slug) }}" class="text-decoration-none text-dark" style="font-size: 1rem">
+                    {{ $post->title }}
+                </a>
+
+                {{-- Author and Date --}}
+                <div class="author mb-1 text-muted" style="font-size: 0.7rem">
+                    <a href="{{ route('authors.posts', $post->author->username) }}" 
+                        class="text-muted">{{ $post->author->name }} in {{$post->category->name}}| 
+                        {{$post->created_at->diffForHumans()}}</a>
                 </div>
-                <p class="card-text text-muted">Panduan lengkap install Laravel 10...</p>
+
+                <!-- Artikel Excerpt -->
+                <p class="card-text text-muted mt-2" style="font-size: 0.8rem">
+                    {{ Str::limit($post->body, 100) }}
+                </p>
+
+                <!-- Read More Link -->
+                <a href="{{ route('articles.show', $post->slug) }}" style="font-size: 0.7rem">
+                    Read More &gt;&gt;
+                </a>
             </div>
         </div>
     </div>
+    @endforeach
 
-    <!-- Article 2 -->
-    <div class="col-md-6 col-lg-3 mb-4">
-        <div class="card h-100 shadow-sm border-0 hover-effect">
-            <a href="/articles/2" class="stretched-link text-decoration-none" aria-label="Baca artikel: Tips Bootstrap 5"></a>
-            <img src="{{asset('images/church-hero.jpg')}}" class="card-img-top" alt="Article Image" style="height: 180px; object-fit: cover;">
-            <div class="card-body">
-                <h2 class="card-title h5 text-dark">Tips Bootstrap 5</h2>
-                <div class="d-flex align-items-center mb-3">
-                    <img src="{{asset('images/church-hero.jpg')}}" alt="Author" class="rounded-circle me-2" width="30" height="30">
-                    <div>
-                        <div class="text-muted small">By <strong>Jane Doe</strong></div>
-                        <div class="text-muted small">May 10, 2023</div>
-                    </div>
-                </div>
-                <p class="card-text text-muted">Rahasia layout responsive...</p>
-            </div>
-        </div>
-    </div>
-  </div>
+    <style>
+        .transition-card {
+            transition: all 0.3s ease;
+        }
+        
+        .transition-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        }
+        
+        .transition-card:active {
+            transform: translateY(0) scale(0.98);
+        }
+        
+        .transition-btn {
+            transition: all 0.2s ease;
+        }
+        
+        .transition-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+        }
+        
+        .transition-btn:active {
+            transform: translateY(0);
+        }
+    </style>
 </div>
+
+  

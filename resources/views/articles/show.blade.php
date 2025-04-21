@@ -16,12 +16,14 @@
                             Home
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Artikel</li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <a href="{{ route('articles.index') }}">Artikel</a>
+                    </li>
                 </ol>
             </nav>
         </div>
         <div class="col-md-4">
-          <form class="d-flex" action="{{ route('articles.search') }}" method="GET">
+          {{-- <form class="d-flex" action="{{ route('articles.search') }}" method="GET">
             <input 
                 class="form-control form-control-sm shadow-sm" 
                 type="search" 
@@ -31,7 +33,7 @@
                 value="{{ request()->query('query') }}"
                 oninput="this.form.submit()" 
             >
-        </form>
+        </form> --}}
         </div>
     </div>
     {{-- end header --}}
