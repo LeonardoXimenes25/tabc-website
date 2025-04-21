@@ -49,14 +49,22 @@
                                 <a href="{{ route('articles.show', $post->slug) }}" class="text-decoration-none text-dark" style="font-size: 1rem">
                                     {{ $post->title }}
                                 </a>
-                                <div class="author mb-1 text-muted" style="font-size: 0.6rem">
-                                    By <a href="{{ route('authors.posts', $post->author->username) }}" class="text-muted">{{ $post->author->name }}</a> 
-                                    {{ $post->author->articles_count }}
-                                    in 
-                                    <a href="{{ route('categories.show', $post->category->slug) }}" class="text-muted">{{ $post->category->name }}</a> 
-                                    {{ $post->category->articles_count }} |
-                                    {{$post->created_at->diffForHumans()}}
+                                {{-- author, categories and date --}}
+                                <div class="d-flex flex-wrap align-items-center mb-4 text-muted small my-2" style="font-size: 0.7rem">
+                                    <span class="me-2">✍️ By 
+                                        <a href="{{ route('authors.posts', $post->author->username) }}" class="text-decoration-none text-muted fw-semibold">
+                                            {{ $post->author->name }}
+                                        </a>
+                                    </span>
+                                    <span class="me-2">
+                                        <a href="{{ route('categories.show', $post->category->slug) }}" class="text-decoration-none">
+                                            <span class="badge bg-primary text-white px-3 py-1 rounded-pill">{{ $post->category->name }}</span>
+                                        </a>
+                                    </span>
+                                    <span class="me-2">🕒 {{ $post->created_at->diffForHumans() }}</span>
                                 </div>
+                                {{-- author, categories and date end--}}
+
                                 <p class="card-text text-muted mt-2" style="font-size: 0.8rem">
                                     {{ Str::limit($post->body, 100) }}
                                 </p>

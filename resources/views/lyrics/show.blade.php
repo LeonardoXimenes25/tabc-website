@@ -14,7 +14,9 @@
                         Home
                     </a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Lirik Lagu</li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <a href="{{ route('songs.index') }}">Pujian</a>
+                </li>
             </ol>
         </nav>
     </div>
@@ -91,27 +93,47 @@
     </div>
     
     <!-- Column 3: Related Songs Only (No Popular Lyrics) -->
-    <div class="col-lg-4 ps-lg-3">
-      <div class="sticky-top" style="top: 15px;">
-        <h3 class="h5 mb-2 pb-2 border-bottom">Lagu Terkait</h3>
-        
-        <!-- Clickable Text Items -->
-        <a href="#" class="related-song-item d-block mb-2 p-2 text-decoration-none">
-          <h5 class="mb-0 text-light">All Heaven Declares</h5>
-          <p class="text-light small mb-0">JPCC Worship • 2015</p>
-        </a>
-        
-        <a href="#" class="related-song-item d-block mb-2 p-2 text-decoration-none">
-          <h5 class="mb-0 text-light">God of Victory</h5>
-          <p class="text-light small mb-0">JPCC Worship • 2019</p>
-        </a>
-        
-        <a href="#" class="related-song-item d-block mb-2 p-2 text-decoration-none">
-          <h5 class="mb-0 text-light">Percaya</h5>
-          <p class="text-light small mb-0">JPCC Worship • 2016</p>
-        </a>
-      </div>
-    </div>
+        <!-- Popular Songs Sidebar -->
+        <div class="col-lg-4">
+          <div class="sticky-top" style="top: 20px;">
+            <div class="popular-songs">
+              <h3 class="h5 mb-3">Lagu Populer</h3>
+              
+              <div class="popular-song-item mb-3">
+                <div class="d-flex align-items-center">
+                  <span class="popular-song-rank me-3">1</span>
+                  <div>
+                    <h5 class="mb-0">RumahMu</h5>
+                    <small class="text-muted">Sion</small>
+                  </div>
+                </div>
+                <a href="#" class="stretched-link"></a>
+              </div>
+              
+              <div class="popular-song-item mb-3">
+                <div class="d-flex align-items-center">
+                  <span class="popular-song-rank me-3">2</span>
+                  <div>
+                    <h5 class="mb-0">HadiratMu</h5>
+                    <small class="text-muted">True Worshippers</small>
+                  </div>
+                </div>
+                <a href="#" class="stretched-link"></a>
+              </div>
+              
+              <div class="popular-song-item mb-3">
+                <div class="d-flex align-items-center">
+                  <span class="popular-song-rank me-3">3</span>
+                  <div>
+                    <h5 class="mb-0">Kau Yang Mulia</h5>
+                    <small class="text-muted">Sidney Mohede</small>
+                  </div>
+                </div>
+                <a href="#" class="stretched-link"></a>
+              </div>
+            </div>
+          </div>
+        </div>
   </div>
 </div>
 @endsection

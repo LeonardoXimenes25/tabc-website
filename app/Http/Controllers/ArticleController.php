@@ -9,55 +9,57 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    // Menampilkan daftar artikel
+    /**
+     * Menampilkan daftar artikel dengan pagination.
+     */
     public function index()
     {
         // Ambil data artikel dengan relasi author dan category
         $posts = Article::with(['author', 'category'])->latest()->paginate(8);
-        
-        // Kalau masih butuh authors count (bisa disesuaikan)
-        $authors = User::withCount('articles')->get();
-
-        return view('articles.posts', compact('posts'));
+        return view('articles.posts', compact('posts', 'posts'));
     }
 
-    // Menampilkan artikel berdasarkan slug
     public function show($slug)
     {
-        // Eager load relasi author dan category
+        // Eager load relasi author dan category untuk menghindari N+1 query
         $post = Article::with(['author', 'category'])->where('slug', $slug)->firstOrFail();
 
+        // Ambil artikel terkait berdasarkan kategori
         $relatedPosts = Article::where('id', '!=', $post->id)
-                        ->latest()
-                        ->take(4)
-                        ->with(['author', 'category']) // Tambah ini biar related posts tidak N+1
-                        ->get();
-
-        $categoryArticleCount = $post->category->articles()->count();
+                               ->latest()
+                               ->take(4)
+                               ->with(['author', 'category'])
+                               ->get();
 
         return view('articles.show', compact('post', 'relatedPosts'));
     }
 
-
-
-    // Menampilkan artikel berdasarkan username penulis
     public function postsByAuthor($username)
     {
         $author = User::where('username', $username)->firstOrFail();
-
-        // Eager load category jika dipakai di view
+        
         $posts = $author->articles()
-        ->with(['author', 'category']) // eager load relasi
-        ->latest()
-        ->paginate(10);
+                       ->with('category')
+                       ->latest()
+                       ->paginate(8);
+        
+        return view('articles.posts', [
+            'title' => "Artikel oleh $author->name",
+            'posts' => $posts,
+        ]);
+    }
 
+    public function postsByCategory($slug)
+    {
+        // Cari kategori berdasarkan slug
+        $category = Category::where('slug', $slug)->firstOrFail();
 
-        $articleCount = $author->articles()->count();
+        // Ambil artikel-artikel yang masuk dalam kategori tersebut
+        $posts = $category->articles()->with('author')->latest()->paginate(10);
 
         return view('articles.posts', [
-            'title' => "All posts by $author->name",
-            'posts' => $posts,
-            'articleCount' => $articleCount
+            'category' => $category,
+            'posts' => $posts
         ]);
     }
 }

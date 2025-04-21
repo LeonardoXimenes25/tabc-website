@@ -16,7 +16,9 @@
                             Home
                         </a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Lirik lagu</li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                      <a href="{{ route('songs.index') }}">Pujian</a>
+                    </li>
                 </ol>
             </nav>
         </div>
@@ -31,75 +33,51 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
         <h2 class="fw-bold">Lirik Pujian Terbaru</h2>
-        <a href="/articles/posts/" class="btn btn-link text-primary">Lihat Semua</a>
     </div>
 
-{{-- lirik lagu --}}
-  <div class="row">
-      <div class="row row-cols-2 row-cols-md-4 g-4 mb-4">
-        <!-- Song 1 -->
-        <div class="col">
-          <div class="song-item text-center rounded">
-            <img src="{{asset('images/church-hero.jpg')}}" class="img-fluid mb-2" alt="Song Cover">
-            <h3 class="h6 mb-1">Made Alive</h3>
-            <p class="text-muted small">JPCC Worship</p>
-            <a href="/lyrics/1" class="stretched-link"></a>
-          </div>
-        </div>
-      
-      {{-- Pagination muncul hanya jika data ada --}}
-    <div class="mt-4">
-      {{ $songs->links('pagination::bootstrap-5') }}
-  </div> @else
-  {{-- Tampilkan pesan kosong --}}
-  <div class="alert alert-warning text-center" role="alert">
-          Belum ada artikel yang tersedia.
-  </div>
-  @endif
-  {{-- post section end --}}
-
-
-    <!-- Popular Songs Sidebar -->
-    <div class="col-lg-4">
-      <div class="sticky-top" style="top: 20px;">
-        <div class="popular-songs">
-          <h3 class="h5 mb-3">Lagu Populer</h3>
-          
-          <div class="popular-song-item mb-3">
-            <div class="d-flex align-items-center">
-              <span class="popular-song-rank me-3">1</span>
-              <div>
-                <h5 class="mb-0">RumahMu</h5>
-                <small class="text-muted">Sion</small>
-              </div>
+{{-- lirik lagu start --}}
+@if ($songs->count() > 0)
+@foreach ($songs->chunk(4) as $chunk)
+    <div class="row">
+        @foreach ($chunk as $song)
+            <div class="col-md-3 mb-4">
+                <div class="card h-100 border-0 shadow-sm transition-card">
+                    <img src="{{ asset($song->image_url) }}" class="card-img-top" alt="{{ $song->title }}" >
+                    <div class="card-body">
+                        <a href="{{ route('songs.show', $song->slug) }}" class="text-decoration-none text-dark" style="font-size: 1rem">
+                            {{ $song->title }}
+                        </a>
+                        <div class="author mb-1 text-muted" style="font-size: 0.6rem">
+                            By <a href="{{ route('authors.songs', $song->author->username) }}" class="text-muted">{{ $song->author->name }}</a> 
+                            {{ $song->author->articles_count }}
+                            in 
+                            <a href="{{ route('categories-songs.show', $song->categorysong->slug) }}" class="text-muted">{{ $song->categorysong->name }}</a> 
+                            {{$song->created_at->diffForHumans()}}
+                        </div>
+                        <p class="card-text text-muted mt-2" style="font-size: 0.8rem">
+                            {{ Str::limit($song->body, 50) }}
+                        </p>
+                        <a href="{{ route('songs.show', $song->slug) }}" style="font-size: 0.7rem">
+                            Read More &gt;&gt;
+                        </a>
+                    </div>
+                </div>
             </div>
-            <a href="#" class="stretched-link"></a>
-          </div>
-          
-          <div class="popular-song-item mb-3">
-            <div class="d-flex align-items-center">
-              <span class="popular-song-rank me-3">2</span>
-              <div>
-                <h5 class="mb-0">HadiratMu</h5>
-                <small class="text-muted">True Worshippers</small>
-              </div>
-            </div>
-            <a href="#" class="stretched-link"></a>
-          </div>
-          
-          <div class="popular-song-item mb-3">
-            <div class="d-flex align-items-center">
-              <span class="popular-song-rank me-3">3</span>
-              <div>
-                <h5 class="mb-0">Kau Yang Mulia</h5>
-                <small class="text-muted">Sidney Mohede</small>
-              </div>
-            </div>
-            <a href="#" class="stretched-link"></a>
-          </div>
-        </div>
-      </div>
+        @endforeach
     </div>
+@endforeach
+@else
+<div class="alert alert-warning text-center" role="alert">
+    Belum ada Lirik lagu yang tersedia.
+</div>
+@endif
+{{-- artikel section end --}}
+
+{{-- Pagination --}}
+<div class="mt-4">
+{{ $songs->links('pagination::bootstrap-5') }}
+</div>
+{{-- lyrics lagu end --}}
   </div>
 </div>
 @endsection

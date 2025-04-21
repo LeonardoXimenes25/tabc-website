@@ -5,8 +5,10 @@ use App\Models\Article;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SongsController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategorySongController;
 use App\Http\Controllers\IncomingMailExportController;
 
 // home
@@ -17,19 +19,39 @@ Route::get('/articles', [ArticleController::class, 'index'])->name('articles.ind
 
 // Artikel tunggal berdasarkan slug
 Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
+// Ganti route authors.posts dengan yang sesuai
+// Tambahkan route ini bersama route lainnya
+Route::get('/authors/{username}/posts', [ArticleController::class, 'postsByAuthor'])->name('authors.posts');
+Route::get('/categories/{slug}', [ArticleController::class, 'postsByCategory'])->name('categories.show');
 
-Route::get('/authors/{username}', [ArticleController::class, 'postsByAuthor'])->name('authors.posts');
-Route::get('category/{slug}', [CategoryController::class, 'show'])->name('categories.show');
 
 
-// Static routes for lyrics
-Route::get('/lyrics', function () {
-    return view('lyrics.index');
-});
 
-Route::get('/lyrics/{id}', function ($id) {
-    return view('lyrics.show');
-});
+
+
+
+
+
+
+// Lyrics
+Route::get('/lyrics', [SongsController::class, 'index'])->name('songs.index');
+
+// Lirik tunggal berdasarkan slug
+Route::get('/lyrics/{slug}', [SongsController::class, 'show'])->name('songs.show');
+
+Route::get('/authors/{username}/songs', [SongsController::class, 'postsByAuthor'])->name('authors.songs');
+Route::get('categories-songs/{slug}', [CategorySongController::class, 'show'])->name('categories-songs.show');
+
+
+
+
+
+
+
+
+
+
+
 
 // about
 Route::get('/about', function () {
