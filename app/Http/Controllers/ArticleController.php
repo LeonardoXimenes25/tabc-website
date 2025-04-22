@@ -21,8 +21,7 @@ class ArticleController extends Controller
 
     public function show($slug)
     {
-        // Eager load relasi author dan category untuk menghindari N+1 query
-        $post = Article::with(['author', 'category'])->where('slug', $slug)->firstOrFail();
+        $post = Article::with(['author', 'category', 'comment'])->where('slug', $slug)->firstOrFail();
 
         // Ambil artikel terkait berdasarkan kategori
         $relatedPosts = Article::where('id', '!=', $post->id)
@@ -33,6 +32,8 @@ class ArticleController extends Controller
 
         return view('articles.show', compact('post', 'relatedPosts'));
     }
+
+
 
     public function postsByAuthor($username)
     {

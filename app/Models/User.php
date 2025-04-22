@@ -20,8 +20,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -53,5 +55,9 @@ class User extends Authenticatable
 
     public function songs(): HasMany {
         return $this->hasMany(Songs::class, 'author_id');
+    }
+
+    public function articlecomment(): HasMany {
+        return $this->hasMany(ArticleComment::class, 'author_id');
     }
 }

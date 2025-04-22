@@ -13,6 +13,9 @@ class Songs extends Model
 
     protected $fillable = ['title', 'author', 'slug', 'body', 'image_url'];
 
+    // eager lazy loading
+    protected $with = ['author', 'categorysong'];
+
     public function author(): BelongsTo 
     {
         return $this->belongsTo(User::class);
@@ -20,6 +23,6 @@ class Songs extends Model
 
     public function categorysong(): BelongsTo 
     {
-        return $this->belongsTo(CategorySongs::class, 'category_id');
+        return $this->belongsTo(CategorySong::class, 'category_id');
     }
 }

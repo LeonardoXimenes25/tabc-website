@@ -4,7 +4,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item">
-                        <a href="/home" class="text-decoration-none d-flex align-items-center">
+                        <a href="/" class="text-decoration-none d-flex align-items-center">
                             <i class="fas fa-home me-2"></i>
                             Home
                         </a>
