@@ -5,7 +5,7 @@
 @section('content')
 <!-- Main Container -->
 <div class="container my-5">
-    {{-- Breadcrumb --}}
+    {{-- Header start --}}
     <div class="row mb-4 bg-light rounded-3 p-3 shadow-sm">
         <div class="col-md-8">
             <nav aria-label="breadcrumb">
@@ -29,12 +29,13 @@
             </form>
         </div>
     </div>
+    {{-- Header end --}}
 
     <div class="row g-4">
         {{-- Main Content --}}
         <div class="col-lg-8">
             <article class="card shadow-sm mb-4 border-0">
-                <img src="{{ asset($post->image_url) }}"
+                <img src="{{ asset('storage/' . $post->image_url) }}"
                      class="card-img-top img-fluid rounded-top"
                      alt="{{ $post->title }}"
                      style="height: 400px; object-fit: cover;">
@@ -119,26 +120,16 @@
         </div>
 
         {{-- Sidebar --}}
-        <div class="col-lg-4">
-            {{-- Related Articles --}}
-            <div class="card shadow-sm border-0 mb-4">
-                <div class="card-header bg-white border-0 py-3">
-                    <h5 class="fw-bold mb-0">
-                        <i class="fas fa-newspaper me-2 text-primary"></i> Artikel Terkait
-                    </h5>
-                </div>
-                <div class="card-body p-0">
-                    @foreach($relatedPosts as $related)
-                    <a href="{{ route('articles.show', $related->slug) }}"
-                       class="d-block p-3 border-bottom text-decoration-none text-dark hover-effect">
-                        <div>
-                            <h6 class="fw-bold mb-1">{{ Str::limit($related->title, 40) }}</h6>
-                            <small class="text-muted">{{ $related->created_at->diffForHumans() }}</small>
-                        </div>
-                    </a>
-                    @endforeach
-                </div>
-            </div>
+        <div class="col-lg-4">            
+            {{-- start sidebar --}}
+
+            @include('partials.sidebar', [
+            'title' => 'Artikel Terbaru',
+            'items' => \App\Models\Article::latest()->take(5)->get(),
+            'route' => 'articles.show',
+            'icon' => 'fas fa-newspaper'
+            ])
+            {{-- end sidebar --}}
 
             {{-- Author Info --}}
             <div class="card shadow-sm border-0 mb-4">
@@ -153,6 +144,7 @@
                     <p class="mb-0">{{ $post->author->bio ?? 'Penulis aktif dengan berbagai kontribusi artikel menarik.' }}</p>
                 </div>
             </div>
+            {{-- author end --}}
 
             {{-- Bible Verse --}}
             <div class="card bg-primary text-white shadow-sm border-0 mb-4">
@@ -164,6 +156,8 @@
                     </blockquote>
                 </div>
             </div>
+            {{-- bible verse end --}}
+
         </div>
     </div>
 </div>

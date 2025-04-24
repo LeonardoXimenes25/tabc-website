@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Songs>
  */
-class SongsFactory extends Factory
+class SongFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -22,10 +22,13 @@ class SongsFactory extends Factory
         return [
             'title' => fake()->sentence(),
             'author_id' => User::factory(),
-            'category_id' => CategorySong::factory(),
+            'categorysong_id' => CategorySong::factory(),
             'slug' => Str::slug(fake()->sentence()),
             'body' => fake()->text(),
-            'image_url' => 'images/church-hero.jpg?rand=' . fake()->numberBetween(1, 1000)
+            'image_url' => 'images/church-hero.jpg?rand=' . fake()->numberBetween(1, 1000),
+            'artist' => fake()->name(),
+            'album' => fake()->sentence(),
+            'youtube_embed' => fake()->sentence(),
         ];
     }
 }

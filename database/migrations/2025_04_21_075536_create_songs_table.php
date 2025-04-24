@@ -18,13 +18,16 @@ return new class extends Migration
                 table: 'users',
                 indexName: 'songs_author_id'
             );
-            $table->foreignId('category_id')->constrained(
+            $table->foreignId('categorysong_id')->constrained(
                 table: 'category_songs',
                 indexName: 'songs_category_id'
             );
             $table->string('slug')->unique();
             $table->text('body');
             $table->string('image_url')->nullable();
+            $table->string('artist');
+            $table->string('album');
+            $table->string('youtube_embed')->nullable();
             $table->timestamps();
         });
     }

@@ -34,7 +34,7 @@ Route::post('/filament/comment-article', [ArticleCommentController::class, 'stor
 Route::get('/lyrics', [SongsController::class, 'index'])->name('songs.index');
 Route::get('/lyrics/{slug}', [SongsController::class, 'show'])->name('songs.show');
 Route::get('/authors/{username}/songs', [SongsController::class, 'postsByAuthor'])->name('authors.songs');
-Route::get('categories-songs/{slug}', [CategorySongController::class, 'show'])->name('categories-songs.show');
+Route::get('categories-songs/{slug}', [CategorySongController::class, 'postsByCategory'])->name('categories-songs.show');
 // lyrics route end
 
 

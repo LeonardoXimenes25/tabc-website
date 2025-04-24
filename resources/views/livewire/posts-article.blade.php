@@ -1,25 +1,12 @@
 <div>
-    <div class="row bg-light rounded-3 p-3 shadow-sm align-items-center">
-        <div class="col-md-8">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item">
-                        <a href="/" class="text-decoration-none d-flex align-items-center">
-                            <i class="fas fa-home me-2"></i>
-                            Home
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                        <a href="{{ route('articles.index') }}">Artikel</a>
-                    </li>
-                </ol>
-            </nav>
-        </div>
-        <div class="col-md-4">
-            <input type="text" wire:model.live.debounce.300ms="query" class="form-control form-control-sm"
-                placeholder="Cari artikel...">
-        </div>
-    </div>
+    {{-- header --}}
+    @php
+    $breadcrumbItems = [
+    ['title' => 'Artikel', 'link' => route('articles.index'), 'active' => true]
+    ];
+    @endphp
+
+    @include('partials.breadcrumb_search', ['breadcrumbItems' => $breadcrumbItems])
     {{-- end header --}}
 
     {{-- Artikel --}}
@@ -34,7 +21,7 @@
                 @foreach ($chunk as $post)
                     <div class="col-md-3 mb-4">
                         <div class="card h-100 border-0 shadow-sm transition-card">
-                            <img src="{{ asset($post->image_url) }}" class="card-img-top" alt="{{ $post->title }}">
+                            <img src="{{ asset('storage/' . $post->image_url) }}" class="card-img-top" alt="{{ $post->title }}">
                             <div class="card-body">
                                 <a href="{{ route('articles.show', $post->slug) }}" class="text-decoration-none text-dark"
                                     style="font-size: 1rem">
@@ -80,7 +67,5 @@
     {{-- artikel section end --}}
 
     {{-- Pagination --}}
-    <div class="mt-4">
-        {{ $posts->links() }}
-    </div>
+@include('partials.pagination', ['paginator' => $posts])
 </div>

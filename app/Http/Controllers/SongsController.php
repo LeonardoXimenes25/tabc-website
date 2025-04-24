@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Song;
 use App\Models\User;
-use App\Models\Songs;
+use App\Models\CategorySong;
 use Illuminate\Http\Request;
 
 class SongsController extends Controller
@@ -12,7 +13,7 @@ class SongsController extends Controller
     public function index()
     {
         // Ambil data pujian/lagu dengan relasi author dan category
-        $songs = Songs::with(['author', 'categorysong'])->latest()->paginate(8);
+        $songs = Song::with(['author', 'categorysong'])->latest()->paginate(8);
         return view('lyrics.songs', compact('songs'));
     }
 
@@ -20,9 +21,9 @@ class SongsController extends Controller
     public function show($slug)
     {
         // Eager load relasi author dan category
-        $songs = Songs::with(['author', 'categorysong'])->where('slug', $slug)->firstOrFail();
+        $songs = Song::with(['author', 'categorysong'])->where('slug', $slug)->firstOrFail();
 
-        $relatedPosts = Songs::where('id', '!=', $songs->id)
+        $relatedPosts = Song::where('id', '!=', $songs->id)
                         ->latest()
                         ->take(4)
                         ->with(['author', 'categorysong']) // Tambah ini biar related posts tidak N+1
@@ -43,6 +44,20 @@ class SongsController extends Controller
         return view('lyrics.songs', [
             'title' => "Pujian oleh $author->name",
             'songs' => $songs,
+        ]);
+    }
+
+    public function postsByCategory($slug)
+    {
+        // Cari kategori berdasarkan slug
+        $categorysong = CategorySong::where('slug', $slug)->firstOrFail();
+
+        // Ambil artikel-artikel yang masuk dalam kategori tersebut
+        $songs = $categorysong->articles()->with('author')->latest()->paginate(10);
+
+        return view('lyrics.songs', [
+            'category' => $categorysong,
+            'songs' => $songs
         ]);
     }
 }

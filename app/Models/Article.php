@@ -11,19 +11,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Article extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'author', 'slug', 'body', 'image_url'];
+    protected $fillable = ['title', 'author_id', 'slug', 'body', 'image_url', 'category_id'];
 
     // eager lazy loading
     protected $with = ['author', 'category'];
 
     public function author(): BelongsTo 
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function category(): BelongsTo 
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function comment(): HasMany
