@@ -28,6 +28,7 @@ class SongFactory extends Factory
             'image_url' => 'images/church-hero.jpg?rand=' . fake()->numberBetween(1, 1000),
             'artist' => fake()->name(),
             'album' => fake()->sentence(),
+            'year' => fake()->year(),
             'youtube_embed' => fake()->sentence(),
         ];
     }

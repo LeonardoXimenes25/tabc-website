@@ -48,7 +48,7 @@ class SongsLyricResource extends Resource
 
                 Select::make('category_id')
                     ->relationship('categorysong', 'name')
-                    ->label('Genre')
+                    ->label('Tema')
                     ->searchable()
                     ->required(),
 
@@ -82,11 +82,23 @@ class SongsLyricResource extends Resource
                     ->nullable()
                     ->helperText('Masukkan link YouTube'),
 
+                    
+                TextInput::make('album')
+                ->label('Album')
+                ->required()
+                ->maxLength(255),
+
+                TextInput::make('year')
+                ->label('Tahun')
+                ->required()
+                ->maxLength(255),
+
                 Select::make('author_id')
                     ->relationship('author', 'name')
                     ->label('Penulis')
                     ->searchable()
-                    ->required()
+                    ->required(),
+
                 ]);
     }
 

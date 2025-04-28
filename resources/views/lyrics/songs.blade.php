@@ -26,28 +26,29 @@
             <div class="col-md-3 mb-4">
                 <div class="card h-100 border-0 shadow-sm transition-card">
                     <img src="{{ asset('storage/' . $song->image_url) }}" class="card-img-top" alt="{{ $song->title }}" >
-                    <div class="card-body">
-                        <a href="{{ route('songs.show', $song->slug) }}" class="text-decoration-none text-dark fw-bold" style="font-size: 1rem">
+                    <div class="card-body text-center">
+                        <a href="{{ route('songs.show', $song->slug) }}" class="text-decoration-none text-dark fw-bold" style="font-size: 1rem;">
                             {{ $song->title }}
                         </a>
                         {{-- author, genre and date --}}
-                        <div class="d-flex flex-wrap align-items-center mb-4 text-muted small my-2"
-                                    style="font-size: 0.7rem">
-                                    <span class="me-2">✍️ By
-                                        <a href="{{ route('authors.posts', $song->artist) }}"
-                                            class="text-decoration-none text-muted fw-semibold">
-                                            {{ $song->artist }}
-                                        </a>
+                        <div class="d-flex flex-wrap align-items-center justify-content-center mb-4 text-muted small my-2" style="font-size: 0.5rem;">
+                            <span class="me-2">✍️ By
+                                <a href="{{ route('authors.posts', $song->artist) }}" 
+                                    class="text-decoration-none text-muted fw-semibold">
+                                    {{ $song->artist }}
+                                </a>
+                            </span>
+
+                            <span class="me-2">
+                                <a href="{{ route('categories.show', $song->categorysong->slug) }}" class="text-decoration-none">
+                                    <span class="badge {{ $song->categorysong->getCategoryColor() }} text-white px-3 py-1 rounded-pill">
+                                        {{ $song->categorysong->name }}
                                     </span>
-                                    <span class="me-2">
-                                        <a href="{{ route('categories.show', $song->categorysong->slug) }}" class="text-decoration-none">
-                                            <span class="badge {{ $song->categorysong->getCategoryColor() }} text-white px-3 py-1 rounded-pill">
-                                                {{ $song->categorysong->name }}
-                                            </span>
-                                        </a>
-                                    </span>
-                                    <span class="me-2">🕒 {{ $song->created_at->diffForHumans() }}</span>
-                                </div>
+                                </a>
+                            </span>
+
+                            <span class="me-2">🕒 {{ $song->created_at->diffForHumans() }}</span>
+                        </div>
                         {{-- end artist, genre and date --}}
                         <p class="mt-2 text-muted" style="font-size: 0.85rem;">
                             {!! Str::limit(strip_tags($song->body), 100) !!}
@@ -69,10 +70,6 @@
 {{-- artikel section end --}}
 
 {{-- Panggil partial pagination --}}
-@include('partials.pagination', ['paginator' => $songs])
-
-
-
-  </div>
+@include('partials.pagination', ['paginator' => $songs])  
 </div>
 @endsection

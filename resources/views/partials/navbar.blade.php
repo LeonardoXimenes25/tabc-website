@@ -1,60 +1,109 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 fixed-top" style="background-color: #1a1a1a!important;">
-    <div class="container">
-      <!-- Logo + Text (Left Side) -->
-      <a class="navbar-brand me-5" href="/">
-        <div class="d-flex align-items-center">
-          <img src="{{asset('images/cop-tabc.png')}}" alt="TABC-TL Logo" width="40" height="40" class="d-inline-block align-top me-2">
-          <span class="font-weight-bold">TABC-TL</span>
-        </div>
-      </a>
-  
-      <!-- Centered Navigation -->
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item mx-2">
-            <a class="nav-link {{ request()->is('/home') ? 'active' : '' }}" href="/">
-               Home
-            </a>
+<nav class="navbar navbar-dark bg-dark fixed-top py-2">
+  <div class="container">
+    <!-- Logo + Brand -->
+    <a class="navbar-brand me-5" href="/">
+      <div class="d-flex align-items-center">
+        <img src="{{asset('images/cop-tabc.png')}}" alt="TABC-TL Logo" width="40" height="40" class="d-inline-block align-top me-2">
+        <span class="fw-bold">TABC-TL</span>
+      </div>
+    </a>
+    
+    <!-- Desktop Navigation (visible on lg and up) -->
+    <div class="d-none d-lg-block">
+      <ul class="navbar-nav mx-auto d-flex flex-row">
+        <li class="nav-item mx-2">
+          <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Home</a>
+        </li>
+        <li class="nav-item mx-2">
+          <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">Tentang</a>
+        </li>
+        <li class="nav-item mx-2">
+          <a class="nav-link {{ request()->is('schedule') ? 'active' : '' }}" href="/schedule">Jadwal Ibadah</a>
+        </li>
+        <li class="nav-item mx-2">
+          <a class="nav-link {{ request()->is('articles*') ? 'active' : '' }}" href="/articles">Artikel</a>
+        </li>
+        <li class="nav-item mx-2">
+          <a class="nav-link {{ request()->is('lyrics') ? 'active' : '' }}" href="/lyrics">Lirik Lagu</a>
+        </li>
+        <li class="nav-item mx-2">
+          <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="/contact">Kontak Kami</a>
+        </li>
+      </ul>
+    </div>
+    
+    <!-- Desktop Login Button (visible on lg and up) -->
+    <div class="d-none d-lg-block ms-3">
+      <a href="{{ route('login_user') }}" class="btn btn-outline-light">Login</a>
+    </div>
+    
+    <!-- Mobile Toggle Button (hidden on lg and up) -->
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <!-- Offcanvas Menu (mobile only) -->
+    <div class="offcanvas offcanvas-end bg-dark text-white d-lg-none" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header border-bottom border-secondary">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">TABCTL</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <!-- Mobile Navigation Links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Home</a>
           </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">
-              Tentang
-            </a>
+          <li class="nav-item">
+            <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">Tentang</a>
           </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link {{ request()->is('schedule') ? 'active' : '' }}" href="/schedule">
-               Jadwal Ibadah
-            </a>
+          <li class="nav-item">
+            <a class="nav-link {{ request()->is('schedule') ? 'active' : '' }}" href="/schedule">Jadwal Ibadah</a>
           </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link {{ request()->is('articles.posts') ? 'active' : '' }}" href="/articles">
-               Artikel
-            </a>
+          <li class="nav-item">
+            <a class="nav-link {{ request()->is('articles*') ? 'active' : '' }}" href="/articles">Artikel</a>
           </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link {{ request()->is('lyrics') ? 'active' : '' }}" href="/lyrics">
-               Lirik Lagu
-            </a>
+          <li class="nav-item">
+            <a class="nav-link {{ request()->is('lyrics') ? 'active' : '' }}" href="/lyrics">Lirik Lagu</a>
           </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link {{ request()->is('lyrics') ? 'active' : '' }}" href="/lyrics">
-               Kontak Kami
-            </a>
+          <li class="nav-item">
+            <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="/contact">Kontak Kami</a>
           </li>
         </ul>
+        
+        <!-- Mobile Login Button -->
+        <div class="mt-4 pt-3 border-top border-secondary">
+          <a href="{{ route('login_user') }}" class="btn btn-outline-light w-100">Login</a>
+        </div>
       </div>
-
-      {{-- login auth --}}
-      <div class="d-flex">
-        <a href="{{ route('login_user') }}" class="btn btn-outline-light">
-          Login
-        </a>
-      </div>
-
-
-      <!-- Mobile Toggle -->
-      <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
     </div>
-  </nav>
+  </div>
+</nav>
+
+<!-- Custom CSS for Offcanvas Menu -->
+<style>
+
+    .nav-link {
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 2px;
+    }
+
+  @media (max-width: 991.98px) {
+    .offcanvas {
+      width: 280px;
+    }
+    .nav-link {
+      padding: 12px 15px;
+      border-radius: 10px;
+      margin-bottom: 2px;
+    }
+    .nav-link:hover, .nav-link.active {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+  }
+  .btn-close {
+    filter: invert(1);
+  }
+</style>

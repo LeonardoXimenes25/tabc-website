@@ -1,4 +1,3 @@
-<!-- resources/views/partials/breadcrumb_search.blade.php -->
 <div class="row bg-light rounded-3 p-3 shadow-sm align-items-center">
     <div class="col-md-8">
         <nav aria-label="breadcrumb">
@@ -19,8 +18,8 @@
             </ol>
         </nav>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 mt-3 mt-md-0">
         <input type="text" wire:model.live.debounce.300ms="query" class="form-control form-control-sm"
-            placeholder="Cari artikel...">
+            placeholder="Cari artikel..." />
     </div>
 </div>

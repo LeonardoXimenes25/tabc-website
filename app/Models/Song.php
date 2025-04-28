@@ -10,7 +10,7 @@ class Song extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'author_id', 'slug', 'body', 'image_url', 'categorysong_id', 'artist', 'album', 'youtube_embed'];
+    protected $fillable = ['title', 'author_id', 'slug', 'body', 'image_url', 'categorysong_id', 'artist', 'album', 'year', 'youtube_embed'];
 
     // Eager loading untuk relasi 'author' dan 'categorysong'
     protected $with = ['author', 'categorysong'];

@@ -42,13 +42,17 @@
                     <h6 class="text-muted">{{ $songs->artist }}</h6>
                 </div>
                 <div class="d-flex mb-2">
-                    <h6 class="me-2 fw-bold">Genre:</h6>
+                    <h6 class="me-2 fw-bold">Tema:</h6>
                     <h6 class="text-muted">{{ $songs->categorysong->name }}</h6>
                 </div>
                 <div class="d-flex mb-2">
                     <h6 class="me-2 fw-bold">Album:</h6>
                     <h6 class="text-muted">{{ $songs->album }}</h6>
                 </div>
+                <div class="d-flex mb-2">
+                  <h6 class="me-2 fw-bold">Tahun Rilis:</h6>
+                  <h6 class="text-muted">{{ $songs->year }}</h6>
+              </div>
 
                 {{-- Tags --}}
                 <div class="tags mt-3">
@@ -58,23 +62,23 @@
 
                 {{-- YouTube Embed --}}
                 @if ($songs->youtube_embed)
-                    @php
-                        preg_match('/v=([^&]+)/', $songs->youtube_embed, $matches);
-                        $videoId = $matches[1] ?? null;
-                    @endphp
+                      @php
+                          preg_match('/v=([^&]+)/', $songs->youtube_embed, $matches);
+                          $videoId = $matches[1] ?? null;
+                      @endphp
 
-                    @if ($videoId)
-                        <div class="mt-4" style="max-width: 280px;">
-                            <div class="ratio ratio-16x9">
-                                <iframe 
-                                    src="https://www.youtube.com/embed/{{ $videoId }}" 
-                                    frameborder="0" 
-                                    allowfullscreen>
-                                </iframe>
-                            </div>
-                        </div>
-                    @endif
-                @endif
+                      @if ($videoId)
+                          <div class="mt-4 d-flex justify-content-center">
+                              <div class="ratio ratio-16x9" style="max-width: 100%; width: 100%; height: auto;">
+                                  <iframe 
+                                      src="https://www.youtube.com/embed/{{ $videoId }}" 
+                                      frameborder="0" 
+                                      allowfullscreen>
+                                  </iframe>
+                              </div>
+                          </div>
+                      @endif
+                  @endif
                 {{-- End YouTube Embed --}}
             </div>
         </div>
