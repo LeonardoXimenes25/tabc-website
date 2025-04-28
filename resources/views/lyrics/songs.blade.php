@@ -4,13 +4,8 @@
 
 @section('content')
 <div class="container my-4" style="min-height: 100vh;">
-
-      {{-- header --}}
-          {{-- header --}}
-    @php
-    $breadcrumbItems = [
-    ['title' => 'Lirik lagu', 'link' => route('songs.index'), 'active' => true]
-    ];
+    @php 
+    $breadcrumbItems = [['title' => 'Lirik lagu', 'link' => route('songs.index'), 'active' => true]];
     @endphp
 
     @include('partials.breadcrumb_search', ['breadcrumbItems' => $breadcrumbItems])
@@ -32,7 +27,7 @@
                 <div class="card h-100 border-0 shadow-sm transition-card">
                     <img src="{{ asset('storage/' . $song->image_url) }}" class="card-img-top" alt="{{ $song->title }}" >
                     <div class="card-body">
-                        <a href="{{ route('songs.show', $song->slug) }}" class="text-decoration-none text-dark" style="font-size: 1rem">
+                        <a href="{{ route('songs.show', $song->slug) }}" class="text-decoration-none text-dark fw-bold" style="font-size: 1rem">
                             {{ $song->title }}
                         </a>
                         {{-- author, genre and date --}}
@@ -45,18 +40,18 @@
                                         </a>
                                     </span>
                                     <span class="me-2">
-                                        <a href="{{ route('categories.show', $song->categorysong->slug) }}"
-                                            class="text-decoration-none">
-                                            <span
-                                                class="badge bg-primary text-white px-3 py-1 rounded-pill">{{ $song->categorysong->name }}</span>
+                                        <a href="{{ route('categories.show', $song->categorysong->slug) }}" class="text-decoration-none">
+                                            <span class="badge {{ $song->categorysong->getCategoryColor() }} text-white px-3 py-1 rounded-pill">
+                                                {{ $song->categorysong->name }}
+                                            </span>
                                         </a>
                                     </span>
                                     <span class="me-2">🕒 {{ $song->created_at->diffForHumans() }}</span>
                                 </div>
                         {{-- end artist, genre and date --}}
-                        <p class="card-text text-muted mt-2" style="font-size: 0.8rem">
-                            {{ Str::limit($song->body, 50) }}
-                        </p>
+                        <p class="mt-2 text-muted" style="font-size: 0.85rem;">
+                            {!! Str::limit(strip_tags($song->body), 100) !!}
+                        </p>                        
                         <a href="{{ route('songs.show', $song->slug) }}" style="font-size: 0.7rem">
                             Read More &gt;&gt;
                         </a>

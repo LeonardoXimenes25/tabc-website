@@ -15,5 +15,19 @@ class CategorySong extends Model
         return $this->hasMany(Song::class);
     }
 
+    public function getCategoryColor()
+    {
+        switch ($this->name) {
+            case 'Sekolah Minggu':
+                return 'bg-success';
+            case 'Natal':
+                return 'bg-warning text-dark';
+            case 'Paskua':
+                return 'bg-danger';
+            default:
+                return 'bg-primary';
+        }
+    }
+
 
 }

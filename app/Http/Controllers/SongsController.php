@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class SongsController extends Controller
 {
+
     // Menampilkan daftar artikel
     public function index()
     {

@@ -11,7 +11,7 @@
 
     {{-- Artikel --}}
     <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
-        <h4 class="fw-bold">Artikel Terbaru</h4>
+        <h5 class="fw-bold">Daftar Artikel</h5>
     </div>
 
     {{-- article start --}}
@@ -37,10 +37,10 @@
                                         </a>
                                     </span>
                                     <span class="me-2">
-                                        <a href="{{ route('categories.show', $post->category->slug) }}"
-                                            class="text-decoration-none">
-                                            <span
-                                                class="badge bg-primary text-white px-3 py-1 rounded-pill">{{ $post->category->name }}</span>
+                                        <a href="{{ route('categories.show', $post->category->slug) }}" class="text-decoration-none">
+                                            <span class="badge {{ $post->category->getCategoryColor() }} text-white px-3 py-1 rounded-pill">
+                                                {{ $post->category->name }}
+                                            </span>
                                         </a>
                                     </span>
                                     <span class="me-2">🕒 {{ $post->created_at->diffForHumans() }}</span>
@@ -51,7 +51,7 @@
                                     {{ Str::limit($post->body, 100) }}
                                 </p>
                                 <a href="{{ route('articles.show', $post->slug) }}" style="font-size: 0.7rem">
-                                    Read More &gt;&gt;
+                                    Baca Selekapnya &gt;&gt;
                                 </a>
                             </div>
                         </div>

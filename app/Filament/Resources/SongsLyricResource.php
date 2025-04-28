@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\SongsLyricResource\Pages;
 use App\Filament\Resources\SongsLyricResource\RelationManagers;
+use Filament\Forms\Components\RichEditor;
 
 class SongsLyricResource extends Resource
 {
@@ -35,39 +36,58 @@ class SongsLyricResource extends Resource
                 ->required()
                 ->maxLength(255),
 
-            TextInput::make('artist')
-                ->label('Penyanyi')
-                ->required()
-                ->maxLength(255),
+                TextInput::make('artist')
+                    ->label('Penyanyi')
+                    ->required()
+                    ->maxLength(255),
 
-            TextInput::make('slug')
-                ->required()
-                ->unique(ignoreRecord: true)
-                ->maxLength(255),
+                TextInput::make('slug')
+                    ->required()
+                    ->unique(ignoreRecord: true)
+                    ->maxLength(255),
 
-            Select::make('category_id')
-                ->relationship('categorysong', 'name')
-                ->label('Genre')
-                ->searchable()
-                ->required(),
+                Select::make('category_id')
+                    ->relationship('categorysong', 'name')
+                    ->label('Genre')
+                    ->searchable()
+                    ->required(),
 
-            FileUpload::make('image_url')
-                ->label('Gambar')
-                ->image()
-                ->disk('public')
-                ->directory('articles'),
+                FileUpload::make('image_url')
+                    ->label('Gambar')
+                    ->image()
+                    ->disk('public')
+                    ->directory('articles'),
 
-            Textarea::make('body')
-                ->label('Lirik Lagu')
-                ->rows(10)
-                ->required(),
+                RichEditor::make('body')
+                    ->toolbarButtons([
+                        'attachFiles',
+                        'bold',
+                        'bulletList',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                        'html',
+                    ]) ->columns(2),
 
-            Select::make('author_id')
-                ->relationship('author', 'name')
-                ->label('Penulis')
-                ->searchable()
-                ->required(),
-            ]);
+                    TextInput::make('youtube_embed')
+                    ->label('YouTube Video URL')
+                    ->placeholder('https://www.youtube.com/watch?v=oXNn1fIXir8')
+                    ->url()
+                    ->nullable()
+                    ->helperText('Masukkan link YouTube'),
+
+                Select::make('author_id')
+                    ->relationship('author', 'name')
+                    ->label('Penulis')
+                    ->searchable()
+                    ->required()
+                ]);
     }
 
     public static function table(Table $table): Table

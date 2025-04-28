@@ -17,9 +17,11 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                      <a href="{{ route('articles.index') }}">Pujian</a>
+                      <a href="{{ route('articles.index') }}">Artikel</a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ Str::limit($post->title, 30) }}</li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        {{ Str::limit($post->title, 30) }}
+                    </li>
                 </ol>
             </nav>
         </div>

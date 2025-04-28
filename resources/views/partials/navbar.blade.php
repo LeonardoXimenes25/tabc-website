@@ -46,7 +46,7 @@
 
       {{-- login auth --}}
       <div class="d-flex">
-        <a href="{{ route('login') }}" class="btn btn-outline-light">
+        <a href="{{ route('login_user') }}" class="btn btn-outline-light">
           Login
         </a>
       </div>

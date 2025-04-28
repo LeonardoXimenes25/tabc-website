@@ -12,6 +12,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
@@ -45,11 +46,16 @@ class ArticleResource extends Resource
                     ->searchable()
                     ->required(),
 
-                Select::make('category_id')
+                    Select::make('category_id')
                     ->relationship('category', 'name')
-                    ->label('Kategori')
-                    ->searchable()
-                    ->required(),
+                    ->label('Category')
+                    ->options([
+                        1 => 'Renungan Harian',
+                        2 => 'Pengajaran Alkitab',
+                        3 => 'Sejarah Gereja dan Tokoh Iman',
+                    ])
+                    ->required()
+                    ->searchable(),
 
                 FileUpload::make('image_url')
                     ->label('Gambar')
@@ -70,7 +76,13 @@ class ArticleResource extends Resource
             ->columns([
                 TextColumn::make('title')->searchable()->sortable()->wrap(),
                 TextColumn::make('author.name')->label('Penulis')->sortable(),
-                TextColumn::make('category.name')->label('Kategori')->sortable(),
+                BadgeColumn::make('category.name')
+                    ->label('Category')
+                    ->color(function (Article $record) {
+                        return $record->category->getCategoryColor();
+                    })
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('body')->label('Konten')->sortable()->limit(30),
                 ImageColumn::make('image_url')->label('Gambar')->height(50)->disk('public'),
                 TextColumn::make('created_at')->dateTime('d M Y')->label('Tanggal Dibuat')->sortable(),

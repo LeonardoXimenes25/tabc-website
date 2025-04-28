@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Song;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
 use App\Models\Article;
 use App\Models\Category;
@@ -27,6 +26,9 @@ class DatabaseSeeder extends Seeder
             User::all()
         ])->create();
     
-        Song::factory(10)->create();
+        Song::factory(10)->recycle([
+            CategorySong::all(),
+            User::all()
+        ])->create();
     }
 }

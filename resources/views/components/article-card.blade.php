@@ -1,7 +1,7 @@
 <div class="container my-5">
     <!-- Header Section -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h3 class="m-0">Artikel Terbaru</h3>
+        <h3 class="m-0 fw-bold">Artikel Terbaru</h3>
         <a href="{{route('articles.index')}}" class="btn btn-link text-decoration-none">Lihat Semua →</a>
     </div>
     
@@ -18,10 +18,25 @@
                       {{ $post->title }}
                   </a>
   
-                  {{-- Author and Date --}}
-                  <div class="author mb-1 text-muted" style="font-size: 0.7rem">
-                    By <a href="{{ route('authors.posts', $post->author->username) }}" class="text-muted">{{ $post->author->name }}</a> in <a href="{{ route('categories.show', $post->category->slug) }}" class="text-muted">{{ $post->category->name }}</a> |{{$post->created_at->diffForHumans()}}
-                  </div>
+                  {{-- Author, Categories and Date --}}
+                  <div class="d-flex flex-wrap align-items-center mb-4 text-muted small my-2"
+                                    style="font-size: 0.7rem">
+                                    <span class="me-2">✍️ By
+                                        <a href="{{ route('authors.posts', $post->author->username) }}"
+                                            class="text-decoration-none text-muted fw-semibold">
+                                            {{ $post->author->name }}
+                                        </a>
+                                    </span>
+                                    <span class="me-2">
+                                        <a href="{{ route('categories.show', $post->category->slug) }}" class="text-decoration-none">
+                                            <span class="badge {{ $post->category->getCategoryColor() }} text-white px-3 py-1 rounded-pill">
+                                                {{ $post->category->name }}
+                                            </span>
+                                        </a>
+                                    </span>
+                                    <span class="me-2">🕒 {{ $post->created_at->diffForHumans() }}</span>
+                                </div>
+                  {{-- Author, categories and Date end --}}
   
                   <!-- Artikel Excerpt -->
                   <p class="card-text text-muted mt-2" style="font-size: 0.8rem">
@@ -30,7 +45,7 @@
   
                   <!-- Read More Link -->
                   <a href="{{ route('articles.show', $post->slug) }}" style="font-size: 0.7rem">
-                      Read More &gt;&gt;
+                      Baca Selekapnya &gt;&gt;
                   </a>
               </div>
           </div>
@@ -38,4 +53,31 @@
       @endforeach
   </div>
   
+  <style>
+    .transition-card {
+        transition: all 0.3s ease;
+    }
+    
+    .transition-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+    
+    .transition-card:active {
+        transform: translateY(0) scale(0.98);
+    }
+    
+    .transition-btn {
+        transition: all 0.2s ease;
+    }
+    
+    .transition-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+    }
+    
+    .transition-btn:active {
+        transform: translateY(0);
+    }
+</style>
     

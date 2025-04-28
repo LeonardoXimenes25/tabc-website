@@ -17,7 +17,7 @@ class CategorySongFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->unique()->sentence(rand(1, 2), false); // ambil name sekali saja
+        $name = fake()->unique()->sentence(rand(1, 2), false);
         return [
         'name' => $name,
         'slug' => Str::slug($name),

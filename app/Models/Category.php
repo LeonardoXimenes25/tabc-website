@@ -14,4 +14,18 @@ class Category extends Model
     {
     return $this->hasMany(Article::class);
     }
+
+    public function getCategoryColor()
+    {
+        switch ($this->name) {
+            case 'Renungan Harian':
+                return 'bg-success';
+            case 'Pengajaran Alkitab':
+                return 'bg-warning text-dark';
+            case 'Sejarah Gereja dan Tokoh Iman':
+                return 'bg-danger';
+            default:
+                return 'bg-primary';
+        }
+    }
 }

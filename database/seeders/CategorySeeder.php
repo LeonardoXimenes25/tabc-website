@@ -14,18 +14,18 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::create([
-            'name' => 'Santapan Rohani',
-            'slug' => 'santapan-rohani'
+            'name' => 'Renungan Harian',
+            'slug' => 'renungan-harian'
         ]);
 
         Category::create([
-            'name' => 'Sejarah Alkitab',
-            'slug' => 'sejarah-alkitab'
+            'name' => 'Pengajaran Alkitab',
+            'slug' => 'pengajaran-alkitab'
         ]);
 
         Category::create([
-            'name' => 'Renungan',
-            'slug' => 'renungan'
+            'name' => 'Sejarah Gereja dan Tokoh Iman',
+            'slug' => 'sejarah-gereja-dan-tokoh-iman'
         ]);
     }
 }

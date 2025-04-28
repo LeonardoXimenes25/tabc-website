@@ -14,18 +14,18 @@ class CategorySongSeeder extends Seeder
     public function run(): void
     {
         CategorySong::create([
-            'name' => 'Gospel',
-            'slug' => 'gospel'
+            'name' => 'Sekolah Minggu',
+            'slug' => 'sekolah-minggu'
         ]);
 
         CategorySong::create([
-            'name' => 'Pop',
-            'slug' => 'pop'
+            'name' => 'Natal',
+            'slug' => 'natal'
         ]);
 
         CategorySong::create([
-            'name' => 'Kidung Jemaat',
-            'slug' => 'kidung-jemaat'
+            'name' => 'Paskah',
+            'slug' => 'paskah'
         ]);
     }
 }
