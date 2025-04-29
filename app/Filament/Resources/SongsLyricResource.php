@@ -8,6 +8,7 @@ use Filament\Tables;
 use Filament\Forms\Form;
 use App\Models\SongsLyric;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -15,11 +16,11 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\SongsLyricResource\Pages;
 use App\Filament\Resources\SongsLyricResource\RelationManagers;
-use Filament\Forms\Components\RichEditor;
 
 class SongsLyricResource extends Resource
 {
@@ -33,30 +34,25 @@ class SongsLyricResource extends Resource
             ->schema([
                 TextInput::make('title')
                 ->label('Judul')
+                ->live(onBlur: true)
+                ->afterStateUpdated(function ($state, $get, $set) {
+                    if (!$get('slug')) {
+                        $set('slug', Str::slug($state));
+                    }
+                })
                 ->required()
                 ->maxLength(255),
 
-                TextInput::make('artist')
-                    ->label('Penyanyi')
-                    ->required()
-                    ->maxLength(255),
-
                 TextInput::make('slug')
+                    ->label('Slug')
                     ->required()
-                    ->unique(ignoreRecord: true)
-                    ->maxLength(255),
+                    ->unique('songs', 'slug', ignoreRecord: true)
+                    ->disabled(),
 
-                Select::make('category_id')
-                    ->relationship('categorysong', 'name')
-                    ->label('Tema')
-                    ->searchable()
-                    ->required(),
-
-                FileUpload::make('image_url')
-                    ->label('Gambar')
-                    ->image()
-                    ->disk('public')
-                    ->directory('articles'),
+                TextInput::make('artist')
+                        ->label('Penyanyi')
+                        ->required()
+                        ->maxLength(255),
 
                 RichEditor::make('body')
                     ->toolbarButtons([
@@ -73,7 +69,22 @@ class SongsLyricResource extends Resource
                         'underline',
                         'undo',
                         'html',
-                    ]) ->columns(2),
+                    ])
+                    ->columns(2)
+                    ->label('Lirik Lagu')
+                    ->required(),
+
+                Select::make('category_id')
+                    ->relationship('categorysong', 'name')
+                    ->label('Tema')
+                    ->searchable()
+                    ->required(),
+
+                FileUpload::make('image_url')
+                    ->label('Gambar')
+                    ->image()
+                    ->disk('public')
+                    ->directory('songs'),
 
                     TextInput::make('youtube_embed')
                     ->label('YouTube Video URL')
@@ -108,7 +119,7 @@ class SongsLyricResource extends Resource
             ->columns([
                 TextColumn::make('title')->searchable()->sortable()->wrap()->label('Judul'),
                 TextColumn::make('artist')->searchable()->sortable()->wrap()->label('artist'),
-                TextColumn::make('categorysong.name')->label('Genre')->sortable(),
+                TextColumn::make('categorysong.name')->label('Tema')->sortable(),
                 TextColumn::make('body')->label('Lirik Lagu')->sortable()->limit(30),
                 ImageColumn::make('image_url')->label('Gambar')->height(50)->disk('public'),
                 TextColumn::make('author.name')->label('Penulis')->sortable(),

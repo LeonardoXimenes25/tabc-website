@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,5 +23,14 @@ class Song extends Model
 
     public function categorysong(): BelongsTo {
         return $this->belongsTo(CategorySong::class, 'categorysong_id');
+    }
+
+    protected static function booted()
+    {
+        static::saving(function ($song) {
+            if (empty($song->slug)) {
+                $song->slug = Str::slug($song->title);
+            }
+        });
     }
 }

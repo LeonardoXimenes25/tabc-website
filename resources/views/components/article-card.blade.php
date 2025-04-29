@@ -10,7 +10,7 @@
       <div class="col-md-3 mb-4">
           <div class="card h-100 border-0 shadow-sm transition-card">
               <!-- Featured Image -->
-              <img src="{{ asset($post->image_url) }}" class="card-img-top" alt="{{ $post->title }}">
+              <img src="{{ asset('storage/' . $post->image_url) }}" class="card-img-top" alt="{{ $post->title }}">
   
               <div class="card-body">
                   <!-- Artikel Title sebagai Link -->
@@ -39,10 +39,9 @@
                   {{-- Author, categories and Date end --}}
   
                   <!-- Artikel Excerpt -->
-                  <p class="card-text text-muted mt-2" style="font-size: 0.8rem">
-                      {{ Str::limit($post->body, 100) }}
-                  </p>
-  
+                  <p class="mt-2 text-muted" style="font-size: 0.85rem;">
+                    {!! Str::limit(strip_tags($post->body), 100) !!}
+                </p>     
                   <!-- Read More Link -->
                   <a href="{{ route('articles.show', $post->slug) }}" style="font-size: 0.7rem">
                       Baca Selekapnya &gt;&gt;

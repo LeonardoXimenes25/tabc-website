@@ -66,8 +66,8 @@
 
                     <hr>
 
-                    <div class="article-content fs-5 lh-base">
-                        {!! nl2br(e($post->body)) !!}
+                    <div class="article-content" style="font-size: 1rem">
+                        {!! ($post->body) !!}
                     </div>
                 </div>
             </article>
@@ -81,7 +81,7 @@
                 </div>
                 <div class="card-body p-4">
                     @auth
-                    <form action="{{ route('filament.comment-article.store') }}" method="POST" class="mb-4">
+                    <form action="{{ route('articles.comments.store', $post->slug) }}" method="POST" class="mb-4">
                         @csrf
                         <input type="hidden" name="post_id" value="{{ $post->id }}">
                         <div class="mb-3">

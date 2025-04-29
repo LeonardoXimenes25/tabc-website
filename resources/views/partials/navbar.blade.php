@@ -3,7 +3,7 @@
     <!-- Logo + Brand -->
     <a class="navbar-brand me-5" href="/">
       <div class="d-flex align-items-center">
-        <img src="{{asset('images/cop-tabc.png')}}" alt="TABC-TL Logo" width="40" height="40" class="d-inline-block align-top me-2">
+        <img src="{{ asset('images/cop-tabc.png') }}" alt="TABC-TL Logo" width="40" height="40" class="d-inline-block align-top me-2">
         <span class="fw-bold">TABC-TL</span>
       </div>
     </a>
@@ -32,9 +32,16 @@
       </ul>
     </div>
     
-    <!-- Desktop Login Button (visible on lg and up) -->
+    <!-- Desktop Login/Logout Button (visible on lg and up) -->
     <div class="d-none d-lg-block ms-3">
-      <a href="{{ route('login_user') }}" class="btn btn-outline-light">Login</a>
+      @auth
+        <form method="POST" action="{{ route('logout') }}" class="d-inline">
+          @csrf
+          <button type="submit" class="btn btn-outline-light">Logout</button>
+        </form>
+      @else
+        <a href="{{ route('login') }}" class="btn btn-outline-light">Login</a>
+      @endauth
     </div>
     
     <!-- Mobile Toggle Button (hidden on lg and up) -->
@@ -71,9 +78,16 @@
           </li>
         </ul>
         
-        <!-- Mobile Login Button -->
+        <!-- Mobile Login/Logout Button -->
         <div class="mt-4 pt-3 border-top border-secondary">
-          <a href="{{ route('login_user') }}" class="btn btn-outline-light w-100">Login</a>
+          @auth
+            <form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <button type="submit" class="btn btn-outline-light w-100">Logout</button>
+            </form>
+          @else
+            <a href="{{ route('login') }}" class="btn btn-outline-light w-100">Login</a>
+          @endauth
         </div>
       </div>
     </div>
@@ -82,27 +96,28 @@
 
 <!-- Custom CSS for Offcanvas Menu -->
 <style>
-
-    .nav-link {
-      padding: 12px 15px;
-      border-radius: 10px;
-      margin-bottom: 2px;
-    }
+  .nav-link {
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 2px;
+  }
 
   @media (max-width: 991.98px) {
     .offcanvas {
       width: 280px;
     }
+
     .nav-link {
       padding: 12px 15px;
       border-radius: 10px;
       margin-bottom: 2px;
     }
+
     .nav-link:hover, .nav-link.active {
       background-color: rgba(255, 255, 255, 0.1);
     }
-
   }
+
   .btn-close {
     filter: invert(1);
   }

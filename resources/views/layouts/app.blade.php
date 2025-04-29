@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 @include('partials/head')
-<body>
+<body class="full-height">
     @include('partials/navbar')
 
     <main class="mt-5 pt-4">

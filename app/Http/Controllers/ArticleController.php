@@ -21,7 +21,7 @@ class ArticleController extends Controller
 
     public function show($slug)
     {
-        $post = Article::with(['author', 'category', 'comment'])->where('slug', $slug)->firstOrFail();
+        $post = Article::with(['author', 'category', 'comment.user'])->where('slug', $slug)->firstOrFail();
 
         // Ambil artikel terkait berdasarkan kategori
         $relatedPosts = Article::where('id', '!=', $post->id)

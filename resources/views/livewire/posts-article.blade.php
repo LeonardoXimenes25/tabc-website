@@ -47,9 +47,10 @@
                                 </div>
                                 {{-- author, categories and date end--}}
 
-                                <p class="card-text text-muted mt-2" style="font-size: 0.8rem">
-                                    {{ Str::limit($post->body, 100) }}
-                                </p>
+                                <p class="mt-2 text-muted" style="font-size: 0.85rem;">
+                                    {!! Str::limit(strip_tags($post->body), 100) !!}
+                                </p>   
+
                                 <a href="{{ route('articles.show', $post->slug) }}" style="font-size: 0.7rem">
                                     Baca Selekapnya &gt;&gt;
                                 </a>

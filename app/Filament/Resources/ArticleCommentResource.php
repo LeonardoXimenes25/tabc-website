@@ -29,7 +29,7 @@ class ArticleCommentResource extends Resource
                 ->label('Judul Artikel'),
 
             Forms\Components\Select::make('author_id')
-                ->relationship('author', 'name')
+                ->relationship('user', 'name')
                 ->required()
                 ->label('Penulis Komentar'),
 

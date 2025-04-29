@@ -6,34 +6,68 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
 {
-     // Menampilkan form login
-     public function index()
-     {
-         return view('auth.login');
-     }
+    public function showRegistrationForm()
+    {
+        return view('auth.register');
+    }
 
-     public function login_user (request $request){
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ],
-        [
-            'email.required' => 'Email wajib di isi',
-            'password.required' => 'Password wajib di isi',
+    public function register(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', new Password(8)], // Menggunakan rule Password dari Laravel
         ]);
 
-        $infologin = [
-            'email'=>$request->email,
-            'password'=>$request->password,
-         ];
+        if ($validator->fails()) {
+            return redirect()->route('register')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
-         if(Auth::attempt($infologin)) {
-            return redirect('/admin');
-         }else{
-            return redirect('')->withErrors('Username dan Password yang dimasukan tidak sesuai')->withInput();
-         }
-     }
+        User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
+    }
+
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials, $request->remember)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/'); // Ganti 'dashboard' dengan route setelah login berhasil
+        }
+
+        return back()->withErrors([
+            'email' => 'Kredensial yang Anda masukkan salah.',
+        ])->onlyInput('email');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login')->with('success', 'Anda telah berhasil logout.');
+    }
 }

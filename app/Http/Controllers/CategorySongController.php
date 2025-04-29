@@ -1,16 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
-
+use App\Models\CategorySong;
 use Illuminate\Http\Request;
-use App\Models\CategorySongs;
 
 class CategorySongController extends Controller
 {
     public function show($slug)
 {
-    $categorysong = CategorySongs::where('slug', $slug)->firstOrFail();
+    $categorysong = CategorySong::where('slug', $slug)->firstOrFail();
 
     $songs = $categorysong->songs()
         ->with(['author', 'categorysong']) // eager load relasi

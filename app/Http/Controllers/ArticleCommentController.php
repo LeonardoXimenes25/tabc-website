@@ -2,25 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 use App\Models\ArticleComment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ArticleCommentController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request, Article $article)
     {
-        $request->validate([
-            'article_id' => 'required|exists:posts,id',
-            'body' => 'required|string|max:1000',
+        // Validasi data komentar
+        $validator = Validator::make($request->all(), [
+            'body' => 'required|min:3', // Contoh validasi: komentar minimal 3 karakter
         ]);
 
-        ArticleComment::create([
-            'user_id' => Auth::id(),
-            'article_id' => $request->post_id,
-            'body' => $request->body,
-        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
 
-        return back()->with('success', 'Komentar berhasil dikirim!');
+        // Pastikan user sudah login untuk bisa berkomentar
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('warning', 'Anda harus login untuk berkomentar.');
+        }
+
+        // Buat komentar baru dan kaitkan dengan artikel dan user yang sedang login
+        $comment = new ArticleComment();
+        $comment->article_id = $article->id;
+        $comment->author_id = Auth::id();
+        $comment->body = $request->body;
+        $comment->save();
+
+        // Redirect kembali ke halaman artikel dengan pesan sukses
+        return back()->with('success', 'Komentar berhasil ditambahkan.');
     }
 }

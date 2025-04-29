@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources;
 
+use Closure;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Article;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -32,14 +34,46 @@ class ArticleResource extends Resource
         return $form
             ->schema([
                 TextInput::make('title')
-                    ->label('Judul')
-                    ->required()
-                    ->maxLength(255),
+                ->label('Judul')
+                ->live(onBlur: true)
+                ->afterStateUpdated(function ($state, $get, $set) {
+                    if (!$get('slug')) {
+                        $set('slug', Str::slug($state));
+                    }
+                })
+                ->required()
+                ->maxLength(255),
 
                 TextInput::make('slug')
-                    ->required()
-                    ->unique(ignoreRecord: true)
-                    ->maxLength(255),
+                ->label('Slug')
+                ->required()
+                ->unique('articles', 'slug', ignoreRecord: true)
+                ->disabled(),
+
+                RichEditor::make('body')
+                ->toolbarButtons([
+                    'attachFiles',
+                    'bold',
+                    'bulletList',
+                    'h2',
+                    'h3',
+                    'italic',
+                    'link',
+                    'orderedList',
+                    'redo',
+                    'strike',
+                    'underline',
+                    'undo',
+                    'html',
+                ]) 
+                ->label('Konten Artikel')
+                ->required(),
+
+                FileUpload::make('image_url')
+                ->label('Gambar')
+                ->image()
+                ->disk('public')
+                ->directory('articles'),
 
                 Select::make('author_id')
                     ->relationship('author', 'name')
@@ -57,29 +91,6 @@ class ArticleResource extends Resource
                     ])
                     ->required()
                     ->searchable(),
-
-                FileUpload::make('image_url')
-                    ->label('Gambar')
-                    ->image()
-                    ->disk('public')
-                    ->directory('articles'),
-
-                    RichEditor::make('body')
-                    ->toolbarButtons([
-                        'attachFiles',
-                        'bold',
-                        'bulletList',
-                        'h2',
-                        'h3',
-                        'italic',
-                        'link',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'underline',
-                        'undo',
-                        'html',
-                    ]) ->columns(2),
             ]);
     }
 
