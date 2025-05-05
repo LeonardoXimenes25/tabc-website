@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SongsController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\CategorySongController;
 use App\Http\Controllers\ArticleCommentController;
 
@@ -32,10 +33,11 @@ Route::get('/about', function () {
     return view('about');
 });
 
-// Schedule
-Route::get('/schedule', function () {
-    return view('schedule.index');
-});
+// schedule
+Route::get('/schedule', [ScheduleController::class, 'index'])->name('schedule.index');
+Route::get('/schedule/calendar', [ScheduleController::class, 'calendar'])->name('schedule.calendar');
+Route::get('/schedule/{id}', [ScheduleController::class, 'show'])->name('schedule.show');
+
 
 // auth
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');

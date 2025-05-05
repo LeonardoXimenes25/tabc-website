@@ -65,7 +65,7 @@
             <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">Tentang</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ request()->is('schedule') ? 'active' : '' }}" href="/schedule">Jadwal Ibadah</a>
+            <a class="nav-link {{ request()->is('schedule') ? 'active' : '' }}" href="/schedules">Jadwal Ibadah</a>
           </li>
           <li class="nav-item">
             <a class="nav-link {{ request()->is('articles*') ? 'active' : '' }}" href="/articles">Artikel</a>
@@ -74,7 +74,7 @@
             <a class="nav-link {{ request()->is('lyrics') ? 'active' : '' }}" href="/lyrics">Lirik Lagu</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="/contact">Kontak Kami</a>
+            <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="/contacts">Kontak Kami</a>
           </li>
         </ul>
         
