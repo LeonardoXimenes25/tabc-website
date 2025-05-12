@@ -20,6 +20,6 @@ class Songs extends Model
 
     public function categorysong(): BelongsTo 
     {
-        return $this->belongsTo(CategorySongs::class, 'category_id');
+        return $this->belongsTo(CategorySong::class, 'category_id');
     }
 }
