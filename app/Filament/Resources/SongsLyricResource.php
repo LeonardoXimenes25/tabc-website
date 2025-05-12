@@ -27,6 +27,8 @@ class SongsLyricResource extends Resource
     protected static ?string $model = Song::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $modelLabel = 'Lirik Lagu';
+    protected static ?string $pluralModelLabel = 'Lirik Lagu';
 
     public static function form(Form $form): Form
     {

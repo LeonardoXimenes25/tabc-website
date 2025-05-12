@@ -19,10 +19,12 @@ class ArticleCommentResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Articles';
+        return 'Artikel';
     }
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $modelLabel = 'Komentar';
+    protected static ?string $pluralModelLabel = 'Komentar';
 
     public static function form(Form $form): Form
     {

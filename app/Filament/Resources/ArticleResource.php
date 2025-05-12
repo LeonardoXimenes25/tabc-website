@@ -29,10 +29,12 @@ class ArticleResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Articles';
+        return 'Artikel';
     }
 
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
+    protected static ?string $modelLabel = 'Artikel Rohani';
+    protected static ?string $pluralModelLabel = 'Artikel Rohani';
 
     public static function form(Form $form): Form
     {

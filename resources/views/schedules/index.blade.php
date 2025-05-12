@@ -67,7 +67,7 @@
                         <div class="calendar-day-number {{ $date->dayOfWeek == Carbon\Carbon::SUNDAY ? 'sunday-text' : '' }}">
                             <strong>{{ $date->day }}</strong>
                             @if($date->isSameMonth($firstDay) && $eventsByDay->has($date->day))
-                                <span class="badge {{ $date->dayOfWeek == Carbon\Carbon::SUNDAY ? 'bg-danger' : 'bg-primary' }} rounded-pill event-count">
+                                <span class="badge bg-secondary rounded-pill event-count">
                                     {{ $eventsByDay->get($date->day)->count() }}
                                 </span>
                             @endif
@@ -75,13 +75,62 @@
 
                         @if($date->isSameMonth($firstDay) && $eventsByDay->has($date->day))
                             <div class="calendar-events">
-                                @foreach($eventsByDay->get($date->day) as $event)
+                                @foreach($eventsByDay->get($date->day)->take(3) as $event)
                                    <a href="{{ route('schedules.show', ['type' => isset($event->worship_type) ? 'worship' : 'fellowship', 'id' => $event->id]) }}" class="text-decoration-none">
-                                        <div class="calendar-event {{ isset($event->worship_type) ? 'event-worship' : (isset($event->fellowship_type) ? 'event-fellowship' : 'event-other') }}">
-                                            {{ Str::limit($event->theme, 15) }}
+                                        <div class="calendar-event">
+                                            <span class="event-type-badge 
+                                                @if(isset($event->worship_type))
+                                                    {{ $event->worship_type === 'sunday_service' ? 'badge-sunday-service' : 'badge-worship' }}
+                                                @elseif(isset($event->fellowship_type))
+                                                    {{ $event->fellowship_type === 'sunday_school' ? 'badge-sunday-school' : 'badge-fellowship' }}
+                                                @else
+                                                    badge-other
+                                                @endif">
+                                                @if(isset($event->worship_type))
+                                                    @switch($event->worship_type)
+                                                        @case('sunday_service')
+                                                            Ibadah Minggu
+                                                            @break
+                                                        @case('good_friday')
+                                                            Jumat Agung
+                                                            @break
+                                                        @case('christmas')
+                                                            Natal
+                                                            @break
+                                                        @case('easter')
+                                                            Paskah
+                                                            @break
+                                                        @default
+                                                            Ibadah
+                                                    @endswitch
+                                                @elseif(isset($event->fellowship_type))
+                                                    @switch($event->fellowship_type)
+                                                        @case('prayer_fellowship')
+                                                            Pers. Doa
+                                                            @break
+                                                        @case('youth_fellowship')
+                                                            Pers. Remaja
+                                                            @break
+                                                        @case('family_fellowship')
+                                                            Pers. Keluarga
+                                                            @break
+                                                        @case('sunday_school')
+                                                            Sekolah Minggu
+                                                            @break
+                                                        @default
+                                                            Persekutuan
+                                                    @endswitch
+                                                @else
+                                                    Acara
+                                                @endif
+                                            </span>
+                                            <div class="event-theme text-muted">{{ Str::limit($event->theme, 15) }}</div>
                                         </div>
                                     </a>
                                 @endforeach
+                                @if($eventsByDay->get($date->day)->count() > 3)
+                                    <small class="text-muted">+{{ $eventsByDay->get($date->day)->count() - 3 }} acara lagi</small>
+                                @endif
                             </div>
                         @endif
                     </div>
@@ -109,6 +158,55 @@
                             @php
                                 $eventDate = Carbon\Carbon::parse($event->date);
                                 $isSunday = $eventDate->dayOfWeek == Carbon\Carbon::SUNDAY;
+                                
+                                if (isset($event->worship_type)) {
+                                    switch ($event->worship_type) {
+                                        case 'sunday_service': 
+                                            $eventType = 'Ibadah Minggu';
+                                            $badgeClass = 'badge-sunday-service';
+                                            break;
+                                        case 'good_friday': 
+                                            $eventType = 'Jumat Agung';
+                                            $badgeClass = 'badge-worship';
+                                            break;
+                                        case 'christmas': 
+                                            $eventType = 'Natal';
+                                            $badgeClass = 'badge-worship';
+                                            break;
+                                        case 'easter': 
+                                            $eventType = 'Paskah';
+                                            $badgeClass = 'badge-worship';
+                                            break;
+                                        default: 
+                                            $eventType = 'Ibadah';
+                                            $badgeClass = 'badge-worship';
+                                    }
+                                } elseif (isset($event->fellowship_type)) {
+                                    switch ($event->fellowship_type) {
+                                        case 'prayer_fellowship': 
+                                            $eventType = 'Pers. Doa';
+                                            $badgeClass = 'badge-fellowship';
+                                            break;
+                                        case 'youth_fellowship': 
+                                            $eventType = 'Pers. Remaja';
+                                            $badgeClass = 'badge-fellowship';
+                                            break;
+                                        case 'family_fellowship': 
+                                            $eventType = 'Pers. Keluarga';
+                                            $badgeClass = 'badge-fellowship';
+                                            break;
+                                        case 'sunday_school': 
+                                            $eventType = 'Sekolah Minggu';
+                                            $badgeClass = 'badge-sunday-school';
+                                            break;
+                                        default: 
+                                            $eventType = 'Persekutuan';
+                                            $badgeClass = 'badge-fellowship';
+                                    }
+                                } else {
+                                    $eventType = 'Acara';
+                                    $badgeClass = 'badge-other';
+                                }
                             @endphp
                             <li class="list-group-item">
                                 <div class="d-flex justify-content-between align-items-start">
@@ -117,9 +215,12 @@
                                             {{ $eventDate->isoFormat('dddd, D MMMM YYYY') }}
                                         </strong>
                                         <a href="{{ route('schedules.show', ['type' => isset($event->worship_type) ? 'worship' : 'fellowship', 'id' => $event->id]) }}" class="text-decoration-none">
-                                            <span class="event-badge {{ $isSunday ? 'bg-danger' : (isset($event->worship_type) ? 'bg-info' : (isset($event->fellowship_type) ? 'bg-success' : 'bg-secondary')) }} text-white rounded-pill px-2 py-1 d-inline-block mt-1">
-                                                {{ $event->theme }}
-                                            </span>
+                                            <div class="d-flex flex-column">
+                                                <span class="{{ $badgeClass }} rounded-pill px-2 py-1 d-inline-block mt-1 mb-1">
+                                                    {{ $eventType }}
+                                                </span>
+                                                <small class="text-muted">{{ Str::limit($event->theme, 30) }}</small>
+                                            </div>
                                         </a>
                                     </div>
                                     <i class="bi bi-calendar-event {{ $isSunday ? 'sunday-text' : 'text-muted' }}"></i>
@@ -228,45 +329,83 @@
         overflow-y: auto;
         max-height: calc(150px - 2rem);
         flex-grow: 1;
+        font-size: 0.75rem;
     }
 
     .calendar-event {
-        font-size: 0.75rem;
-        padding: 0.25rem;
-        margin-bottom: 0.25rem;
+        padding: 0.2rem;
+        margin-bottom: 0.3rem;
         border-radius: 0.25rem;
-        white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis;
     }
 
-    .event-worship {
-        background-color: #d1e7ff;
-        color: #084298;
-        border-left: 3px solid #0d6efd;
+    .event-type-badge {
+        display: inline-block;
+        font-size: 0.65rem;
+        font-weight: 500;
+        padding: 0.2rem 0.5rem;
+        border-radius: 0.75rem;
+        margin-bottom: 0.2rem;
     }
 
-    .event-fellowship {
-        background-color: #d4edda;
-        color: #155724;
-        border-left: 3px solid #28a745;
-    }
-
-    .event-other {
+    .badge-sunday-service {
         background-color: #f8d7da;
         color: #721c24;
-        border-left: 3px solid #dc3545;
+    }
+
+    .badge-sunday-school {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+
+    .badge-worship {
+        background-color: #e2e3e5;
+        color: #383d41;
+    }
+
+    .badge-fellowship {
+        background-color: #d1ecf1;
+        color: #0c5460;
+    }
+
+    .badge-other {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .event-theme {
+        font-size: 0.7rem;
+        line-height: 1.2;
+        color: #6c757d;
     }
 
     /* Mobile Styles */
     .list-group-item {
-        min-height: 80px;
+        min-height: 90px;
         display: flex;
         align-items: center;
     }
 
-    .event-badge {
-        font-size: 0.8rem;
+    .badge-sunday-service, 
+    .badge-sunday-school,
+    .badge-worship,
+    .badge-fellowship,
+    .badge-other {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 767.98px) {
+        .calendar-day {
+            min-height: 120px;
+        }
+        .calendar-week {
+            min-height: 120px;
+        }
+        .calendar-events {
+            max-height: calc(120px - 2rem);
+        }
     }
 </style>
 @endsection
