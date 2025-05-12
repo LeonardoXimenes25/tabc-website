@@ -29,6 +29,7 @@ class PostsArticle extends Component
 
     public function render()
     {
+        
         return view('livewire.posts-article', ['posts' => $this->updatingQuery($this->query)]);
     }
 }
