@@ -13,7 +13,6 @@ class WorshipFactory extends Factory
     {
         $worshipTypes = [
             'sunday_service',
-            'school_service',
             'good_friday',
             'christmas',
             'easter',

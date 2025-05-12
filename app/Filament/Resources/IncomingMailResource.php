@@ -19,6 +19,11 @@ use App\Filament\Resources\IncomingMailResource\Pages;
 
 class IncomingMailResource extends Resource
 {
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Surat';
+    }
+
     protected static ?string $model = IncomingMail::class;
     protected static ?string $navigationIcon = 'heroicon-o-inbox';
     protected static ?string $modelLabel = 'Surat Masuk';

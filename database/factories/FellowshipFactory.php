@@ -20,7 +20,7 @@ class FellowshipFactory extends Factory
             'prayer_fellowship',
             'youth_fellowship',
             'family_fellowship',
-            'others',
+            'sunday_school',
         ];
                 
         return [

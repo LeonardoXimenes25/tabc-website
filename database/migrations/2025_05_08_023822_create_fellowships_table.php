@@ -18,7 +18,7 @@ return new class extends Migration
                'prayer_fellowship', // Persekutuan Doa
                 'youth_fellowship', // Persekutuan Remaja
                 'family_fellowship', // Persekutuan Keluarga
-                'others' // Persekutuan Lainnya
+                'sunday_school'
             ]);
             $table->string('theme'); // Tema Persekutuan
             $table->string('bible_verse'); // Nats

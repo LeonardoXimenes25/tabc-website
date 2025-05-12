@@ -14,11 +14,11 @@ class WorshipSeeder extends Seeder
     public function run(): void
     {
       // Create 50 random worship services
-      Worship::factory()->count(50)->create();
+      Worship::factory()->count(5)->create();
         
       // Or create specific worship services for important dates
       Worship::create([
-          'date' => now()->format('Y') . '-12-25',
+          'date' => now()->format('Y') . '-5-25',
           'worship_type' => 'sunday_service',
           'theme' => 'Kelahiran Juru Selamat',
           'bible_verse' => 'Lukas 2:10-11',

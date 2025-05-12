@@ -17,6 +17,11 @@ class ArticleCommentResource extends Resource
 {
     protected static ?string $model = ArticleComment::class;
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Articles';
+    }
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

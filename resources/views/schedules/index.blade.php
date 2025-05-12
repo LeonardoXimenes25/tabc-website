@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container py-4">
+<div class="container py-4" style="min-height: 100vh">
     <h1 class="text-center mb-5">Kalender Acara</h1>
 
     <!-- Month/Year Filter -->
@@ -39,7 +39,7 @@
     <div class="d-none d-md-block">
         <div class="calendar-grid">
             <div class="row calendar-header">
-                @foreach(['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'] as $day)
+                @foreach(['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'] as $day)
                     <div class="col calendar-day-header {{ $loop->last ? 'sunday-header' : '' }}">
                         <strong>{{ $day }}</strong>
                     </div>
@@ -136,8 +136,6 @@
             </div>
         </div>
     </div>
-
-    {{-- paginana --}}
 </div>
 @endsection
 
@@ -172,21 +170,24 @@
     }
 
     .calendar-week {
-        min-height: 120px;
+        min-height: 150px;
     }
 
     .calendar-day {
         padding: 0.5rem;
         border: 1px solid #dee2e6;
         position: relative;
-        min-height: 120px;
+        min-height: 150px;
         background-color: white;
+        display: flex;
+        flex-direction: column;
     }
 
     /* Hari di luar bulan saat ini */
     .calendar-day-outside {
         background-color: #f8f9fa;
         color: #adb5bd;
+        min-height: 150px;
     }
 
     /* Hari ini */
@@ -209,6 +210,7 @@
         text-align: right;
         margin-bottom: 0.25rem;
         position: relative;
+        flex-shrink: 0;
     }
 
     .calendar-day-number strong {
@@ -224,7 +226,8 @@
 
     .calendar-events {
         overflow-y: auto;
-        max-height: 80px;
+        max-height: calc(150px - 2rem);
+        flex-grow: 1;
     }
 
     .calendar-event {
@@ -253,6 +256,17 @@
         background-color: #f8d7da;
         color: #721c24;
         border-left: 3px solid #dc3545;
+    }
+
+    /* Mobile Styles */
+    .list-group-item {
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+    }
+
+    .event-badge {
+        font-size: 0.8rem;
     }
 </style>
 @endsection

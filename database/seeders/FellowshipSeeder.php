@@ -13,7 +13,7 @@ class FellowshipSeeder extends Seeder
      */
     public function run(): void
     {
-        Fellowship::factory()->count(50)->create();
+        Fellowship::factory()->count(5)->create();
         
         Fellowship::create([
             'date' => now()->format('Y') . '-12-25',

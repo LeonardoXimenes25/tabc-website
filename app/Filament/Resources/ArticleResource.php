@@ -27,6 +27,11 @@ class ArticleResource extends Resource
 {
     protected static ?string $model = Article::class;
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Articles';
+    }
+
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
 
     public static function form(Form $form): Form

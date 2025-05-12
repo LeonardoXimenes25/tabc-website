@@ -16,7 +16,6 @@ return new class extends Migration
             $table->date('date')->nullable();
             $table->enum('worship_type', [
                 'sunday_service',
-                'school_service',
                 'good_friday',
                 'christmas',
                 'easter',
@@ -25,9 +24,9 @@ return new class extends Migration
             $table->string('bible_verse'); // Nats
             $table->string('preacher'); // Pengkhotbah
             $table->string('liturgist'); // Liturgis
-            $table->string('singer'); // Singer
+            $table->string('singer')->nullable(); // Singer
             $table->string('musician'); // Pemusik
-            $table->string('greeter'); // Penyambut
+            $table->string('greeter')->nullable(); // Penyambut
             $table->string('collector'); // Persembahan
             $table->string('offering_prayer'); // Doa Persembahan
             $table->string('lcd_operator'); // Operator LCD

@@ -22,6 +22,12 @@ use App\Filament\Resources\OutcomingMailResource\RelationManagers;
 
 class OutcomingMailResource extends Resource
 {
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Surat';
+    }
+
     protected static ?string $model = OutcomingMail::class;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $modelLabel = 'Surat Keluar';
