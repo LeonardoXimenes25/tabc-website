@@ -40,8 +40,9 @@
                         <span>+670 123 456 789</span>
                     </li>
                     <li class="mb-3">
-                        <i class="fas fa-envelope me-2" style="color: #0d6efd;"></i> 
-                        <span>tacbtl1990@gmail.com</span>
+                        <a href="tabctl1990@gmail.com"><i data-feather="mail" class="me-2" style="color: #0d6efd;"></i> </a>
+                        
+                       
                     </li>
                 </ul>
             </div>
@@ -80,9 +81,9 @@
             </div>
             <div class="col-md-6 text-md-end mt-3">
                 <p style="display: inline-block" class="me-3">Follow Kami di : </p>
-                <a href="#" class="text-white me-3 icon-hover"><i class="fab fa-facebook-f fa-lg"></i></a>
-                <a href="#" class="text-white me-3 icon-hover"><i class="fab fa-youtube fa-lg"></i></a>
-                <a href="#" class="text-white me-3 icon-hover"><i class="fab fa-instagram fa-lg"></i></a>
+                <a href="tabctl1990@gmail.com" class="text-white me-3 icon-hover"><i data-feather="mail"></i></a>
+                <a href="#" class="text-white me-3 icon-hover"><i data-feather="youtube"></i></a>
+                <a href="#" class="text-white me-3 icon-hover"><i data-feather="instagram"></i></a>
                 <a href="#" class="text-white me-3 icon-hover"><i class="fab fa-whatsapp fa-lg"></i></a>
             </div>
         </div>

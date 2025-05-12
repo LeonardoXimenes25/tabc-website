@@ -5,8 +5,9 @@ namespace Database\Seeders;
 use App\Models\Song;
 use App\Models\User;
 use App\Models\Article;
+use App\Models\Worship;
 use App\Models\Category;
-use App\Models\Schedule;
+use App\Models\Fellowship;
 use Illuminate\Support\Str;
 use App\Models\CategorySong;
 use Illuminate\Database\Seeder;
@@ -20,6 +21,8 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             UserSeeder::class,
             CategorySongSeeder::class,
+            WorshipSeeder::class,
+            FellowshipSeeder::class,
         ]);
     
         Article::factory(10)->recycle([
@@ -32,8 +35,6 @@ class DatabaseSeeder extends Seeder
             User::all()
         ])->create();
 
-        Schedule::factory(10)->recycle([
-            User::all()
-        ])->create();
+        Fellowship::factory(10)->create();
     }
 }

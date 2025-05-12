@@ -61,9 +61,4 @@ class User extends Authenticatable
     public function articlecomment(): HasMany {
         return $this->hasMany(ArticleComment::class, 'author_id');
     }
-
-    public function schedules()
-    {
-        return $this->hasMany(Schedule::class, 'author_id');
-    }
 }

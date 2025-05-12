@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SongsController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\CategorySongController;
 use App\Http\Controllers\ArticleCommentController;
@@ -28,15 +29,20 @@ Route::get('/authors/{username}/songs', [SongsController::class, 'postsByAuthor'
 Route::get('categories-songs/{slug}', [CategorySongController::class, 'postsByCategory'])->name('categories-songs.show');
 // lyrics route end
 
+Route::get('/schedules', [ScheduleController::class, 'index'])->name('schedules.index');
+Route::get('/schedules/{type}/{id}', [ScheduleController::class, 'show'])->name('schedules.show');
+
+
+
+
+
+
+
+
 // about
 Route::get('/about', function () {
     return view('about');
 });
-
-// schedule
-Route::get('/schedule', [ScheduleController::class, 'index'])->name('schedule.index');
-Route::get('/schedule/calendar', [ScheduleController::class, 'calendar'])->name('schedule.calendar');
-Route::get('/schedule/{id}', [ScheduleController::class, 'show'])->name('schedule.show');
 
 
 // auth

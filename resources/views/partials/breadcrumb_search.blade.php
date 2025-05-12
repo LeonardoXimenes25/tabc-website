@@ -4,7 +4,7 @@
             <ol class="breadcrumb mb-0">
                 <li class="breadcrumb-item">
                     <a href="/" class="text-decoration-none d-flex align-items-center">
-                        <i class="fas fa-home me-2"></i>
+                        <i data-feather="home"></i>
                         Home
                     </a>
                 </li>
