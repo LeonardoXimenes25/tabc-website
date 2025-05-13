@@ -11,8 +11,8 @@ class CategorySong extends Model
 {
     use HasFactory;
 
-    public function song() : HasMany {
-        return $this->hasMany(Song::class);
+    public function songs() : HasMany {
+        return $this->hasMany(Song::class, 'categorysong_id');
     }
 
     public function getCategoryColor()
@@ -28,6 +28,4 @@ class CategorySong extends Model
                 return 'bg-primary';
         }
     }
-
-
 }

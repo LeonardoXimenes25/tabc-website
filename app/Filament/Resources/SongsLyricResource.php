@@ -76,7 +76,7 @@ class SongsLyricResource extends Resource
                     ->label('Lirik Lagu')
                     ->required(),
 
-                Select::make('category_id')
+                Select::make('categorysong_id')
                     ->relationship('categorysong', 'name')
                     ->label('Tema')
                     ->searchable()

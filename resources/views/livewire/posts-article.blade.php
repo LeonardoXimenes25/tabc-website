@@ -1,20 +1,20 @@
 <div>
-    {{-- header --}}
+    {{-- Header --}}
     @php
     $breadcrumbItems = [
-    ['title' => 'Artikel', 'link' => route('articles.index'), 'active' => true]
+        ['title' => 'Artikel', 'link' => route('articles.index'), 'active' => true]
     ];
     @endphp
 
     @include('partials.breadcrumb_search', ['breadcrumbItems' => $breadcrumbItems])
-    {{-- end header --}}
+    {{-- End Header --}}
 
     {{-- Artikel --}}
     <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
         <h5 class="fw-bold">Daftar Artikel</h5>
     </div>
 
-    {{-- article start --}}
+    {{-- Artikel Start --}}
     @if ($posts->count() > 0)
         @foreach ($posts->chunk(4) as $chunk)
             <div class="row">
@@ -27,7 +27,7 @@
                                     style="font-size: 1rem">
                                     {{ $post->title }}
                                 </a>
-                                {{-- author, categories and date --}}
+                                {{-- Author, Categories and Date --}}
                                 <div class="d-flex flex-wrap align-items-center mb-4 text-muted small my-2"
                                     style="font-size: 0.7rem">
                                     <span class="me-2">✍️ By
@@ -45,7 +45,7 @@
                                     </span>
                                     <span class="me-2">🕒 {{ $post->created_at->diffForHumans() }}</span>
                                 </div>
-                                {{-- author, categories and date end--}}
+                                {{-- End Author, Categories and Date --}}
 
                                 <p class="mt-2 text-muted" style="font-size: 0.85rem;">
                                     {!! Str::limit(strip_tags($post->body), 100) !!}
@@ -65,8 +65,8 @@
             Belum ada artikel yang tersedia.
         </div>
     @endif
-    {{-- artikel section end --}}
+    {{-- Artikel End --}}
 
     {{-- Pagination --}}
-@include('partials.pagination', ['paginator' => $posts])
+    @include('partials.pagination', ['paginator' => $posts])
 </div>

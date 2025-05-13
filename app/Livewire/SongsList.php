@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\Songs;
+use App\Models\Song;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,9 +13,16 @@ class SongsList extends Component
 
     public $query = '';
 
-    public function updatingQuery($query)
+    // Memperbarui query pencarian
+    public function updatingQuery()
     {
-        $songs = Songs::with(['author', 'categorysong'])
+        $this->resetPage();  // Reset halaman saat query diperbarui
+    }
+
+    public function render()
+    {
+        // Query pencarian
+        $songs = Song::with(['author', 'categorysong'])
             ->where('title', 'like', '%' . $this->query . '%')
             ->orWhereHas('author', function ($query) {
                 $query->where('name', 'like', '%' . $this->query . '%');
@@ -23,17 +30,11 @@ class SongsList extends Component
             ->orWhereHas('categorysong', function ($query) {
                 $query->where('name', 'like', '%' . $this->query . '%');
             })
-            ->latest()->paginate(8);
+            ->latest()
+            ->paginate(8);
 
-        return $songs;
-
-    }
-
-    public function render()
-    {
-        // dd($this->updatingQuery($this->query));
         return view('livewire.songs-list', [
-            'songs' => $this->updatingQuery($this->query)
+            'songs' => $songs
         ]);
     }
 }

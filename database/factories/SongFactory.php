@@ -1,22 +1,16 @@
 <?php
 
+// database/factories/SongFactory.php
+
 namespace Database\Factories;
 
+use App\Models\CategorySong;
 use App\Models\User;
 use Illuminate\Support\Str;
-use App\Models\CategorySong;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Songs>
- */
 class SongFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
@@ -29,7 +23,7 @@ class SongFactory extends Factory
             'artist' => fake()->name(),
             'album' => fake()->sentence(),
             'year' => fake()->year(),
-            'youtube_embed' => fake()->sentence(),
+            'youtube_embed' => fake()->sentence()
         ];
     }
 }

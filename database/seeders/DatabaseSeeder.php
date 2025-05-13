@@ -29,12 +29,12 @@ class DatabaseSeeder extends Seeder
             Category::all(),
             User::all()
         ])->create();
-    
+
         Song::factory(10)->recycle([
             CategorySong::all(),
             User::all()
         ])->create();
-
+    
         Fellowship::factory(10)->create();
     }
 }

@@ -27,7 +27,7 @@
           <a class="nav-link {{ request()->is('lyrics') ? 'active' : '' }}" href="/lyrics">Lirik Lagu</a>
         </li>
         <li class="nav-item mx-2">
-          <a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="/contact">Kontak Kami</a>
+          <a class="nav-link {{ request()->is('galleries') ? 'active' : '' }}" href="/galleries">Galleri</a>
         </li>
       </ul>
     </div>

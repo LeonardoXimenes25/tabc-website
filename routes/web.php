@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SongsController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ScheduleController;
@@ -18,7 +19,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
 Route::get('/authors/{username}/posts', [ArticleController::class, 'postsByAuthor'])->name('authors.posts');
-Route::get('/categories/{slug}', [ArticleController::class, 'postsByCategory'])->name('categories.show');
+Route::get('/category/{slug}', [ArticleController::class, 'postsByCategory'])->name('categories.show');
 Route::post('/articles/{article:slug}/comments', [ArticleCommentController::class, 'store'])->name('articles.comments.store');
 // Daftar artikel route end
 
@@ -26,18 +27,16 @@ Route::post('/articles/{article:slug}/comments', [ArticleCommentController::clas
 Route::get('/lyrics', [SongsController::class, 'index'])->name('songs.index');
 Route::get('/lyrics/{slug}', [SongsController::class, 'show'])->name('songs.show');
 Route::get('/authors/{username}/songs', [SongsController::class, 'postsByAuthor'])->name('authors.songs');
-Route::get('categories-songs/{slug}', [CategorySongController::class, 'postsByCategory'])->name('categories-songs.show');
+Route::get('categories-songs/{slug}', [SongsController::class, 'postsByCategory'])->name('categories-songs.show');
+
 // lyrics route end
 
 Route::get('/schedules', [ScheduleController::class, 'index'])->name('schedules.index');
 Route::get('/schedules/{type}/{id}', [ScheduleController::class, 'show'])->name('schedules.show');
 
-
-
-
-
-
-
+// Gallery
+Route::get('/galleries', [GalleryController::class, 'index'])->name('galleries.index');
+Route::get('/galleries/{gallery}', [GalleryController::class, 'show'])->name('galleries.show');
 
 // about
 Route::get('/about', function () {

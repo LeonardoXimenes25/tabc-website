@@ -52,15 +52,17 @@ class ArticleController extends Controller
 
     public function postsByCategory($slug)
     {
-        // Cari kategori berdasarkan slug
-        $category = Category::where('slug', $slug)->firstOrFail();
-
-        // Ambil artikel-artikel yang masuk dalam kategori tersebut
-        $posts = $category->articles()->with('author')->latest()->paginate(10);
+        // Ambil artikel-artikel berdasarkan kategori slug
+        $posts = Article::whereHas('category', function($query) use ($slug) {
+            $query->where('slug', $slug);
+        })
+        ->with('author', 'category')
+        ->latest()
+        ->paginate(10);
 
         return view('articles.posts', [
-            'category' => $category,
             'posts' => $posts
         ]);
     }
+
 }
