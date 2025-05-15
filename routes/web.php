@@ -18,8 +18,13 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // artikel route start
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
 Route::get('/articles/{slug}', [ArticleController::class, 'show'])->name('articles.show');
-Route::get('/authors/{username}/posts', [ArticleController::class, 'postsByAuthor'])->name('authors.posts');
-Route::get('/category/{slug}', [ArticleController::class, 'postsByCategory'])->name('categories.show');
+// Change this route
+Route::get('/authors/{username}/posts', function($username) {
+    return view('articles.posts', ['authorUsername' => $username]);
+})->name('authors.posts');
+Route::get('/category/{slug}', function($slug){
+    return view('articles.posts', ['categorySlug' => $slug]);
+})->name('categories.show');
 Route::post('/articles/{article:slug}/comments', [ArticleCommentController::class, 'store'])->name('articles.comments.store');
 // Daftar artikel route end
 
