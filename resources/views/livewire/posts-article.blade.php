@@ -11,7 +11,7 @@
 
     {{-- Artikel --}}
     <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
-        <h5 class="fw-bold">Daftar Artikel</h5>
+        <h5 class="fw-bold">Lista Artigu Espiritual</h5>
     </div>
 
     {{-- Artikel Start --}}
@@ -30,7 +30,7 @@
                                 {{-- Author, Categories and Date --}}
                                 <div class="d-flex flex-wrap align-items-center mb-4 text-muted small my-2"
                                     style="font-size: 0.7rem">
-                                    <span class="me-2">✍️ By
+                                    <span class="me-2"><i data-feather="user"></i>
                                         <a href="{{ route('authors.posts', $post->author->username) }}"
                                             class="text-decoration-none text-muted fw-semibold">
                                             {{ $post->author->name }}
@@ -43,7 +43,7 @@
                                             </span>
                                         </a>
                                     </span>
-                                    <span class="me-2">🕒 {{ $post->created_at->diffForHumans() }}</span>
+                                    <span class="me-2"><i data-feather="clock"></i> {{ $post->created_at->diffForHumans() }}</span>
                                 </div>
                                 {{-- End Author, Categories and Date --}}
 
@@ -52,7 +52,7 @@
                                 </p>   
 
                                 <a href="{{ route('articles.show', $post->slug) }}" style="font-size: 0.7rem">
-                                    Baca Selekapnya &gt;&gt;
+                                   Lee kompletu &gt;&gt;
                                 </a>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
         @endforeach
     @else
         <div class="alert alert-warning text-center" role="alert">
-            Belum ada artikel yang tersedia.
+           Artigu espiritual mamuk
         </div>
     @endif
     {{-- Artikel End --}}

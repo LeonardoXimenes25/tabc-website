@@ -22,7 +22,7 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', new Password(8)], // Menggunakan rule Password dari Laravel
+            'password' => ['required', 'string', Password::min(8), 'confirmed'],
         ]);
 
         if ($validator->fails()) {
@@ -36,9 +36,14 @@ class AuthController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+
+            // Default role, position, and section
+            'role' => 'user',
+            'position' => 'Jemaat',
+            'section' => 'Umum',
         ]);
 
-        return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
+        return redirect()->route('login')->with('success', 'Rejistrasaun susesu! Bele login.');
     }
 
     public function showLoginForm()
@@ -55,11 +60,25 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $request->remember)) {
             $request->session()->regenerate();
-            return redirect()->intended('home');
+
+            $user = Auth::user();
+
+            // Arahkan ke admin panel jika:
+            // - role = admin
+            // - atau role = majelis dan position = xefe majelis
+            if (
+                $user->role === 'admin' ||
+                ($user->role === 'majelis' && strtolower($user->position) === 'xefe majelis')
+            ) {
+                return redirect()->intended('/admin');
+            }
+
+            // Jika bukan admin atau ketua majelis
+            return redirect()->intended('/');
         }
 
         return back()->withErrors([
-            'email' => 'Kredensial yang Anda masukkan salah.',
+            'email' => 'Ita nia kredensial sala.',
         ])->onlyInput('email');
     }
 
@@ -68,6 +87,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login')->with('success', 'Anda telah berhasil logout.');
+
+        return redirect()->route('login')->with('success', 'Ita susesu halo logout.');
     }
 }

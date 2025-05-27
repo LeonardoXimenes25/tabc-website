@@ -25,6 +25,7 @@ class Song extends Model
         return $this->belongsTo(CategorySong::class, 'categorysong_id');
     }
 
+
     protected static function booted()
     {
         static::saving(function ($song) {

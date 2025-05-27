@@ -3,9 +3,8 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0">
                 <li class="breadcrumb-item">
-                    <a href="/" class="text-decoration-none d-flex align-items-center">
-                        <i data-feather="home"></i>
-                        Home
+                    <a href="{{route('home')}}" class="text-decoration-none d-flex align-items-center">
+                        <i data-feather="home" class="me-1"></i>Home
                     </a>
                 </li>
                 @foreach($breadcrumbItems as $breadcrumb)

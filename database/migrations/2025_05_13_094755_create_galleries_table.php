@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('galleries', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('author_id')->constrained(
+                table: 'users',
+                indexName: 'gallery_author_id'
+            );
             $table->string('title');
             $table->date('event_date')->nullable();
             $table->text('description')->nullable();

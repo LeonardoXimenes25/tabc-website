@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class OutcomingMail extends Model
@@ -15,6 +16,7 @@ class OutcomingMail extends Model
     // The attributes that are mass assignable.
     protected $fillable = [
         'received_date',
+        'author_id',
         'letter_number',
         'recepient',
         'subject',
@@ -32,4 +34,10 @@ class OutcomingMail extends Model
     const STATUS_ACCEPTED = 'accepted';
     const STATUS_IN_PROGRESS = 'in progress';
     const STATUS_PEDNING = 'pending';
+    
+    // relasi with author table
+    public function author(): BelongsTo 
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
 }

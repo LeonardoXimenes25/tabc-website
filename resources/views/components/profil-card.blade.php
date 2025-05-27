@@ -1,6 +1,6 @@
 <div class="profile-slider-section py-5 bg-light">
     <div class="container">
-        <h2 class="text-center fw-bold mb-5">Profil Hamba Tuhan & Majelis</h2>
+        <h2 class="text-center fw-bold mb-5">Profil Pastoral no Majelis</h2>
 
         <div class="profile-slider">
             <!-- Item 1 -->

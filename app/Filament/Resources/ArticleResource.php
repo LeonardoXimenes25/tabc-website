@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
@@ -29,19 +30,19 @@ class ArticleResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Artikel';
+        return 'Artigu Espiritual';
     }
 
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
-    protected static ?string $modelLabel = 'Artikel Rohani';
-    protected static ?string $pluralModelLabel = 'Artikel Rohani';
+    protected static ?string $modelLabel = 'Artigu Espiritual';
+    protected static ?string $pluralModelLabel = 'Artigu Espiritual';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make('title')
-                ->label('Judul')
+                ->label('Titulu')
                 ->live(onBlur: true)
                 ->afterStateUpdated(function ($state, $get, $set) {
                     if (!$get('slug')) {
@@ -51,11 +52,16 @@ class ArticleResource extends Resource
                 ->required()
                 ->maxLength(255),
 
-                TextInput::make('slug')
-                ->label('Slug')
-                ->required()
-                ->unique('articles', 'slug', ignoreRecord: true)
-                ->disabled(),
+                 Select::make('category_id')
+                    ->relationship('category', 'name')
+                    ->label('Category')
+                    ->options([
+                        1 => 'Devosaun loro-loron',
+                        2 => 'Ensinu biblia',
+                        3 => 'Historia igreja no figura fe',
+                    ])
+                    ->required()
+                    ->searchable(),
 
                 RichEditor::make('body')
                 ->toolbarButtons([
@@ -73,31 +79,15 @@ class ArticleResource extends Resource
                     'undo',
                     'html',
                 ]) 
-                ->label('Konten Artikel')
+                ->label('Konteudu')
                 ->required(),
 
-                FileUpload::make('image_url')
+                 FileUpload::make('image_url')
                 ->label('Gambar')
                 ->image()
                 ->disk('public')
-                ->directory('articles'),
-
-                Select::make('author_id')
-                    ->relationship('author', 'name')
-                    ->label('Penulis')
-                    ->searchable()
-                    ->required(),
-
-                    Select::make('category_id')
-                    ->relationship('category', 'name')
-                    ->label('Category')
-                    ->options([
-                        1 => 'Renungan Harian',
-                        2 => 'Pengajaran Alkitab',
-                        3 => 'Sejarah Gereja dan Tokoh Iman',
-                    ])
-                    ->required()
-                    ->searchable(),
+                ->directory('articles')
+                ->label('Upload imajen'),
             ]);
     }
 
@@ -105,18 +95,17 @@ class ArticleResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')->searchable()->sortable()->wrap(),
-                TextColumn::make('author.name')->label('Penulis')->sortable(),
+                TextColumn::make('title')->searchable()->sortable()->wrap()->label('Titulu'),
                 BadgeColumn::make('category.name')
-                    ->label('Category')
+                    ->label('Kategoria')
                     ->color(function (Article $record) {
                         return $record->category->getCategoryColor();
                     })
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('body')->label('Konten')->sortable()->limit(30),
-                ImageColumn::make('image_url')->label('Gambar')->height(50)->disk('public'),
-                TextColumn::make('created_at')->dateTime('d M Y')->label('Tanggal Dibuat')->sortable(),
+                TextColumn::make('body')->label('Kontendu')->sortable()->limit(30),
+                ImageColumn::make('image_url')->label('Imajen')->height(50)->disk('public'),
+                TextColumn::make('created_at')->dateTime('d M Y')->label('Data')->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
@@ -147,5 +136,17 @@ class ArticleResource extends Resource
             'create' => Pages\CreateArticle::route('/create'),
             'edit' => Pages\EditArticle::route('/{record}/edit'),
         ];
+    }
+
+        public static function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['author_id'] = Auth::id();
+        return $data;
+    }
+
+    public static function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['author_id'] = Auth::id();
+        return $data;
     }
 }

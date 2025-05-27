@@ -12,7 +12,7 @@ class Worship extends Model
     use HasFactory;
     
     protected $fillable = [
-        'date', 'worship_type', 'theme', 'bible_verse', 
+        'date', 'author_id', 'worship_type', 'theme', 'bible_verse', 
         'preacher', 'liturgist', 'singer', 'musician', 
         'greeter', 'collector', 'offering_prayer', 'lcd_operator'
     ];

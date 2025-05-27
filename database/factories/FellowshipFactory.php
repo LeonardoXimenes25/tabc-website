@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -25,6 +26,7 @@ class FellowshipFactory extends Factory
                 
         return [
             'date' => now()->startOfMonth()->addDays(fake()->numberBetween(0, 27))->format('Y-m-d'),
+            'author_id' => User::factory(),
             'fellowship_type' => fake()->randomElement($fellowshipTypes),
             'theme' => fake()->sentence(3),
             'bible_verse' => fake()->word . ' ' . 

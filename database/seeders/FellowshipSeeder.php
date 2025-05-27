@@ -13,16 +13,6 @@ class FellowshipSeeder extends Seeder
      */
     public function run(): void
     {
-        Fellowship::factory()->count(5)->create();
-        
-        Fellowship::create([
-            'date' => now()->format('Y') . '-12-25',
-            'fellowship_type' => 'prayer_fellowship',
-            'theme' => 'Kasih Bapa',
-            'bible_verse' => 'Yohanes 3:16',
-            'preacher' => 'Pdt. Asiana',
-            'mc' => 'Bapa Tino',
-            'musician' => 'Pdt. Timotius',
-        ]);
+       Fellowship::factory()->count(10)->create();
     }
 }

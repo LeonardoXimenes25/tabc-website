@@ -5,7 +5,10 @@
 @section('content')
     <div class="container my-4" style="min-height: 100vh;">
 
-        @livewire('songs-list')
+        @livewire('songs-lyrics', [
+            'authorUsername' => $authorUsername ?? null,
+            'categorySlug' => $categorySlug ?? null
+        ])
 
     </div>
 @endsection

@@ -33,32 +33,33 @@ class SongsController extends Controller
         return view('lyrics.show', compact('songs', 'relatedPosts'));
     }
 
-    public function postsByAuthor($username)
+      public function postsByArtist($artist)
     {
-        $author = User::where('username', $username)->firstOrFail();
-        
-        $songs = $author->songs()
-                       ->with('categorysong')
-                       ->latest()
-                       ->paginate(10);
-        
+        $songs = Song::where('artist', $artist)
+                     ->with('categorysong')
+                     ->latest()
+                     ->paginate(10);
+
         return view('lyrics.songs', [
-            'title' => "Pujian oleh $author->name",
+            'title' => "Pujian oleh $artist",
             'songs' => $songs,
+            'artist' => $artist
         ]);
     }
 
     public function postsByCategory($slug)
     {
-        // Cari kategori berdasarkan slug
-        $categorysong = CategorySong::where('slug', $slug)->firstOrFail();
-
-        // Ambil artikel-artikel yang masuk dalam kategori tersebut
-        $songs = $categorysong->songs()->with('author')->latest()->paginate(10);
+        // Ambil artikel-artikel berdasarkan kategori slug
+        $songs = Song::whereHas('categorysong', function($query) use ($slug) {
+            $query->where('slug', $slug);
+        })
+        ->with('author', 'categorysong')
+        ->latest()
+        ->paginate(10);
 
         return view('lyrics.songs', [
-            'category' => $categorysong,
-            'songs' => $songs
+            'songs' => $songs,
+            'categorySlug' => $slug
         ]);
     }
 }

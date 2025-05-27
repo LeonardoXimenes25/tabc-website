@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,6 +21,7 @@ class WorshipFactory extends Factory
 
         return [
             'date' => fake()->dateTimeBetween('now', '+1 year'),
+            'author_id' => User::factory(),
             'worship_type' => fake()->randomElement($worshipTypes),
             'theme' => fake()->sentence(3),
             'bible_verse' => fake()->word . ' ' . 

@@ -1,31 +1,20 @@
 <div>
     {{-- Header --}}
     @php
-        $breadcrumbItems = [];
-
-        if (isset($category)) {
-            $breadcrumbItems[] = [
-                'title' => 'Kategori: ' . $category->name,
-                'link' => route('categories-songs.show', $category->slug),
-                'active' => true
-            ];
-        } else {
-            $breadcrumbItems[] = [
-                'title' => 'Lirik Lagu',
-                'link' => route('songs.index'),
-                'active' => true
-            ];
-        }
+    $breadcrumbItems = [
+        ['title' => 'Letra musika', 'link' => route('songs.index'), 'active' => true]
+    ];
     @endphp
 
     @include('partials.breadcrumb_search', ['breadcrumbItems' => $breadcrumbItems])
+    {{-- End Header --}}
 
     <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
         <h5 class="fw-bold">
             @isset($category)
-                Kategori: <a href="{{ route('categories-songs.show', $category->slug) }}" class="text-decoration-none">{{ $category->name }}</a>
+                Kategoria: <a href="{{ route('categories-songs.show', $category->slug) }}" class="text-decoration-none">{{ $category->name }}</a>
             @else
-                Daftar Lirik Lagu
+                Lista Letra Musika
             @endisset
         </h5>
     </div>
@@ -47,8 +36,8 @@
                                 {{-- Info --}}
                                 <div class="d-flex flex-wrap align-items-center mb-4 text-muted small my-2"
                                     style="font-size: 0.7rem">
-                                    <span class="me-2">✍️ By
-                                        <a href="{{ route('authors.songs', $song->artist) }}"
+                                    <span class="me-2"><i data-feather="user"></i>
+                                        <a href="{{ route('songs.byArtist', $song->artist) }}"
                                             class="text-decoration-none text-muted fw-semibold">
                                             {{ $song->artist }}
                                         </a>
@@ -66,12 +55,12 @@
                                             </a>
                                         @else
                                             <span class="badge {{ $badgeColor }} px-3 py-1 rounded-pill">
-                                                - Tidak ada kategori -
+                                                - Kategoria Mamuk -
                                             </span>
                                         @endif
                                     </span>
 
-                                    <span class="me-2">🕒 {{ $song->created_at->diffForHumans() }}</span>
+                                    <span class="me-2"><i data-feather="clock"></i> {{ $song->created_at->diffForHumans() }}</span>
                                 </div>
 
                                 <p class="mt-2 text-muted" style="font-size: 0.85rem;">
@@ -79,7 +68,7 @@
                                 </p>
 
                                 <a href="{{ route('songs.show', $song->slug) }}" style="font-size: 0.7rem">
-                                    Baca Selengkapnya &gt;&gt;
+                                    Lee kompletu &gt;&gt;
                                 </a>
                             </div>
                         </div>
@@ -89,7 +78,7 @@
         @endforeach
     @else
         <div class="alert alert-warning text-center" role="alert">
-            Tidak ada lagu ditemukan.
+             Letra musika mamuk.
         </div>
     @endif
 

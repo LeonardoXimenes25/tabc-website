@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('fellowships', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('author_id')->constrained(
+                table: 'users',
+                indexName: 'fellowship_author_id'
+            );
             $table->date('date')->nullable(); // tanggal
             $table->enum('fellowship_type', [
                'prayer_fellowship', // Persekutuan Doa

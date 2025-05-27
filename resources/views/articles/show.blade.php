@@ -12,12 +12,11 @@
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item">
                         <a href="/" class="text-decoration-none d-flex align-items-center">
-                            <i class="fas fa-home me-2"></i>
-                            Home
+                            <i data-feather="home" class="me-1"></i>Baranda
                         </a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                      <a href="{{ route('articles.index') }}">Artikel</a>
+                      <a href="{{ route('articles.index') }}">Artigu Espiritual</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
                         {{ Str::limit($post->title, 30) }}
@@ -48,7 +47,7 @@
                             {{ $post->category->name }}
                         </span>
                         <small class="text-muted">
-                            <i class="far fa-clock me-1"></i> {{ $post->created_at->diffForHumans() }}
+                            <i data-feather="clock" class="me-1"></i> {{ $post->created_at->diffForHumans() }}
                         </small>
                     </div>
 
@@ -60,7 +59,7 @@
                                class="text-decoration-none text-dark fw-semibold">
                                 {{ $post->author->name }}
                             </a>
-                            <p class="small text-muted mb-0">Penulis Artikel</p>
+                            <p class="small text-muted mb-0"><i data-feather="user" class="me-1"></i>Autor</p>
                         </div>
                     </div>
 

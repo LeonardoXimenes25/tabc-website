@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('worships', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('author_id')->constrained(
+                table: 'users',
+                indexName: 'worship_author_id'
+            );
             $table->date('date')->nullable();
             $table->enum('worship_type', [
                 'sunday_service',

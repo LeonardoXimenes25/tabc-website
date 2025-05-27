@@ -13,13 +13,17 @@ return new class extends Migration
     {
         Schema::create('incoming_mails', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('author_id')->constrained(
+                table: 'users',
+                indexName: 'incomingmail_author_id'
+            );
             $table->string('letter_number'); // Letter Number
             $table->date('received_date'); // Date of Receipt
             $table->string('sender'); // Sender of the letter
             $table->string('subject'); // Subject of the letter
             $table->string('attachment')->nullable(); // Attachment (nullable if there is no attachment)
             $table->string('receiver'); // Receiver of the letter
-            $table->enum('status', ['accepted', 'in progress', 'pending'])->default('accepted'); // Status
+            $table->enum('status', ['draft', 'pending_review', 'approved', 'rejected'])->default('draft');
             $table->timestamps();
         });
     }

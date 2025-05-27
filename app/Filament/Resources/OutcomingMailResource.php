@@ -25,14 +25,14 @@ class OutcomingMailResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Surat';
+        return 'Karta';
     }
 
     protected static ?string $model = OutcomingMail::class;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $modelLabel = 'Surat Keluar';
-    protected static ?string $pluralModelLabel = 'Surat Keluar';
-    protected static ?string $navigationLabel = 'Surat Keluar';
+    protected static ?string $modelLabel = 'Karta sai';
+    protected static ?string $pluralModelLabel = 'Karta sai';
+    protected static ?string $navigationLabel = 'Karta sai';
 
     public static function form(Form $form): Form
     {
@@ -41,31 +41,34 @@ class OutcomingMailResource extends Resource
                     Card::make()
                         ->schema([
                             DatePicker::make('received_date')
-                            ->label('Tanggal Diterima')
-                            ->required()
-                            ->displayFormat('d/m/Y')
-                            ->native(false)
-                            ->extraAttributes(['autocomplete' => 'off']),
+                            ->label('Data simu')
+                            ->required(),
+
                             TextInput::make('letter_number')
-                            ->label('No. Surat')
+                            ->label('No. Karta')
                             ->required()
                             ->extraAttributes(['autocomplete' => 'off']),
+
                             TextInput::make('recepient')
-                            ->label('Kepada')
+                            ->label('Simudor')
                             ->required()
                             ->extraAttributes(['autocomplete' => 'off']),
+
                             TextInput::make('subject')
-                            ->label('Perihal')
+                            ->label('Asuntu')
                             ->required()
                             ->extraAttributes(['autocomplete' => 'off']),
+
                             FileUpload::make('attachment')
-                            ->label('Lampiran')
+                            ->label('Anexu')
                             ->disk('public')
                             ->directory('surat_lampiran')
                             ->nullable(),
+
                             TextInput::make('responsible_person')
                             ->label('Penangun Jawab')
                             ->required(),
+
                             Select::make('status')
                                     ->label('Status')
                                     ->options([
@@ -84,12 +87,12 @@ class OutcomingMailResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->label('No. ')->sortable()->searchable(),
-                TextColumn::make('received_date')->label('Tanggal Diterima')->date('d/m/y')->sortable()->searchable(),
-                TextColumn::make('letter_number')->label('No. Surat')->sortable()->searchable(),
-                TextColumn::make('recepient')->label('Kepada')->sortable()->searchable(),
-                TextColumn::make('subject')->label('Perihal')->sortable()->searchable(),
-                TextColumn::make('attachment')->label('Lampiran')->sortable()->searchable(),
-                TextColumn::make('responsible_person')->label('Penanggun Jawab')->sortable()->searchable(),
+                TextColumn::make('received_date')->label('Data simu')->date('d/m/y')->sortable()->searchable(),
+                TextColumn::make('letter_number')->label('No. karta')->sortable()->searchable(),
+                TextColumn::make('recepient')->label('Ba')->sortable()->searchable(),
+                TextColumn::make('subject')->label('Asuntu')->sortable()->searchable(),
+                TextColumn::make('attachment')->label('Anexu')->sortable()->searchable(),
+                TextColumn::make('responsible_person')->label('Responsabiliza')->sortable()->searchable(),
                 BadgeColumn::make('status')
                 ->label('Status')
                 ->colors([
@@ -109,6 +112,7 @@ class OutcomingMailResource extends Resource
             ->filters([
                 //
             ])
+            ->emptyStateHeading('Dadus mamuk')
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),

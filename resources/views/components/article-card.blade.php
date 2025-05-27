@@ -1,8 +1,8 @@
 <div class="container my-5">
     <!-- Header Section -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h3 class="m-0 fw-bold">Artikel Terbaru</h3>
-        <a href="{{route('articles.index')}}" class="btn btn-link text-decoration-none">Lihat Semua →</a>
+        <h3 class="m-0 fw-bold">Artigu Espiritual Foun</h3>
+        <a href="{{route('articles.index')}}" class="btn btn-link text-decoration-none">Haree hotu →</a>
     </div>
     
     <div class="row">
@@ -21,7 +21,7 @@
                   {{-- Author, Categories and Date --}}
                   <div class="d-flex flex-wrap align-items-center mb-4 text-muted small my-2"
                                     style="font-size: 0.7rem">
-                                    <span class="me-2">✍️ By
+                                    <span class="me-2">✍️ Husi
                                         <a href="{{ route('authors.posts', $post->author->username) }}"
                                             class="text-decoration-none text-muted fw-semibold">
                                             {{ $post->author->name }}
@@ -44,7 +44,7 @@
                 </p>     
                   <!-- Read More Link -->
                   <a href="{{ route('articles.show', $post->slug) }}" style="font-size: 0.7rem">
-                      Baca Selekapnya &gt;&gt;
+                      Lee Kompletu &gt;&gt;
                   </a>
               </div>
           </div>

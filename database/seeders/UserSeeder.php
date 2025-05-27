@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => Hash::make('password'),
                 'role' => 'admin',
+                'position' => 'sarani'
             ]);
 
             User::create(
@@ -31,7 +32,8 @@ class UserSeeder extends Seeder
                     'email' => 'Frederico@gmail.com',
                     'email_verified_at' => now(),
                     'password' => Hash::make('password'),
-                    'role' => 'sekretaris',
+                    'role' => 'majelis',
+                    'position' => 'xefe majelis'
                 ]);
 
                 User::create(
@@ -42,6 +44,7 @@ class UserSeeder extends Seeder
                         'email_verified_at' => now(),
                         'password' => Hash::make('password'),
                         'role' => 'user',
+                        'position' => 'sarani',
                     ]);
     }
 }

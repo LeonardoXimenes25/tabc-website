@@ -19,7 +19,7 @@ class EditIncomingMail extends EditRecord
 
     protected function getSaveButtonLabel(): string
     {
-        return 'Simpan Perubahan';
+        return 'Edit Susesu';
     }
 
 }

@@ -8,47 +8,32 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
         'name',
         'username',
         'email',
         'password',
-        'role'
+        'role',
+        'position',
+        'section',
+        'image',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 
     public function articles(): HasMany {
         return $this->hasMany(Article::class, 'author_id');
@@ -61,4 +46,40 @@ class User extends Authenticatable
     public function articlecomment(): HasMany {
         return $this->hasMany(ArticleComment::class, 'author_id');
     }
+
+    public function gallery(): HasMany {
+        return $this->hasMany(Gallery::class, 'author_id');
+    }
+
+    public function incomingmail(): HasMany {
+        return $this->hasMany(IncomingMail::class, 'author_id');
+    }
+
+    public function outcomingmail(): HasMany {
+        return $this->hasMany(OutcomingMail::class, 'author_id');
+    }
+
+    public function worships(): HasMany {
+        return $this->hasMany(worship::class, 'author_id');
+    }
+
+    public function fellowships(): HasMany {
+        return $this->hasMany(fellowship::class, 'author_id');
+    }
+
+    public function transactions()
+    {
+    return $this->hasMany(Transaction::class, 'author_id');
+    }
+
+    public function financialReports()
+    {
+        return $this->hasMany(FinancialReport::class, 'author_id');
+    }
+
+    public function approvedFinancialReports()
+    {
+        return $this->hasMany(FinancialReport::class, 'approved_by');
+    }
+
 }

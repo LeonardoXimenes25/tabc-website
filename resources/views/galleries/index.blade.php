@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container my-5">
+<div class="container my-5" style="min-height: 100vh">
     <h2 class="mb-4 fw-bold">Galeri Kegiatan</h2>
     <div class="row">
         @foreach ($galleries as $gallery)

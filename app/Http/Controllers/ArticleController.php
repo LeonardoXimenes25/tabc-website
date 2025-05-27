@@ -33,8 +33,6 @@ class ArticleController extends Controller
         return view('articles.show', compact('post', 'relatedPosts'));
     }
 
-
-
     public function postsByAuthor($username)
     {
         $author = User::where('username', $username)->firstOrFail();

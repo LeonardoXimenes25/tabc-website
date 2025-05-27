@@ -12,19 +12,19 @@
     <div class="d-none d-lg-block">
       <ul class="navbar-nav mx-auto d-flex flex-row">
         <li class="nav-item mx-2">
-          <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Home</a>
+          <a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="/">Baranda</a>
         </li>
         <li class="nav-item mx-2">
-          <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">Tentang</a>
+          <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="/about">Konaba Ami</a>
         </li>
         <li class="nav-item mx-2">
-          <a class="nav-link {{ request()->is('schedules') ? 'active' : '' }}" href="/schedules">Jadwal Ibadah</a>
+          <a class="nav-link {{ request()->is('schedules') ? 'active' : '' }}" href="/schedules">Orariu Misa</a>
         </li>
         <li class="nav-item mx-2">
-          <a class="nav-link {{ request()->is('articles*') ? 'active' : '' }}" href="/articles">Artikel</a>
+          <a class="nav-link {{ request()->is('articles*') ? 'active' : '' }}" href="/articles">Artigu Espiritual</a>
         </li>
         <li class="nav-item mx-2">
-          <a class="nav-link {{ request()->is('lyrics') ? 'active' : '' }}" href="/lyrics">Lirik Lagu</a>
+          <a class="nav-link {{ request()->is('lyrics') ? 'active' : '' }}" href="/lyrics">Letra Musika</a>
         </li>
         <li class="nav-item mx-2">
           <a class="nav-link {{ request()->is('galleries') ? 'active' : '' }}" href="/galleries">Galleri</a>

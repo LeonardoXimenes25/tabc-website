@@ -8,15 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Fellowship extends Model
 {
-    /** @use HasFactory<\Database\Factories\FellowshipFactory> */
     use HasFactory;
 
-    protected $fillable = [
-        'date', 'fellowship_type', 'theme', 
-        'bible_verse', 'preacher', 'mc', 'musician'
-    ];
+    protected $fillable = ['date', 'author_id', 'fellowship_type', 'theme', 'bible_verse', 'preacher', 'mc', 'musician'];
 
-    protected $casts = [
-        'date' => 'date'
-    ];
+    protected $casts = ['date' => 'date'];
 }

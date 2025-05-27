@@ -10,6 +10,11 @@ class ListUsers extends ListRecords
 {
     protected static string $resource = UserResource::class;
 
+    protected function getCreateButtonLabel(): string
+    {
+        return 'Aumenta User';
+    }
+
     protected function getHeaderActions(): array
     {
         return [

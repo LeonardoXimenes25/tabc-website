@@ -108,9 +108,11 @@ return [
     |
     */
 
+    'auth_guard' => 'admin',
+
     'middleware' => [
         'web',
-        \Illuminate\Auth\Middleware\Authenticate::class, // Ubah namespace menjadi Illuminate\Auth\Middleware
+        \Illuminate\Auth\Middleware\Authenticate::class,
         'filament.role',
     ],
 ];

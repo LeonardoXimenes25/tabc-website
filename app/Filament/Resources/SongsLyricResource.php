@@ -27,15 +27,15 @@ class SongsLyricResource extends Resource
     protected static ?string $model = Song::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $modelLabel = 'Lirik Lagu';
-    protected static ?string $pluralModelLabel = 'Lirik Lagu';
+    protected static ?string $modelLabel = 'Letra musika';
+    protected static ?string $pluralModelLabel = 'Letra musika';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make('title')
-                ->label('Judul')
+                ->label('Titulu')
                 ->live(onBlur: true)
                 ->afterStateUpdated(function ($state, $get, $set) {
                     if (!$get('slug')) {
@@ -45,14 +45,8 @@ class SongsLyricResource extends Resource
                 ->required()
                 ->maxLength(255),
 
-                TextInput::make('slug')
-                    ->label('Slug')
-                    ->required()
-                    ->unique('songs', 'slug', ignoreRecord: true)
-                    ->disabled(),
-
                 TextInput::make('artist')
-                        ->label('Penyanyi')
+                        ->label('Artista')
                         ->required()
                         ->maxLength(255),
 
@@ -73,17 +67,17 @@ class SongsLyricResource extends Resource
                         'html',
                     ])
                     ->columns(2)
-                    ->label('Lirik Lagu')
+                    ->label('Letra Musika')
                     ->required(),
 
                 Select::make('categorysong_id')
                     ->relationship('categorysong', 'name')
-                    ->label('Tema')
+                    ->label('Kategoria')
                     ->searchable()
                     ->required(),
 
                 FileUpload::make('image_url')
-                    ->label('Gambar')
+                    ->label('Upload imajen')
                     ->image()
                     ->disk('public')
                     ->directory('songs'),
@@ -93,7 +87,7 @@ class SongsLyricResource extends Resource
                     ->placeholder('https://www.youtube.com/watch?v=oXNn1fIXir8')
                     ->url()
                     ->nullable()
-                    ->helperText('Masukkan link YouTube'),
+                    ->helperText('Hatama link YouTube iha nee'),
 
                     
                 TextInput::make('album')
@@ -102,13 +96,13 @@ class SongsLyricResource extends Resource
                 ->maxLength(255),
 
                 TextInput::make('year')
-                ->label('Tahun')
+                ->label('Tinan')
                 ->required()
                 ->maxLength(255),
 
                 Select::make('author_id')
                     ->relationship('author', 'name')
-                    ->label('Penulis')
+                    ->label('Autor')
                     ->searchable()
                     ->required(),
 
@@ -119,13 +113,13 @@ class SongsLyricResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')->searchable()->sortable()->wrap()->label('Judul'),
-                TextColumn::make('artist')->searchable()->sortable()->wrap()->label('artist'),
-                TextColumn::make('categorysong.name')->label('Tema')->sortable(),
-                TextColumn::make('body')->label('Lirik Lagu')->sortable()->limit(30),
-                ImageColumn::make('image_url')->label('Gambar')->height(50)->disk('public'),
-                TextColumn::make('author.name')->label('Penulis')->sortable(),
-                TextColumn::make('created_at')->dateTime('d M Y')->label('Tanggal Dibuat')->sortable(),
+                TextColumn::make('title')->searchable()->sortable()->wrap()->label('Titulu'),
+                TextColumn::make('artist')->searchable()->sortable()->wrap()->label('Artista'),
+                TextColumn::make('categorysong.name')->label('Kategoria')->sortable(),
+                TextColumn::make('body')->label('Letra Musika')->sortable()->limit(30),
+                ImageColumn::make('image_url')->label('Imajen')->height(50)->disk('public'),
+                TextColumn::make('author.name')->label('Autor')->sortable(),
+                TextColumn::make('created_at')->dateTime('d M Y')->label('Data')->sortable(),
             ])
             ->filters([
                 //

@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-auto">
                     <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-filter-circle me-1"></i> Filter
+                         <i data-feather="filter" class="me-2"></i> Filter
                     </button>
                 </div>
             </form>

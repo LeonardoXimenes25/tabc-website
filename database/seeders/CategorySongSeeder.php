@@ -14,7 +14,7 @@ class CategorySongSeeder extends Seeder
     public function run(): void
     {
         CategorySong::create([
-            'name' => 'Sekolah Minggu',
+            'name' => 'Eskola Dominika',
             'slug' => 'sekolah-minggu'
         ]);
 
@@ -24,8 +24,8 @@ class CategorySongSeeder extends Seeder
         ]);
 
         CategorySong::create([
-            'name' => 'Paskah',
-            'slug' => 'paskah'
+            'name' => 'Paskua',
+            'slug' => 'paskua'
         ]);
     }
 }

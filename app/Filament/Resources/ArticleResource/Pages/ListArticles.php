@@ -16,4 +16,9 @@ class ListArticles extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
+    protected function getCreateButtonLabel(): string
+    {
+        return 'Aumenta Dadus';
+    }
 }

@@ -31,7 +31,7 @@ Route::post('/articles/{article:slug}/comments', [ArticleCommentController::clas
 // lyrics route start
 Route::get('/lyrics', [SongsController::class, 'index'])->name('songs.index');
 Route::get('/lyrics/{slug}', [SongsController::class, 'show'])->name('songs.show');
-Route::get('/authors/{username}/songs', [SongsController::class, 'postsByAuthor'])->name('authors.songs');
+Route::get('/artist/{artist}', [SongsController::class, 'postsByArtist'])->name('songs.byArtist');
 Route::get('categories-songs/{slug}', [SongsController::class, 'postsByCategory'])->name('categories-songs.show');
 
 // lyrics route end
@@ -52,8 +52,6 @@ Route::get('/about', function () {
 // auth
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.store');
-
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.authenticate');
-
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

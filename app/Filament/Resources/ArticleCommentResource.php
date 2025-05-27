@@ -19,7 +19,7 @@ class ArticleCommentResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Artikel';
+        return 'Artigu Espiritual';
     }
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';

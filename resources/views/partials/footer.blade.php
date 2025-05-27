@@ -28,7 +28,7 @@
             <!-- Kontak Info -->
             <div class="col-md-3 mb-4">
                 <h5 class="text-uppercase mb-4" style="color: #0d6efd;">
-                    <i class="fas fa-address-book me-2"></i> Hubungi Kami
+                    <i class="fas fa-address-book me-2"></i> Kontaktu Ami
                 </h5>
                 <ul class="list-unstyled">
                     <li class="mb-3">
@@ -40,9 +40,7 @@
                         <span>+670 123 456 789</span>
                     </li>
                     <li class="mb-3">
-                        <a href="tabctl1990@gmail.com"><i data-feather="mail" class="me-2" style="color: #0d6efd;"></i> </a>
-                        
-                       
+                        <a href="tabctl1990@gmail.com" class="text-white"><i data-feather="mail" class="me-2" style="color: #0d6efd;"></i>tabctl1990@gmail.com</a>
                     </li>
                 </ul>
             </div>
@@ -50,20 +48,20 @@
             <!-- Jam Pelayanan -->
             <div class="col-md-4 mb-4">
                 <h5 class="text-uppercase mb-4" style="color: #0d6efd;">
-                    <i class="fas fa-clock me-2"></i> Jam Pelayanan
+                    <i class="fas fa-clock me-2"></i> Oras Ministeriu
                 </h5>
                 <ul class="list-unstyled">
                     <li class="mb-3">
                         <i class="fas fa-sun me-2" style="color: #0d6efd;"></i> 
-                        <strong>Ibadah Minggu:</strong> 08:00 - 10:00
+                        <strong>Misa Domingu:</strong> 08:00 - 10:00
                     </li>
                     <li class="mb-3">
                         <i class="fas fa-sun me-2" style="color: #0d6efd;"></i> 
-                        <strong>Sekolah Minggu:</strong> 10:00 - 11:30
+                        <strong>Eskola Dominika:</strong> 10:00 - 11:30
                     </li>
                     <li class="mb-3">
                         <i class="fas fa-bible me-2" style="color: #0d6efd;"></i> 
-                        <strong>Persekutuan Doa Rabu:</strong> 19:00 - 21:00
+                        <strong>Kultu Orasaun Kuarta:</strong> 19:00 - 21:00
                     </li>
                 </ul>
             </div>
@@ -80,8 +78,7 @@
                 </p>
             </div>
             <div class="col-md-6 text-md-end mt-3">
-                <p style="display: inline-block" class="me-3">Follow Kami di : </p>
-                <a href="tabctl1990@gmail.com" class="text-white me-3 icon-hover"><i data-feather="mail"></i></a>
+                <p style="display: inline-block" class="me-3">Follow Ami: </p>
                 <a href="#" class="text-white me-3 icon-hover"><i data-feather="youtube"></i></a>
                 <a href="#" class="text-white me-3 icon-hover"><i data-feather="instagram"></i></a>
                 <a href="#" class="text-white me-3 icon-hover"><i class="fab fa-whatsapp fa-lg"></i></a>

@@ -18,11 +18,11 @@ class Category extends Model
     public function getCategoryColor()
     {
         switch ($this->name) {
-            case 'Renungan Harian':
+            case 'Devosaun loro-loron':
                 return 'bg-success';
-            case 'Pengajaran Alkitab':
+            case 'Historia biblia':
                 return 'bg-warning text-dark';
-            case 'Sejarah Gereja dan Tokoh Iman':
+            case 'Historia igreja no figura fe':
                 return 'bg-danger';
             default:
                 return 'bg-primary';

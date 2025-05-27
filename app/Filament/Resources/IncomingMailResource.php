@@ -21,14 +21,14 @@ class IncomingMailResource extends Resource
 {
     public static function getNavigationGroup(): ?string
     {
-        return 'Surat';
+        return 'Karta';
     }
 
     protected static ?string $model = IncomingMail::class;
     protected static ?string $navigationIcon = 'heroicon-o-inbox';
-    protected static ?string $modelLabel = 'Surat Masuk';
-    protected static ?string $pluralModelLabel = 'Surat Masuk';
-    protected static ?string $navigationLabel = 'Surat Masuk';
+    protected static ?string $modelLabel = 'Karta tama';
+    protected static ?string $pluralModelLabel = 'Karta tama';
+    protected static ?string $navigationLabel = 'Karta tama';
 
     public static function form(Form $form): Form
     {
@@ -36,38 +36,20 @@ class IncomingMailResource extends Resource
             ->schema([
                 Card::make()
                     ->schema([
-                        DatePicker::make('received_date')
-                            ->label('Tanggal Diterima')
-                            ->required()
-                            ->displayFormat('d/m/Y')
-                            ->native(false),
-                        TextInput::make('letter_number')
-                            ->label('No. Surat')
-                            ->required(),
-                        TextInput::make('sender')
-                            ->label('Pengirim')
-                            ->required(),
-                        TextInput::make('subject')
-                            ->label('Perihal')
-                            ->required(),
-                        FileUpload::make('attachment')
-                            ->label('Lampiran')
-                            ->disk('public')
-                            ->directory('surat_masuk')
-                            ->nullable(),
-                        TextInput::make('attachment')
-                            ->label('Perihal')
-                            ->required(),
-                        TextInput::make('receiver')
-                            ->label('Penerima')
-                            ->required(),
-                        Select::make('status')
-                            ->label('Status')
+                        DatePicker::make('received_date')->label('Data simu')->required(),
+                        TextInput::make('letter_number')->label('No. Karta')->required(),
+                        TextInput::make('sender')->label('Mandador')->required(),
+                        TextInput::make('subject')->label('Asuntu')->required(),
+                        FileUpload::make('attachment')->label('Anexu')->disk('public')->directory('surat_masuk')->nullable(),
+                        TextInput::make('receiver')->label('Simudor')->required(),
+                        Select::make('Estatus')->label('Estatus')
                             ->options([
-                                'accepted' => 'Diterima',
-                                'in progress' => 'Dalam Proses',
-                                'pending' => 'Belum',
+                                'draft' => 'Draf',
+                                'pending_review' => 'Pending',
+                                'approved' => 'Aprova',
+                                'rejected' => 'Rejeita',
                             ])
+                            ->default('draft')
                             ->required(),
                     ])
                     ->columns(2),
@@ -78,37 +60,14 @@ class IncomingMailResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')
-                    ->label('No.')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('received_date')
-                    ->label('Tanggal Diterima')
-                    ->date('d/m/Y')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('letter_number')
-                    ->label('No. Surat')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('sender')
-                    ->label('Pengirim')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('subject')
-                    ->label('Perihal')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('attachment')
-                    ->label('Perihal')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('receiver')
-                    ->label('Penerima')
-                    ->sortable()
-                    ->searchable(),
-                BadgeColumn::make('status')
-                    ->label('Status')
+                TextColumn::make('id')->label('No.')->sortable()->searchable(),
+                TextColumn::make('received_date')->label('Data simu')->date('d/m/y')->sortable()->searchable(),
+                TextColumn::make('letter_number')->label('No. Karta')->sortable()->searchable(),
+                TextColumn::make('sender')->label('Mandador')->sortable()->searchable(),
+                TextColumn::make('subject')->label('Asuntu')->sortable()->searchable(),
+                TextColumn::make('attachment')->label('Anexu')->sortable()->searchable(),
+                TextColumn::make('receiver')->label('Simudor')->sortable()->searchable(),
+                BadgeColumn::make('status')->label('Estatus')
                     ->colors([
                         'success' => 'accepted',
                         'warning' => 'in progress',
@@ -126,9 +85,10 @@ class IncomingMailResource extends Resource
             ->filters([
                 //
             ])
+            ->emptyStateHeading('Dadus mamuk')
             ->actions([
-                Tables\Actions\EditAction::make()->label('Ubah'),
-                Tables\Actions\DeleteAction::make()->label('Hapus'),
+                Tables\Actions\EditAction::make()->label('Edita'),
+                Tables\Actions\DeleteAction::make()->label('Apaga'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

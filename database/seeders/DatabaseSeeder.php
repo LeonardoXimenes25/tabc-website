@@ -21,8 +21,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             UserSeeder::class,
             CategorySongSeeder::class,
-            WorshipSeeder::class,
-            FellowshipSeeder::class,
+            AdminSeeder::class,
         ]);
     
         Article::factory(10)->recycle([
@@ -35,6 +34,12 @@ class DatabaseSeeder extends Seeder
             User::all()
         ])->create();
     
-        Fellowship::factory(10)->create();
+        Fellowship::factory(10)->recycle([
+            User::all()
+        ])->create();
+
+        Worship::factory(10)->recycle([
+            User::all()
+        ])->create();
     }
 }
