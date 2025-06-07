@@ -19,6 +19,6 @@ class ListSongsLyrics extends ListRecords
 
     protected function getCreateButtonLabel(): string
     {
-        return 'Aumenta Dadus';
+        return 'Aumenta Letra Musika';
     }
 }

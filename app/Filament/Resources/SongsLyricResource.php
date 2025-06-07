@@ -10,6 +10,7 @@ use App\Models\SongsLyric;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
@@ -92,20 +93,11 @@ class SongsLyricResource extends Resource
                     
                 TextInput::make('album')
                 ->label('Album')
-                ->required()
                 ->maxLength(255),
 
                 TextInput::make('year')
                 ->label('Tinan')
-                ->required()
                 ->maxLength(255),
-
-                Select::make('author_id')
-                    ->relationship('author', 'name')
-                    ->label('Autor')
-                    ->searchable()
-                    ->required(),
-
                 ]);
     }
 
@@ -148,5 +140,17 @@ class SongsLyricResource extends Resource
             'create' => Pages\CreateSongsLyric::route('/create'),
             'edit' => Pages\EditSongsLyric::route('/{record}/edit'),
         ];
+    }
+
+     public static function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['author_id'] = Auth::id();
+        return $data;
+    }
+
+    public static function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['author_id'] = Auth::id();
+        return $data;
     }
 }

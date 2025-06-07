@@ -7,6 +7,7 @@ use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use App\Models\Transaction;
+use App\Models\FinancialReport;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -30,11 +31,17 @@ class TransactionResource extends Resource
     {
         return $form->schema([
             Select::make('financialreport_id')
-    ->label('Laporan Keuangan')
-    ->relationship('financialReport', 'id') // gunakan kolom 'id'
-    ->getOptionLabelFromRecordUsing(fn ($record) => $record->display_name)
-    ->required()
-    ->searchable(),
+                ->label('Laporan Keuangan')
+                ->options(function () {
+                    return FinancialReport::orderBy('year', 'desc')
+                        ->orderByRaw("FIELD(month, 'January','February','March','April','May','June','July','August','September','October','November','December')")
+                        ->get()
+                        ->mapWithKeys(function ($report) {
+                            return [$report->id => $report->display_name];
+                        });
+                })
+                ->searchable()
+                ->required(),
 
 
             DatePicker::make('date')

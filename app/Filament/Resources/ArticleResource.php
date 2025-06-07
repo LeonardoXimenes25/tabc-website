@@ -138,7 +138,7 @@ class ArticleResource extends Resource
         ];
     }
 
-        public static function mutateFormDataBeforeCreate(array $data): array
+    public static function mutateFormDataBeforeCreate(array $data): array
     {
         $data['author_id'] = Auth::id();
         return $data;

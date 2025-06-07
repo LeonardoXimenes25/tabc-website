@@ -25,7 +25,7 @@ class CreateArticle extends CreateRecord
             return $data;
         }
 
-     protected function getRedirectUrl(): string
+    protected function getRedirectUrl(): string
     {
         // arahkan ke halaman index setelah create sukses
         return $this->getResource()::getUrl('index');

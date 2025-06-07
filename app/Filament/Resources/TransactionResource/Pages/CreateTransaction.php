@@ -16,6 +16,12 @@ class CreateTransaction extends CreateRecord
         $data['author_id'] = Auth::id(); // pakai Facade Auth::id()
         return $data;
     }
+
+    protected function getRedirectUrl(): string
+    {
+        // arahkan ke halaman index setelah create sukses
+        return $this->getResource()::getUrl('index');
+    }
     
 }
 

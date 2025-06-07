@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\FinancialReport;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\CategorySongController;
 use App\Http\Controllers\ArticleCommentController;
+use App\Http\Controllers\FinancialReportPrintController;
 
 // home
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -55,3 +57,7 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.st
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.authenticate');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// laporan keuangan
+Route::get('/report/{report}/print', [FinancialReportPrintController::class, 'print'])
+    ->name('report.print');

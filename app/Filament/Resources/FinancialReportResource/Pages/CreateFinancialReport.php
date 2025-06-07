@@ -13,7 +13,21 @@ class CreateFinancialReport extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-      $data['author_id'] = Auth::id();
+        $data['status'] = 'draft';
+        $data['author_id'] = Auth::id();
+
         return $data;
+    }
+
+    protected function afterSave(): void
+    {
+        if (method_exists($this->record, 'calculateSummary')) {
+            $this->record->calculateSummary();
+        }
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
     }
 }
