@@ -9,4 +9,10 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateWorship extends CreateRecord
 {
     protected static string $resource = WorshipResource::class;
+
+    protected function getRedirectUrl(): string
+    {
+        // arahkan ke halaman index setelah create sukses
+        return $this->getResource()::getUrl('index');
+    }
 }

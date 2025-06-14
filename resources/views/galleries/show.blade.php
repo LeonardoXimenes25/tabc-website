@@ -7,9 +7,9 @@
     <p class="text-muted">
         {{-- Mengecek apakah event_date ada dan merupakan objek Carbon --}}
         @if ($gallery->event_date && $gallery->event_date instanceof \Carbon\Carbon)
-            Tanggal: {{ $gallery->event_date->format('d M Y') }}
+            Data: {{ $gallery->event_date->format('d M Y') }}
         @else
-            <span class="text-danger">Tanggal belum diatur</span>
+            <span class="text-danger">Data Seidauk Iha</span>
         @endif
     </p>
 

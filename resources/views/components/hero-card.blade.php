@@ -15,15 +15,15 @@
                 <div class="mt-4 d-flex">
                     <div class="me-4">
                         <div class="fs-3 fw-bold">10+</div>
-                        <div class="text-muted">Kegiatan</div>
+                        <div class="text-muted">Aktividade</div>
                     </div>
                     <div class="me-4">
                         <div class="fs-3 fw-bold">500+</div>
-                        <div class="text-muted">Jemaat</div>
+                        <div class="text-muted">Sarani</div>
                     </div>
                     <div>
                         <div class="fs-3 fw-bold">24/7</div>
-                        <div class="text-muted">Doa</div>
+                        <div class="text-muted">Orasaun</div>
                     </div>
                 </div>
             </div>
@@ -36,9 +36,9 @@
                 </picture>
 
                 <div class="text-center mt-3">
-                    <span class="badge bg-light text-dark me-2"><i class="fas fa-cross me-1"></i> Kristen</span>
-                    <span class="badge bg-light text-dark me-2"><i class="fas fa-hands-praying me-1"></i> Protestan</span>
-                    <span class="badge bg-light text-dark"><i class="fas fa-heart me-1"></i> Komunitas</span>
+                    <span class="badge bg-light text-dark me-2"><i class="fas fa-cross me-1"></i> Kristaun</span>
+                    <span class="badge bg-light text-dark me-2"><i class="fas fa-hands-praying me-1"></i> Protestante</span>
+                    <span class="badge bg-light text-dark"><i class="fas fa-heart me-1"></i> Komunidade</span>
                 </div>
             </div>
         </div>

@@ -16,4 +16,10 @@ class EditFellowship extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function getRedirectUrl(): string
+    {
+        // arahkan ke halaman index setelah create sukses
+        return $this->getResource()::getUrl('index');
+    }
 }

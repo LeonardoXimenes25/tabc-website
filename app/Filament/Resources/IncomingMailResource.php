@@ -16,6 +16,7 @@ use Filament\Tables\Columns\BadgeColumn;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use App\Filament\Resources\IncomingMailResource\Pages;
+use Filament\Tables\Actions\Action; // ✅ Ditambahkan
 
 class IncomingMailResource extends Resource
 {
@@ -42,7 +43,9 @@ class IncomingMailResource extends Resource
                         TextInput::make('subject')->label('Asuntu')->required(),
                         FileUpload::make('attachment')->label('Anexu')->disk('public')->directory('surat_masuk')->nullable(),
                         TextInput::make('receiver')->label('Simudor')->required(),
-                        Select::make('Estatus')->label('Estatus')
+                        
+                        // ✅ Kolom status disembunyikan dari form
+                        Select::make('status')->label('Estatus')
                             ->options([
                                 'draft' => 'Draf',
                                 'pending_review' => 'Pending',
@@ -50,7 +53,7 @@ class IncomingMailResource extends Resource
                                 'rejected' => 'Rejeita',
                             ])
                             ->default('draft')
-                            ->required(),
+                            ->hidden(), // ✅ Kolom disembunyikan
                     ])
                     ->columns(2),
             ]);
@@ -67,17 +70,21 @@ class IncomingMailResource extends Resource
                 TextColumn::make('subject')->label('Asuntu')->sortable()->searchable(),
                 TextColumn::make('attachment')->label('Anexu')->sortable()->searchable(),
                 TextColumn::make('receiver')->label('Simudor')->sortable()->searchable(),
+
+                // ✅ Badge status yang sudah diperbaiki
                 BadgeColumn::make('status')->label('Estatus')
                     ->colors([
-                        'success' => 'accepted',
-                        'warning' => 'in progress',
-                        'gray' => 'pending',
+                        'gray' => 'draft',
+                        'warning' => 'pending_review',
+                        'success' => 'approved',
+                        'danger' => 'rejected',
                     ])
                     ->formatStateUsing(fn ($state) => match($state) {
-                        'accepted' => 'Diterima',
-                        'in progress' => 'Dalam Proses',
-                        'pending' => 'Belum',
-                        default => $state,
+                        'draft' => 'Draf',
+                        'pending_review' => 'Pending',
+                        'approved' => 'Aprova',
+                        'rejected' => 'Rejeita',
+                        default => ucfirst($state),
                     })
                     ->sortable()
                     ->searchable(),
@@ -89,6 +96,14 @@ class IncomingMailResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make()->label('Edita'),
                 Tables\Actions\DeleteAction::make()->label('Apaga'),
+
+                // ✅ Tombol Aprova untuk mengubah status
+                Action::make('Aprova')
+                    ->label('Aprova')
+                    ->color('success')
+                    ->icon('heroicon-o-check-circle')
+                    ->visible(fn ($record) => $record->status !== 'approved')
+                    ->action(fn ($record) => $record->update(['status' => 'approved'])),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

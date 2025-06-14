@@ -33,16 +33,16 @@ class ArticleCommentResource extends Resource
                 Forms\Components\Select::make('article_id')
                 ->relationship('article', 'title')
                 ->required()
-                ->label('Judul Artikel'),
+                ->label('Tema Artigu Espiritual'),
 
             Forms\Components\Select::make('author_id')
                 ->relationship('user', 'name')
                 ->required()
-                ->label('Penulis Komentar'),
+                ->label('Autor Komentariu'),
 
             Forms\Components\Textarea::make('body')
                 ->required()
-                ->label('Isi Komentar')
+                ->label('Konteudu Komentariu')
                 ->rows(4),
             ]);
     }

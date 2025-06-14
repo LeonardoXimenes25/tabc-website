@@ -15,10 +15,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\BadgeColumn;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\OutcomingMailResource\Pages;
-use App\Filament\Resources\OutcomingMailResource\RelationManagers;
 
 class OutcomingMailResource extends Resource
 {
@@ -38,89 +35,91 @@ class OutcomingMailResource extends Resource
     {
         return $form
             ->schema([
-                    Card::make()
-                        ->schema([
-                            DatePicker::make('received_date')
+                Card::make()
+                    ->schema([
+                        DatePicker::make('sent_date')
                             ->label('Data simu')
                             ->required(),
 
-                            TextInput::make('letter_number')
+                        TextInput::make('letter_number')
                             ->label('No. Karta')
                             ->required()
                             ->extraAttributes(['autocomplete' => 'off']),
 
-                            TextInput::make('recepient')
+                        TextInput::make('recepient')
                             ->label('Simudor')
                             ->required()
                             ->extraAttributes(['autocomplete' => 'off']),
 
-                            TextInput::make('subject')
+                        TextInput::make('subject')
                             ->label('Asuntu')
                             ->required()
                             ->extraAttributes(['autocomplete' => 'off']),
 
-                            FileUpload::make('attachment')
+                        FileUpload::make('attachment')
                             ->label('Anexu')
                             ->disk('public')
                             ->directory('surat_lampiran')
                             ->nullable(),
 
-                            TextInput::make('responsible_person')
+                        TextInput::make('responsible_person')
                             ->label('Penangun Jawab')
                             ->required(),
 
-                            Select::make('status')
-                                    ->label('Status')
-                                    ->options([
-                                        'accepted' => 'Diterima',
-                                        'in progress' => 'Dalam Proses',
-                                        'pending' => 'Belum',
-                                    ])
-                                    ->required(),
-                        ])
-                        ->columns(2),
-                ]);
+                        Select::make('status')
+                            ->label('Status')
+                            ->options([
+                                'draft' => 'Draf',
+                                'pending_review' => 'Pending',
+                                'approved' => 'Aprova',
+                                'rejected' => 'Rejeita',
+                            ])
+                            ->default('draft')
+                            ->required(),
+                    ])
+                    ->columns(2),
+            ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('id')->label('No. ')->sortable()->searchable(),
-                TextColumn::make('received_date')->label('Data simu')->date('d/m/y')->sortable()->searchable(),
-                TextColumn::make('letter_number')->label('No. karta')->sortable()->searchable(),
+                TextColumn::make('id')->label('No.')->sortable()->searchable(),
+                TextColumn::make('sent_date')->label('Data Sai')->date('d/m/y')->sortable()->searchable(),
+                TextColumn::make('letter_number')->label('No. Karta')->sortable()->searchable(),
                 TextColumn::make('recepient')->label('Ba')->sortable()->searchable(),
                 TextColumn::make('subject')->label('Asuntu')->sortable()->searchable(),
                 TextColumn::make('attachment')->label('Anexu')->sortable()->searchable(),
                 TextColumn::make('responsible_person')->label('Responsabiliza')->sortable()->searchable(),
                 BadgeColumn::make('status')
-                ->label('Status')
-                ->colors([
-                    'success' => 'accepted',
-                    'warning' => 'in progress',
-                    'secondary' => 'pending',
-                ])
-                ->formatStateUsing(function ($state) {
-                    return match ($state) {
-                        'accepted' => 'Diterima',
-                        'in progress' => 'Dalam Proses',
-                        'pending' => 'Belum',
+                    ->label('Status')
+                    ->colors([
+                        'success' => 'approved',
+                        'warning' => 'pending_review',
+                        'secondary' => 'draft',
+                        'danger' => 'rejected',
+                    ])
+                    ->formatStateUsing(fn ($state) => match ($state) {
+                        'approved' => 'Aprova',
+                        'pending_review' => 'Pending',
+                        'draft' => 'Draf',
+                        'rejected' => 'Rejeita',
                         default => $state,
-                    };
-                }),
+                    })
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 //
             ])
             ->emptyStateHeading('Dadus mamuk')
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make()->label('Edita'),
+                Tables\Actions\DeleteAction::make()->label('Apaga'),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 

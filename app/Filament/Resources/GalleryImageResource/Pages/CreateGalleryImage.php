@@ -28,4 +28,10 @@ class CreateGalleryImage extends CreateRecord
 
     return [];
 }
+
+protected function getRedirectUrl(): string
+    {
+        // arahkan ke halaman index setelah create sukses
+        return $this->getResource()::getUrl('index');
+    }
 }

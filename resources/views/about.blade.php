@@ -8,15 +8,15 @@
     <div class="col-lg-8 mx-auto">
       <!-- Page Header -->
       <div class="text-center mb-5">
-        <h1 class="display-4">Tentang Kami</h1>
-        <p class="lead">Mengenal lebih dalam gereja kami</p>
+        <h1 class="display-4">Konaba Ami</h1>
+        <p class="lead">Konese Ami nia Igreja</p>
       </div>
 
       <!-- Church History -->
       <section class="mb-5">
         <div class="d-flex align-items-center mb-4">
           <h2 class="h4 mb-0">
-            <i class="bi bi-book me-2"></i>Sejarah Gereja
+            <i class="bi bi-book me-2"></i>Historia Igreja
           </h2>
         </div>
         <div class="card border-0 shadow-sm">
@@ -37,14 +37,14 @@
       <section>
         <div class="d-flex align-items-center mb-4">
           <h2 class="h4 mb-0">
-            <i class="bi bi-bullseye text-center me-2"></i>Visi & Misi
+            <i class="bi bi-bullseye text-center me-2"></i>Visaun no Misaun
           </h2>
         </div>
         
         <!-- Vision -->
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-header bg-primary text-white">
-            <h3 class="h5 mb-0">Visi</h3>
+            <h3 class="h5 mb-0">Visaun</h3>
           </div>
           <div class="card-body">
             <p class="lead">"Menjadi gereja yang relevan dan menjadi berkat bagi kota dan bangsa."</p>
@@ -54,7 +54,7 @@
         <!-- Mission -->
         <div class="card border-0 shadow-sm">
           <div class="card-header bg-primary text-white">
-            <h3 class="h5 mb-0">Misi</h3>
+            <h3 class="h5 mb-0">Misaun</h3>
           </div>
           <div class="card-body">
             <ol>

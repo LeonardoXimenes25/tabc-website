@@ -37,28 +37,28 @@ class WorshipResource extends Resource
         return $form
             ->schema([
                 Grid::make(2)->schema([
-                    DatePicker::make('date')->label('Tanggal'),
+                    DatePicker::make('date')->label('Data Misa'),
                     Select::make('worship_type')
-                        ->label('Jenis Ibadah')
+                        ->label('Tipu Misa')
                         ->options([
-                            'sunday_service' => 'Ibadah Minggu',
-                            'good_friday' => 'Jumat Agung',
-                            'christmas' => 'Natal',
-                            'easter' => 'Paskah',
+                            'sunday_service' => 'Misa Domingu',
+                            'good_friday' => 'Misa Sexta-Feira Santa',
+                            'christmas' => 'Misa Natal',
+                            'easter' => 'Misa Paskua',
                         ])
                         ->required(),
                 ]),
                 TextInput::make('theme')->label('Tema')->required(),
-                TextInput::make('bible_verse')->label('Ayat Alkitab')->required(),
+                TextInput::make('bible_verse')->label('Versu Biblia')->required(),
                 Grid::make(2)->schema([
-                    TextInput::make('preacher')->label('Pengkhotbah'),
-                    TextInput::make('liturgist')->label('Liturgis'),
-                    TextInput::make('singer')->label('Singer'),
-                    TextInput::make('musician')->label('Pemusik'),
-                    TextInput::make('greeter')->label('Penyambut'),
-                    TextInput::make('collector')->label('Kolektan'),
-                    TextInput::make('offering_prayer')->label('Doa Persembahan'),
-                    TextInput::make('lcd_operator')->label('Operator LCD'),
+                    TextInput::make('preacher')->label('Pregador'),
+                    TextInput::make('liturgist')->label('Liturgia'),
+                    TextInput::make('singer')->label('Kantador'),
+                    TextInput::make('musician')->label('Tokador'),
+                    TextInput::make('greeter')->label('Simu Tamu'),
+                    TextInput::make('collector')->label('Ofertor'),
+                    TextInput::make('offering_prayer')->label('Orasaun Ofertor'),
+                    TextInput::make('lcd_operator')->label('Operador LCD'),
                 ])
             ]);
     }
@@ -67,24 +67,24 @@ class WorshipResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('date')->label('Tanggal')->date()->sortable(),
-                TextColumn::make('worship_type')->label('Jenis Ibadah')->formatStateUsing(fn ($state) => match ($state) {
-                    'sunday_service' => 'Ibadah Minggu',
-                    'good_friday' => 'Jumat Agung',
-                    'christmas' => 'Natal',
-                    'easter' => 'Paskah',
+                TextColumn::make('date')->label('Data Misa')->date()->sortable(),
+                TextColumn::make('worship_type')->label('Tipu Misa')->formatStateUsing(fn ($state) => match ($state) {
+                    'sunday_service' => 'Misa Domingu',
+                    'good_friday' => 'Misa Sexta-Feira Santa',
+                    'christmas' => 'Misa Natal',
+                    'easter' => 'Paskua',
                     default => $state,
                 })->sortable(),
                 TextColumn::make('theme')->label('Tema'),
-                TextColumn::make('bible_verse')->label('Ayat Alkitab'),
-                TextColumn::make('preacher')->label('Pengkhotbah'),
-                TextColumn::make('liturgist')->label('Liturgis'),
-                TextColumn::make('singer')->label('Singer'),
-                TextColumn::make('musician')->label('Pemusik'),
-                TextColumn::make('greeter')->label('Penyambut'),
-                TextColumn::make('collector')->label('Kolektan'),
-                TextColumn::make('offering_prayer')->label('Doa Persembahan'),
-                TextColumn::make('lcd_operator')->label('Operator LCD'),
+                TextColumn::make('bible_verse')->label('Versu Biblia'),
+                TextColumn::make('preacher')->label('Pregador'),
+                TextColumn::make('liturgist')->label('Liturgia'),
+                TextColumn::make('singer')->label('Kantor'),
+                TextColumn::make('musician')->label('Tokador'),
+                TextColumn::make('greeter')->label('Simu Tamu'),
+                TextColumn::make('collector')->label('Ofertor'),
+                TextColumn::make('offering_prayer')->label('Orasaun Ofertoriu'),
+                TextColumn::make('lcd_operator')->label('Operador LCD'),
         ])
         ->defaultSort('date', 'desc')
             ->filters([

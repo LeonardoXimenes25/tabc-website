@@ -10,6 +10,12 @@ class EditWorship extends EditRecord
 {
     protected static string $resource = WorshipResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        // arahkan ke halaman index setelah create sukses
+        return $this->getResource()::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

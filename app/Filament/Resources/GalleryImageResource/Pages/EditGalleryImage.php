@@ -10,6 +10,12 @@ class EditGalleryImage extends EditRecord
 {
     protected static string $resource = GalleryImageResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        // arahkan ke halaman index setelah create sukses
+        return $this->getResource()::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

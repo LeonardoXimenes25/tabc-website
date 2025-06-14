@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container my-5" style="min-height: 100vh">
-    <h2 class="mb-4 fw-bold">Galeri Kegiatan</h2>
+    <h2 class="mb-4 fw-bold">Galeri Foto</h2>
     <div class="row">
         @foreach ($galleries as $gallery)
         <div class="col-md-3 mb-4">
@@ -14,10 +14,10 @@
                         @if ($gallery->event_date && $gallery->event_date instanceof \Carbon\Carbon)
                             {{ $gallery->event_date->format('d M Y') }}
                         @else
-                            <span class="text-danger">Tanggal belum diatur</span>
+                            <span class="text-danger">Data seidauk iha</span>
                         @endif
                     </p>
-                    <a href="{{ route('galleries.show', $gallery) }}" class="btn btn-sm btn-outline-primary">Lihat Foto</a>
+                    <a href="{{ route('galleries.show', $gallery) }}" class="btn btn-sm btn-outline-primary">Haree Imajen</a>
                 </div>
             </div>
         </div>

@@ -10,6 +10,12 @@ class EditOutcomingMail extends EditRecord
 {
     protected static string $resource = OutcomingMailResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        // arahkan ke halaman index setelah create sukses
+        return $this->getResource()::getUrl('index');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

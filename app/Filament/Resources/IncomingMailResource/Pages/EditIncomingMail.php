@@ -22,5 +22,11 @@ class EditIncomingMail extends EditRecord
         return 'Edit Susesu';
     }
 
+    protected function getRedirectUrl(): string
+    {
+        // arahkan ke halaman index setelah create sukses
+        return $this->getResource()::getUrl('index');
+    }
+
 }
 

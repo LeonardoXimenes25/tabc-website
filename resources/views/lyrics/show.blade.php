@@ -11,12 +11,12 @@
                     <li class="breadcrumb-item">
                         <a href="/" class="text-decoration-none d-flex align-items-center">
                             <i class="fas fa-home me-2"></i>
-                            Home
+                            Baranda
                         </a>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="{{ route('songs.index') }}" class="text-decoration-none">
-                            Pujian
+                            Letra Musika
                         </a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
@@ -38,7 +38,7 @@
         <div class="col-lg-3 pe-lg-4 mb-4">
             <div class="song-info">
                 <div class="d-flex align-items-center mb-2">
-                    <h6 class="me-2 fw-bold">Artist:</h6>
+                    <h6 class="me-2 fw-bold">Artista:</h6>
                     <h6 class="text-muted">{{ $songs->artist }}</h6>
                 </div>
                 <div class="d-flex mb-2">
@@ -50,7 +50,7 @@
                     <h6 class="text-muted">{{ $songs->album }}</h6>
                 </div>
                 <div class="d-flex mb-2">
-                  <h6 class="me-2 fw-bold">Tahun Rilis:</h6>
+                  <h6 class="me-2 fw-bold">Tinan Release:</h6>
                   <h6 class="text-muted">{{ $songs->year }}</h6>
               </div>
 

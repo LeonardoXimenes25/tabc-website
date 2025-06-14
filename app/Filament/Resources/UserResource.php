@@ -122,10 +122,10 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('position')->label('Posisaun')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('section')->label('Seksaun')->sortable()->searchable(),
                 Tables\Columns\ImageColumn::make('image')
-    ->label('Foto')
-    ->size(50)
-    ->getStateUsing(fn ($record) => asset('storage/' . $record->image))
-    ->extraAttributes(['style' => 'border-radius:50%; object-fit: cover;'])
+                    ->label('Foto')
+                    ->size(50)
+                    ->getStateUsing(fn ($record) => asset('storage/' . $record->image))
+                    ->extraAttributes(['style' => 'border-radius:50%; object-fit: cover;'])
 
 
             ])
