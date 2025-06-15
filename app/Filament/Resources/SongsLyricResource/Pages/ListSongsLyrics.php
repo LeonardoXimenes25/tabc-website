@@ -10,15 +10,15 @@ class ListSongsLyrics extends ListRecords
 {
     protected static string $resource = SongsLyricResource::class;
 
+    protected function getCreateButtonLabel(): string
+    {
+        return 'Aumenta Dadus';
+    }
+
     protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make(),
         ];
-    }
-
-    protected function getCreateButtonLabel(): string
-    {
-        return 'Aumenta Letra Musika';
     }
 }

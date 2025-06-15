@@ -74,16 +74,17 @@ class SongsLyricResource extends Resource
                 Select::make('categorysong_id')
                     ->relationship('categorysong', 'name')
                     ->label('Kategoria')
+                    ->placeholder('Hili opsaun')
                     ->searchable()
                     ->required(),
 
                 FileUpload::make('image_url')
                     ->label('Upload imajen')
                     ->image()
-                    ->disk('public')
-                    ->directory('songs'),
+                    ->directory('songs')
+                    ->maxSize(1024),
 
-                    TextInput::make('youtube_embed')
+                TextInput::make('youtube_embed')
                     ->label('YouTube Video URL')
                     ->placeholder('https://www.youtube.com/watch?v=oXNn1fIXir8')
                     ->url()
@@ -92,12 +93,12 @@ class SongsLyricResource extends Resource
 
                     
                 TextInput::make('album')
-                ->label('Album')
-                ->maxLength(255),
+                    ->label('Album')
+                    ->maxLength(255),
 
                 TextInput::make('year')
-                ->label('Tinan')
-                ->maxLength(255),
+                    ->label('Tinan')
+                    ->maxLength(255),
                 ]);
     }
 
@@ -106,10 +107,14 @@ class SongsLyricResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title')->searchable()->sortable()->wrap()->label('Titulu'),
-                TextColumn::make('artist')->searchable()->sortable()->wrap()->label('Artista'),
+                TextColumn::make('artist')->searchable()->sortable()->label('Artista'),
                 TextColumn::make('categorysong.name')->label('Kategoria')->sortable(),
-                TextColumn::make('body')->label('Letra Musika')->sortable()->limit(30),
-                ImageColumn::make('image_url')->label('Imajen')->height(50)->disk('public'),
+                TextColumn::make('body')->label('Kontendu')->sortable()->wrap()->formatStateUsing(fn ($state) => \Illuminate\Support\Str::limit(strip_tags(html_entity_decode($state)), 30)),
+                ImageColumn::make('image_url')
+                    ->label('Imajen')
+                    ->size(50)
+                    ->getStateUsing(fn ($record) => asset('storage/' . $record->image_url))
+                    ->extraAttributes(['style' => 'border-radius:50%; object-fit: cover;']),
                 TextColumn::make('author.name')->label('Autor')->sortable(),
                 TextColumn::make('created_at')->dateTime('d M Y')->label('Data')->sortable(),
             ])
@@ -118,6 +123,7 @@ class SongsLyricResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -152,5 +158,11 @@ class SongsLyricResource extends Resource
     {
         $data['author_id'] = Auth::id();
         return $data;
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->orderBy('created_at', 'desc');
     }
 }

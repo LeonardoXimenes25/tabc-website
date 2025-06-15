@@ -23,36 +23,36 @@ class FellowshipResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Jadwal Ibadah';
+        return 'Orariu Misa';
     }
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $modelLabel = 'Persekutuan';
-    protected static ?string $pluralModelLabel = 'Persekutuan';
+    protected static ?string $modelLabel = 'Kultu';
+    protected static ?string $pluralModelLabel = 'Kultu';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 DatePicker::make('date')
-                ->label('Tanggal')
+                ->label('Data Kultu')
                 ->required(),
 
                 Select::make('fellowship_type')
-                    ->label('Jenis Persekutuan')
+                    ->label('Tipu Kultu')
                     ->options([
-                        'prayer_fellowship' => 'Persekutuan Doa',
-                        'youth_fellowship' => 'Persekutuan Remaja',
-                        'family_fellowship' => 'Persekutuan Keluarga',
-                        'sunday_school' => 'Sekolah Minggu',
+                        'prayer_fellowship' => 'Kultu Orasaun',
+                        'youth_fellowship' => 'Kultu Jovem',
+                        'family_fellowship' => 'Kultu Familia',
+                        'sunday_school' => 'Eskola Dominika',
                     ])
                     ->required(),
 
                 TextInput::make('theme')->label('Tema')->required(),
-                TextInput::make('bible_verse')->label('Ayat Alkitab')->required(),
-                TextInput::make('preacher')->label('Pengkhotbah')->required(),
+                TextInput::make('bible_verse')->label('Versu Biblia')->required(),
+                TextInput::make('preacher')->label('Pregador')->required(),
                 TextInput::make('mc')->label('MC')->required(),
-                TextInput::make('musician')->label('Pemusik')->required(),
+                TextInput::make('musician')->label('Tokador')->required(),
             ]);
     }
 
@@ -60,19 +60,19 @@ class FellowshipResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('date')->label('Tanggal')->date()->sortable()->searchable(),
-                TextColumn::make('fellowship_type')->label('Jenis Persekutuan')->formatStateUsing(fn ($state) => match ($state) {
-                    'prayer_fellowship' => 'Persekutuan Doa',
-                    'youth_fellowship' => 'Persekutuan Remaja',
-                    'family_fellowship' => 'Persekutuan Keluarga',
-                    'sunday_school' => 'Sekolah Minggu',
+                TextColumn::make('date')->label('Data kultu')->date()->sortable()->searchable(),
+                TextColumn::make('fellowship_type')->label('Tipu Kultu')->formatStateUsing(fn ($state) => match ($state) {
+                    'prayer_fellowship' => 'Kultu Orasaun',
+                    'youth_fellowship' => 'Kultu Jovem',
+                    'family_fellowship' => 'Kultu Familia',
+                    'sunday_school' => 'Eskola Dominika',
                     default => $state,
                 })->sortable(),
                 TextColumn::make('theme')->label('Tema'),
-                TextColumn::make('bible_verse')->label('Ayat Alkitab'),
-                TextColumn::make('preacher')->label('Pengkhotbah'),
+                TextColumn::make('bible_verse')->label('Versu Biblia'),
+                TextColumn::make('preacher')->label('Pregador'),
                 TextColumn::make('mc')->label('MC'),
-                TextColumn::make('musician')->label('Pemusik'),
+                TextColumn::make('musician')->label('Tokador'),
             ])
             ->defaultSort('date', 'desc')
             ->filters([

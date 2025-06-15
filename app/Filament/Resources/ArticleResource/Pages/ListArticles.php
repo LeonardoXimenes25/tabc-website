@@ -10,15 +10,15 @@ class ListArticles extends ListRecords
 {
     protected static string $resource = ArticleResource::class;
 
+    protected function getCreateButtonLabel(): string
+    {
+        return 'Aumenta Dadus';
+    }
+
     protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make(),
         ];
-    }
-
-    protected function getCreateButtonLabel(): string
-    {
-        return 'Aumenta Dadus';
     }
 }

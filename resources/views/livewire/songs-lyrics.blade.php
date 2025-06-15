@@ -26,7 +26,7 @@
                 @foreach ($chunk as $song)
                     <div class="col-md-3 mb-4">
                         <div class="card h-100 border-0 shadow-sm transition-card">
-                            <img src="{{ asset('storage/'. $song->image_url) }}" class="card-img-top" alt="{{ $song->title }}">
+                            <img src="{{ asset('storage/'. $song->image_url) }}" alt="{{ $song->title }}" style="width: 100%; height: 150px; object-fit: cover;">
                             <div class="card-body">
                                 <a href="{{ route('songs.show', $song->slug) }}" class="text-decoration-none text-dark"
                                     style="font-size: 1rem">

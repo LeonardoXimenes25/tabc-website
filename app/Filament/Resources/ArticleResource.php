@@ -24,6 +24,7 @@ use App\Filament\Resources\ArticleResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ArticleResource\RelationManagers;
 
+
 class ArticleResource extends Resource
 {
     protected static ?string $model = Article::class;
@@ -52,7 +53,7 @@ class ArticleResource extends Resource
                 ->required()
                 ->maxLength(255),
 
-                 Select::make('category_id')
+                Select::make('category_id')
                     ->relationship('category', 'name')
                     ->label('Category')
                     ->options([
@@ -82,12 +83,11 @@ class ArticleResource extends Resource
                 ->label('Konteudu')
                 ->required(),
 
-                 FileUpload::make('image_url')
-                ->label('Gambar')
-                ->image()
-                ->disk('public')
-                ->directory('articles')
-                ->label('Upload imajen'),
+                FileUpload::make('image_url')
+                    ->label('Upload imajen')
+                    ->image()
+                    ->directory('songs')
+                    ->maxSize(1024),
             ]);
     }
 
@@ -95,21 +95,43 @@ class ArticleResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title')->searchable()->sortable()->wrap()->label('Titulu'),
-                BadgeColumn::make('category.name')
+                TextColumn::make('title')
+                    ->searchable()
+                    ->sortable()
+                    ->wrap()
+                    ->label('Titulu'),
+
+               BadgeColumn::make('category.name')
                     ->label('Kategoria')
-                    ->color(function (Article $record) {
-                        return $record->category->getCategoryColor();
-                    })
+                    ->color(fn (Article $record) => $record->category?->getCategoryColor() ?? 'primary')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('body')->label('Kontendu')->sortable()->limit(30),
-                ImageColumn::make('image_url')->label('Imajen')->height(50)->disk('public'),
-                TextColumn::make('created_at')->dateTime('d M Y')->label('Data')->sortable(),
+
+                TextColumn::make('body')
+                    ->wrap()
+                    ->label('Kontendu')
+                    ->sortable()->formatStateUsing(fn ($state) => Str::limit(strip_tags($state),50)),
+                
+                ImageColumn::make('image_url')
+                    ->label('Imajen')
+                    ->size(50)
+                    ->getStateUsing(fn ($record) => asset('storage/' . $record->image_url))
+                    ->extraAttributes(['style' => 'border-radius:50%; object-fit: cover;']),
+
+                TextColumn::make('created_at')
+                    ->dateTime('d M Y')
+                    ->label('Data')
+                    ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
-                //
+                 Tables\Filters\SelectFilter::make('category_id')
+                        ->label('Kategoria')
+                        ->options([
+                            1 => 'Devosaun loro-loron',
+                            2 => 'Ensinu biblia',
+                            3 => 'Historia igreja no figura fe',
+                        ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -141,12 +163,24 @@ class ArticleResource extends Resource
     public static function mutateFormDataBeforeCreate(array $data): array
     {
         $data['author_id'] = Auth::id();
+        if (isset($data['image_url'])) {
+        $data['image_url'] = str_replace('public/', '', $data['image_url']);
+    }
         return $data;
     }
 
     public static function mutateFormDataBeforeSave(array $data): array
     {
         $data['author_id'] = Auth::id();
+        if (isset($data['image_url'])) {
+        $data['image_url'] = str_replace('public/', '', $data['image_url']);
+    }
         return $data;
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->orderBy('created_at', 'desc');
     }
 }

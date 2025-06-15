@@ -19,13 +19,13 @@ class Category extends Model
     {
         switch ($this->name) {
             case 'Devosaun loro-loron':
-                return 'bg-success';
+                return 'success';
             case 'Historia biblia':
-                return 'bg-warning text-dark';
+                return 'warning';
             case 'Historia igreja no figura fe':
-                return 'bg-danger';
+                return 'danger';
             default:
-                return 'bg-primary';
+                return 'primary';
         }
     }
 }

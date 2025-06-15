@@ -21,7 +21,7 @@
                 @foreach ($chunk as $post)
                     <div class="col-md-3 mb-4">
                         <div class="card h-100 border-0 shadow-sm transition-card">
-                            <img src="{{ asset('storage/' . $post->image_url) }}" class="card-img-top" alt="{{ $post->title }}">
+                            <img src="{{ asset('storage/'. $post->image_url) }}" alt="{{ $post->title }}" style="width: 100%; height: 150px; object-fit: cover;">
                             <div class="card-body">
                                 <a href="{{ route('articles.show', $post->slug) }}" class="text-decoration-none text-dark"
                                     style="font-size: 1rem">

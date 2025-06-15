@@ -13,6 +13,7 @@ use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\WorshipResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -24,13 +25,13 @@ class WorshipResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Jadwal Ibadah';
+        return 'Orariu Misa';
     }
 
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $modelLabel = 'Ibadah';
-    protected static ?string $pluralModelLabel = 'Ibadah';
+    protected static ?string $modelLabel = 'Misa';
+    protected static ?string $pluralModelLabel = 'Misa';
 
     public static function form(Form $form): Form
     {
@@ -88,7 +89,13 @@ class WorshipResource extends Resource
         ])
         ->defaultSort('date', 'desc')
             ->filters([
-                //
+                SelectFilter::make('worship_type')
+                ->options([
+                    'sunday_service' => 'Misa Domingu',
+                    'good_friday' => 'Misa Sexta-Feira Santa',
+                    'christmas' => 'Misa Natal',
+                    'easter' => 'Paskua',
+                ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

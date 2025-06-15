@@ -138,4 +138,5 @@ class OutcomingMailResource extends Resource
             'edit' => Pages\EditOutcomingMail::route('/{record}/edit'),
         ];
     }
+
 }

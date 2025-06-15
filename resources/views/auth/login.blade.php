@@ -59,8 +59,8 @@
                             </a>
                         @endif
                         <p class="mt-2">
-                            {{ __("Don't have an account?") }}
-                            <a href="{{ route('register') }}">{{ __('Register') }}</a>
+                            {{ __("Seidauk iha account?") }}
+                            <a href="{{ route('register') }}">{{ __('Registu') }}</a>
                         </p>
                     </div>
                 </form>

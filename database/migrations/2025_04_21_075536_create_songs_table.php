@@ -25,9 +25,9 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('body');
             $table->string('image_url')->nullable();
-            $table->string('artist');
+            $table->string('artist')->nullable();
             $table->string('album')->nullable();
-            $table->integer('year')->nullable();
+            $table->year('year')->nullable();
             $table->string('youtube_embed')->nullable();
             $table->timestamps();
         });

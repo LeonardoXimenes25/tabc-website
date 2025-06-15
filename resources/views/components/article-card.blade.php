@@ -10,7 +10,7 @@
       <div class="col-md-3 mb-4">
           <div class="card h-100 border-0 shadow-sm transition-card">
               <!-- Featured Image -->
-              <img src="{{ asset('storage/' . $post->image_url) }}" class="card-img-top" alt="{{ $post->title }}">
+            <img src="{{ asset('storage/'. $post->image_url) }}" alt="{{ $post->title }}" style="width: 100%; height: 150px; object-fit: cover;">
   
               <div class="card-body">
                   <!-- Artikel Title sebagai Link -->
