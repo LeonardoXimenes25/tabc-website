@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Filament\Facades\Filament;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,12 +19,12 @@ class FilamentServiceProvider extends ServiceProvider
     /**
      * Bootstrap services.
      */
-     public function boot()
+    public function boot(): void
     {
-       Filament::serving(function () {
-            // Batasi akses berdasarkan role
+        Filament::serving(function () {
             Gate::define('viewFilament', function ($user) {
-                return auth('admin')->check() && in_array(auth('admin')->user()->role, ['admin', 'majelis']);
+                // Batasi akses hanya untuk user dengan role 'admin' atau 'majelis'
+                return in_array($user->role, ['admin', 'majelis']);
             });
         });
     }

@@ -7,6 +7,7 @@ use Filament\Tables;
 use App\Models\Worship;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Facades\Filament;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
@@ -122,4 +123,10 @@ class WorshipResource extends Resource
             'edit' => Pages\EditWorship::route('/{record}/edit'),
         ];
     }
+
+    public static function canAccess(): bool
+    {
+        return Filament::auth()?->user()?->role === 'admin';
+    }
+
 }

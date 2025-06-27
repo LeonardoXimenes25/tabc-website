@@ -2,18 +2,21 @@
 
 namespace App\Filament\Resources\IncomingMailResource\Pages;
 
-use App\Filament\Resources\IncomingMailResource;
 use Filament\Actions;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\IncomingMailResource;
 
 class CreateIncomingMail extends CreateRecord
 {
     protected static string $resource = IncomingMailResource::class;
 
-     protected function mutateFormDataBeforeCreate(array $data): array
+    protected function mutateFormDataBeforeCreate(array $data): array
     {
-        // ✅ Ubah status dari 'draft' menjadi 'pending_review' secara otomatis saat dibuat
-        $data['status'] = 'pending_review';
+        // Set author_id otomatis dari user yang login
+        $data['author_id'] = Auth::id();
+        $data['status'] = 'draft';
 
         return $data;
     }

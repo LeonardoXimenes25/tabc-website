@@ -23,6 +23,7 @@ class IncomingMail extends Model
         'attachment',
         'receiver',
         'status',
+        'rejection_note',
     ];
 
     // The attributes that should be cast to native types.

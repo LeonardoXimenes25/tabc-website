@@ -52,7 +52,7 @@
                                 </p>   
 
                                 <a href="{{ route('articles.show', $post->slug) }}" style="font-size: 0.7rem">
-                                   Lee kompletu &gt;&gt;
+                                Lee kompletu &gt;&gt;
                                 </a>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
         @endforeach
     @else
         <div class="alert alert-warning text-center" role="alert">
-           Artigu espiritual mamuk
+        Artigu espiritual mamuk
         </div>
     @endif
     {{-- Artikel End --}}

@@ -7,6 +7,7 @@ use Filament\Tables;
 use Filament\Forms\Form;
 use App\Models\Fellowship;
 use Filament\Tables\Table;
+use Filament\Facades\Filament;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\FellowshipResource\Pages;
 use App\Filament\Resources\FellowshipResource\RelationManagers;
+
 
 class FellowshipResource extends Resource
 {
@@ -75,6 +77,7 @@ class FellowshipResource extends Resource
                 TextColumn::make('musician')->label('Tokador'),
             ])
             ->defaultSort('date', 'desc')
+            ->emptyStateHeading('Dadus mamuk')
             ->filters([
                 //
             ])
@@ -103,4 +106,10 @@ class FellowshipResource extends Resource
             'edit' => Pages\EditFellowship::route('/{record}/edit'),
         ];
     }
+
+    public static function canAccess(): bool
+    {
+        return Filament::auth()?->user()?->role === 'admin';
+    }
+
 }

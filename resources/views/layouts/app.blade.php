@@ -22,5 +22,8 @@
 
     {{-- livewire --}}
     @livewireScripts
+
+    @yield('scripts')
+
 </body>
 </html>

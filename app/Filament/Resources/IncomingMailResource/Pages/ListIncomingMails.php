@@ -10,16 +10,11 @@ class ListIncomingMails extends ListRecords
 {
     protected static string $resource = IncomingMailResource::class;
 
-    protected function getCreateButtonLabel(): string
-    {
-        return 'Aumenta Dadus';
-    }
-
     protected function getHeaderActions(): array
     {
         return [
             Actions\CreateAction::make()
-                ->label($this->getCreateButtonLabel()),
+                ->label('Aumenta Dadus')
         ];
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\IncomingMail;
 use App\Models\FinancialReport;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -12,6 +13,8 @@ use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\CategorySongController;
 use App\Http\Controllers\ArticleCommentController;
+use App\Http\Controllers\IncomingMailReportController;
+use App\Http\Controllers\OutcomingMailReportController;
 use App\Http\Controllers\FinancialReportPrintController;
 
 // home
@@ -61,3 +64,13 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // laporan keuangan
 Route::get('/report/{report}/print', [FinancialReportPrintController::class, 'print'])
     ->name('report.print');
+// mail reports
+Route::get('/reports/karta-tama/pdf', [IncomingMailReportController::class, 'pdf'])->name('reports.incoming-mails.pdf');
+
+// karta sai
+Route::get('/reports/karta-sai/pdf', [OutcomingMailReportController::class, 'pdf'])->name('reports.outcoming-mails.pdf');
+Route::get('/print/outcoming-mail/{outcomingMail}', [OutcomingMailReportController::class, 'printSingle'])->name('print.outcoming-mail.single');
+
+
+
+

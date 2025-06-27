@@ -15,19 +15,20 @@ class OutcomingMail extends Model
 
     // The attributes that are mass assignable.
     protected $fillable = [
-        'received_date',
+        'sent_date',
         'author_id',
         'letter_number',
-        'recepient',
+        'recipient',
         'subject',
         'attachment',
-        'resposible_person',
+        'responsible_person',
         'status',
+        'rejection_note',
     ];
 
     // The attributes that should be cast to native types.
     protected $casts = [
-        'received_date' => 'date',
+        'sent_date' => 'date',
     ];
 
     // Status options

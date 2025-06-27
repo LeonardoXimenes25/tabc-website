@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('outcoming_mails', function (Blueprint $table) {
             $table->id();
-             $table->foreignId('author_id')->constrained(
+            $table->foreignId('author_id')->constrained(
                 table: 'users',
                 indexName: 'outcomingmain_author_id'
             );
             $table->date('sent_date'); // Date of Receipt
-            $table->string('letter_number'); // Letter Number
-            $table->string('recipient'); // Recipient of the letter
-            $table->string('subject'); // Subject of the letter
+            $table->string('letter_number', 30); // Letter Number
+            $table->string('recipient', 12); // Recipient of the letter
+            $table->string('subject', 100); // Subject of the letter
             $table->string('attachment')->nullable(); // Attachment (nullable if there is no attachment)
-            $table->string('responsible_person'); // Responsible Person of the letter
-            $table->enum('status', ['accepted', 'in progress', 'pending'])->default('pending');
+            $table->string('responsible_person', 15); // Responsible Person of the letter
+            $table->enum('status', ['draft', 'pending_review', 'approved', 'rejected'])->default('draft');
             $table->timestamps();
         });
     }

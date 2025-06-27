@@ -2,26 +2,24 @@
 
 namespace App\Filament\Resources\OutcomingMailResource\Pages;
 
-use App\Filament\Resources\OutcomingMailResource;
 use Filament\Actions;
+use Illuminate\Support\Facades\Auth;
 use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\OutcomingMailResource;
 
 class CreateOutcomingMail extends CreateRecord
 {
     protected static string $resource = OutcomingMailResource::class;
 
-     protected function mutateFormDataBeforeCreate(array $data): array
+    protected function mutateFormDataBeforeCreate(array $data): array
     {
-        // Saat create, set default status jadi draft
+        // Set author_id otomatis dari user yang login
+        $data['author_id'] = Auth::id();
         $data['status'] = 'draft';
+
         return $data;
     }
-
-    protected function afterCreate(): void
-    {
-        // Opsional: bisa kirim notifikasi, log, dll di sini
-    }
-
+    
     protected function getRedirectUrl(): string
     {
         // arahkan ke halaman index setelah create sukses

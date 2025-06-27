@@ -22,6 +22,9 @@ class FinancialReportResource extends Resource
     }
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $modelLabel = 'Relatoriu Orsamentu';
+    protected static ?string $pluralModelLabel = 'Relatoriu Orsamentu';
+    protected static ?string $navigationLabel = 'Relatoriu Orsamentu';
 
     public static function form(Form $form): Form
     {
@@ -43,27 +46,27 @@ class FinancialReportResource extends Resource
                         'December' => 'December',
                     ])
                     ->required()
-                    ->label('Month'),
+                    ->label('Fulan'),
 
                 Forms\Components\TextInput::make('year')
                     ->numeric()
                     ->required()
-                    ->label('Year'),
+                    ->label('Tinan'),
 
                 Forms\Components\TextInput::make('total_income')
                     ->numeric()
                     ->disabled() // biasanya di-calc otomatis
-                    ->label('Total Income'),
+                    ->label('Total osan sai'),
 
                 Forms\Components\TextInput::make('total_expense')
                     ->numeric()
                     ->disabled()
-                    ->label('Total Expense'),
+                    ->label('Total osan sai'),
 
                 Forms\Components\TextInput::make('final_balance')
                     ->numeric()
                     ->disabled()
-                    ->label('Final Balance'),
+                    ->label('Total Balansu'),
 
                 Forms\Components\Select::make('status')
                     ->options([
@@ -76,16 +79,16 @@ class FinancialReportResource extends Resource
                 Forms\Components\Select::make('author_id')
                     ->relationship('author', 'name')
                     ->disabled()
-                    ->label('Created By'),
+                    ->label('Kria husi'),
 
                 Forms\Components\Select::make('approved_by')
                     ->relationship('approver', 'name')
                     ->disabled()
-                    ->label('Approved By'),
+                    ->label('Aprova husi'),
 
                 Forms\Components\DateTimePicker::make('approved_at')
                     ->disabled()
-                    ->label('Approval Date'),
+                    ->label('Data Aprova'),
             ]);
     }
 
@@ -95,17 +98,18 @@ class FinancialReportResource extends Resource
         ->columns([
             Tables\Columns\TextColumn::make('month')->label('Month'),
             Tables\Columns\TextColumn::make('year')->label('Year'),
-            Tables\Columns\TextColumn::make('total_income')->money('usd')->label('Income'),
-            Tables\Columns\TextColumn::make('total_expense')->money('usd')->label('Expense'),
-            Tables\Columns\TextColumn::make('final_balance')->money('usd')->label('Balance'),
+            Tables\Columns\TextColumn::make('total_income')->money('usd')->label('Osan tama'),
+            Tables\Columns\TextColumn::make('total_expense')->money('usd')->label('Osan sai'),
+            Tables\Columns\TextColumn::make('final_balance')->money('usd')->label('Balansu'),
             Tables\Columns\BadgeColumn::make('status')->colors([
                 'gray' => 'draft',
                 'warning' => 'submitted',
                 'success' => 'approved',
             ]),
-            Tables\Columns\TextColumn::make('author.name')->label('Created By'),
-            Tables\Columns\TextColumn::make('approved_at')->dateTime()->label('Approved At'),
+            Tables\Columns\TextColumn::make('author.name')->label('Kria husi'),
+            Tables\Columns\TextColumn::make('approved_at')->dateTime()->label('Aprova husi'),
         ])
+        ->emptyStateHeading('Dadus mamuk')
         ->filters([
             Tables\Filters\SelectFilter::make('status')
                 ->options([
@@ -116,7 +120,6 @@ class FinancialReportResource extends Resource
         ])
         ->actions([
             Tables\Actions\EditAction::make(),
-
             Tables\Actions\Action::make('submit')
                 ->label('Ajukan ke Ketua Majelis')
                 ->icon('heroicon-o-paper-airplane')

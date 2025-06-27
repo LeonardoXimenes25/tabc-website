@@ -78,7 +78,7 @@
         @endforeach
     @else
         <div class="alert alert-warning text-center" role="alert">
-             Letra musika mamuk.
+            Letra musika mamuk.
         </div>
     @endif
 

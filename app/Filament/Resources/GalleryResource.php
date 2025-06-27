@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\GalleryResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\GalleryResource\RelationManagers;
+use Filament\Facades\Filament;
 
 class GalleryResource extends Resource
 {
@@ -106,6 +107,11 @@ class GalleryResource extends Resource
     {
         $data['author_id'] = Auth::id();
         return $data;
+    }
+
+    public static function canAccess(): bool
+    {
+        return Filament::auth()?->user()?->role === 'admin';
     }
 
 }

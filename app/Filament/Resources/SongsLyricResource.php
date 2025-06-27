@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\SongsLyricResource\Pages;
 use App\Filament\Resources\SongsLyricResource\RelationManagers;
+use Filament\Facades\Filament;
 
 class SongsLyricResource extends Resource
 {
@@ -116,8 +117,10 @@ class SongsLyricResource extends Resource
                     ->getStateUsing(fn ($record) => asset('storage/' . $record->image_url))
                     ->extraAttributes(['style' => 'border-radius:50%; object-fit: cover;']),
                 TextColumn::make('author.name')->label('Autor')->sortable(),
-                TextColumn::make('created_at')->dateTime('d M Y')->label('Data')->sortable(),
+                TextColumn::make('created_at')->dateTime('d-M-Y')->label('Data')->sortable(),
             ])
+            ->emptyStateHeading('Dadus mamuk')
+            ->defaultSort('date', 'desc')
             ->filters([
                 //
             ])
@@ -148,7 +151,7 @@ class SongsLyricResource extends Resource
         ];
     }
 
-     public static function mutateFormDataBeforeCreate(array $data): array
+    public static function mutateFormDataBeforeCreate(array $data): array
     {
         $data['author_id'] = Auth::id();
         return $data;
@@ -160,9 +163,8 @@ class SongsLyricResource extends Resource
         return $data;
     }
 
-    public static function getEloquentQuery(): Builder
+    public static function canAccess(): bool
     {
-        return parent::getEloquentQuery()
-            ->orderBy('created_at', 'desc');
+        return Filament::auth()?->user()?->role === 'admin';
     }
 }

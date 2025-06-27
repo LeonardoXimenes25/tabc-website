@@ -14,16 +14,16 @@ class SongFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence(),
+            'title' => Str::limit(fake()->sentence(), 60),
             'author_id' => User::factory(),
             'categorysong_id' => CategorySong::factory(),
-            'slug' => Str::slug(fake()->sentence()),
+            'slug' => Str::limit(Str::slug(fake()->sentence()), 60, ''),
             'body' => fake()->text(),
             'image_url' => 'images/church-hero.jpg?rand=' . fake()->numberBetween(1, 1000),
-            'artist' => fake()->name(),
-            'album' => fake()->sentence(),
+            'artist' => Str::limit(fake()->name(), 15),
+            'album' => Str::limit(fake()->sentence(), 50),
             'year' => fake()->year(),
-            'youtube_embed' => fake()->sentence()
+            'youtube_embed' => Str::limit(fake()->sentence(), 100),
         ];
     }
 }

@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\GalleryImageResource\Pages;
 use App\Filament\Resources\GalleryImageResource\RelationManagers;
+use Filament\Facades\Filament;
 
 class GalleryImageResource extends Resource
 {
@@ -50,6 +51,7 @@ class GalleryImageResource extends Resource
             ->columns([
                 //
             ])
+            
             ->filters([
                 //
             ])
@@ -77,5 +79,10 @@ class GalleryImageResource extends Resource
             'create' => Pages\CreateGalleryImage::route('/create'),
             'edit' => Pages\EditGalleryImage::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return Filament::auth()?->user()?->role === 'admin';
     }
 }

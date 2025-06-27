@@ -26,12 +26,15 @@ class TransactionResource extends Resource
     }
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $modelLabel = 'Transasaun';
+    protected static ?string $pluralModelLabel = 'Transasaun';
+    protected static ?string $navigationLabel = 'Transasaun';
 
     public static function form(Form $form): Form
     {
         return $form->schema([
             Select::make('financialreport_id')
-                ->label('Laporan Keuangan')
+                ->label('Relatoriu Orsamentu')
                 ->options(function () {
                     return FinancialReport::orderBy('year', 'desc')
                         ->orderByRaw("FIELD(month, 'January','February','March','April','May','June','July','August','September','October','November','December')")
@@ -58,15 +61,15 @@ class TransactionResource extends Resource
 
             TextInput::make('category')
                 ->required()
-                ->label('Kategori'),
+                ->label('Kategoria'),
 
             TextInput::make('amount')
                 ->required()
                 ->numeric()
-                ->label('Jumlah'),
+                ->label('Total'),
 
             Textarea::make('description')
-                ->label('Keterangan'),
+                ->label('Deskripsaun'),
 
             Select::make('account')
                 ->required()
@@ -89,12 +92,12 @@ class TransactionResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('date')->label('Tanggal')->date(),
-                TextColumn::make('type')->label('Jenis')->badge(),
-                TextColumn::make('category')->label('Kategori'),
-                TextColumn::make('amount')->label('Jumlah')->money('USD'),
+                TextColumn::make('date')->label('Data')->date(),
+                TextColumn::make('type')->label('Tipu')->badge(),
+                TextColumn::make('category')->label('Kategoria'),
+                TextColumn::make('amount')->label('Total')->money('USD'),
                 TextColumn::make('account')->label('Rekening'),
-                TextColumn::make('author.name')->label('Dibuat Oleh'),
+                TextColumn::make('author.name')->label('Kria Husi'),
             ])
             ->filters([
                 //

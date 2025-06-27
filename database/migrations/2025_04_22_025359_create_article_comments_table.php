@@ -21,6 +21,10 @@ return new class extends Migration
                 table: 'articles',
                 indexName: 'comment_article_id'
             );
+            $table->foreignId('parent_id')->nullable()->constrained(
+                table: 'article_comments',
+                indexName: 'comment_parent_id'
+            );
             $table->text('body');
             $table->timestamps();
         });

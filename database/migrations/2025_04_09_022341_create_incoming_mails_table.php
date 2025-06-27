@@ -17,13 +17,14 @@ return new class extends Migration
                 table: 'users',
                 indexName: 'incomingmail_author_id'
             );
-            $table->string('letter_number'); // Letter Number
-            $table->date('received_date'); // Date of Receipt
-            $table->string('sender'); // Sender of the letter
-            $table->string('subject'); // Subject of the letter
-            $table->string('attachment')->nullable(); // Attachment (nullable if there is no attachment)
-            $table->string('receiver'); // Receiver of the letter
+            $table->string('letter_number');
+            $table->date('received_date');
+            $table->string('sender', 50);
+            $table->string('subject', 100);
+            $table->string('attachment')->nullable();
+            $table->string('receiver', 50);
             $table->enum('status', ['draft', 'pending_review', 'approved', 'rejected'])->default('draft');
+            $table->text('rejection_note')->nullable();
             $table->timestamps();
         });
     }

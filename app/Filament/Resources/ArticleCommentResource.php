@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Facades\Filament;
 
 class ArticleCommentResource extends Resource
 {
@@ -51,10 +52,10 @@ class ArticleCommentResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('article.title')->label('Artikel'),
-                Tables\Columns\TextColumn::make('author.name')->label('Penulis'),
-                Tables\Columns\TextColumn::make('body')->limit(50)->label('Komentar'),
-                Tables\Columns\TextColumn::make('created_at')->since()->label('Dibuat'),
+                Tables\Columns\TextColumn::make('id')->label('Nu.'),
+                Tables\Columns\TextColumn::make('user.name')->label('Autor'),
+                Tables\Columns\TextColumn::make('body')->limit(50)->label('Komentariu'),
+                Tables\Columns\TextColumn::make('created_at')->since()->label('Kria husi'),
             ])
             ->filters([
                 //
@@ -83,5 +84,10 @@ class ArticleCommentResource extends Resource
             'create' => Pages\CreateArticleComment::route('/create'),
             'edit' => Pages\EditArticleComment::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return Filament::auth()?->user()?->role === 'admin';
     }
 }

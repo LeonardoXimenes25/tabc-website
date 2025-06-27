@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\ArticleResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ArticleResource\RelationManagers;
+use Filament\Facades\Filament;
 
 
 class ArticleResource extends Resource
@@ -119,11 +120,12 @@ class ArticleResource extends Resource
                     ->extraAttributes(['style' => 'border-radius:50%; object-fit: cover;']),
 
                 TextColumn::make('created_at')
-                    ->dateTime('d M Y')
+                    ->dateTime('d-M-Y')
                     ->label('Data')
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
+            ->emptyStateHeading('Dadus mamuk')
             ->filters([
                  Tables\Filters\SelectFilter::make('category_id')
                         ->label('Kategoria')
@@ -178,9 +180,8 @@ class ArticleResource extends Resource
         return $data;
     }
 
-    public static function getEloquentQuery(): Builder
+    public static function canAccess(): bool
     {
-        return parent::getEloquentQuery()
-            ->orderBy('created_at', 'desc');
+        return Filament::auth()?->user()?->role === 'admin';
     }
 }
