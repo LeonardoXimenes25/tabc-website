@@ -96,13 +96,20 @@ class ArticleResource extends Resource
     {
         return $table
             ->columns([
+
+                TextColumn::make('id')
+                    ->searchable()
+                    ->sortable()
+                    ->wrap()
+                    ->label('Nu.'),
+                    
                 TextColumn::make('title')
                     ->searchable()
                     ->sortable()
                     ->wrap()
                     ->label('Titulu'),
 
-               BadgeColumn::make('category.name')
+                TextColumn::make('category.name')
                     ->label('Kategoria')
                     ->color(fn (Article $record) => $record->category?->getCategoryColor() ?? 'primary')
                     ->sortable()

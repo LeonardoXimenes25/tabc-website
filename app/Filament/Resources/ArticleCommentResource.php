@@ -2,17 +2,18 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ArticleCommentResource\Pages;
-use App\Filament\Resources\ArticleCommentResource\RelationManagers;
-use App\Models\ArticleComment;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\ArticleComment;
+use Filament\Facades\Filament;
+use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Facades\Filament;
+use App\Filament\Resources\ArticleCommentResource\Pages;
+use App\Filament\Resources\ArticleCommentResource\RelationManagers;
 
 class ArticleCommentResource extends Resource
 {
@@ -45,6 +46,16 @@ class ArticleCommentResource extends Resource
                 ->required()
                 ->label('Konteudu Komentariu')
                 ->rows(4),
+
+            Forms\Components\Select::make('parent_id')
+                ->relationship('parent', 'body')
+                ->label('Balasan Untuk')
+                ->searchable()
+                ->preload()
+                ->helperText('Kosongkan jika ini komentar utama'),
+
+            
+
             ]);
     }
 
@@ -55,6 +66,10 @@ class ArticleCommentResource extends Resource
                 Tables\Columns\TextColumn::make('id')->label('Nu.'),
                 Tables\Columns\TextColumn::make('user.name')->label('Autor'),
                 Tables\Columns\TextColumn::make('body')->limit(50)->label('Komentariu'),
+                Tables\Columns\TextColumn::make('parent.body')
+                    ->limit(30)
+                    ->label('Balasan Dari')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')->since()->label('Kria husi'),
             ])
             ->filters([
@@ -73,7 +88,7 @@ class ArticleCommentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\RepliesRelationManager::class,
         ];
     }
 
@@ -85,6 +100,19 @@ class ArticleCommentResource extends Resource
             'edit' => Pages\EditArticleComment::route('/{record}/edit'),
         ];
     }
+
+    public static function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['author_id'] = Auth::id();
+        return $data;
+    }
+
+    public static function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['author_id'] = Auth::id();
+        return $data;
+    }
+
 
     public static function canAccess(): bool
     {

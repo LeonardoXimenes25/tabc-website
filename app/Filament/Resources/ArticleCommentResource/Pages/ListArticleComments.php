@@ -16,4 +16,10 @@ class ListArticleComments extends ListRecords
             Actions\CreateAction::make()->label('Komentariu'),
         ];
     }
+
+    protected function getRedirectUrl(): string
+    {
+        // arahkan ke halaman index setelah create sukses
+        return $this->getResource()::getUrl('index');
+    }
 }

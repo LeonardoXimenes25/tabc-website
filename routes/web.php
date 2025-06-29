@@ -30,36 +30,45 @@ Route::get('/authors/{username}/posts', function($username) {
 Route::get('/category/{slug}', function($slug){
     return view('articles.posts', ['categorySlug' => $slug]);
 })->name('categories.show');
-Route::post('/articles/{article:slug}/comments', [ArticleCommentController::class, 'store'])->name('articles.comments.store');
 // Daftar artikel route end
+
+// route komentar start
+Route::post('/articles/{article:slug}/comments', [ArticleCommentController::class, 'store'])->name('articles.comments.store');
+Route::post('/articles/{article:slug}/comments/{comment}/reply', [ArticleCommentController::class, 'reply'])->name('articles.comments.reply');
+
+// route komentar end
+
 
 // lyrics route start
 Route::get('/lyrics', [SongsController::class, 'index'])->name('songs.index');
 Route::get('/lyrics/{slug}', [SongsController::class, 'show'])->name('songs.show');
 Route::get('/artist/{artist}', [SongsController::class, 'postsByArtist'])->name('songs.byArtist');
 Route::get('categories-songs/{slug}', [SongsController::class, 'postsByCategory'])->name('categories-songs.show');
-
 // lyrics route end
 
+// schedule route start
 Route::get('/schedules', [ScheduleController::class, 'index'])->name('schedules.index');
 Route::get('/schedules/{type}/{id}', [ScheduleController::class, 'show'])->name('schedules.show');
+// schedule route end
 
-// Gallery
+// Gallery route start
 Route::get('/galleries', [GalleryController::class, 'index'])->name('galleries.index');
 Route::get('/galleries/{gallery}', [GalleryController::class, 'show'])->name('galleries.show');
+// Gallery route start
 
 // about
-Route::get('/about', function () {
+Route::get('/konaba-ami', function () {
     return view('about');
 });
 
 
-// auth
+// auth route start
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.store');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.authenticate');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+// auth route end
 
 // laporan keuangan
 Route::get('/report/{report}/print', [FinancialReportPrintController::class, 'print'])

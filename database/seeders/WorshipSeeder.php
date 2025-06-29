@@ -13,6 +13,6 @@ class WorshipSeeder extends Seeder
      */
     public function run(): void
     {
-       Worship::factory()->count(10)->create();
+        Worship::factory()->count(10)->create();
     }
 }

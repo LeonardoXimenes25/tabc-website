@@ -3,37 +3,62 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use Illuminate\Http\Request;
 use App\Models\ArticleComment;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ArticleCommentController extends Controller
 {
+    /**
+     * Simpan komentar utama untuk artikel.
+     */
     public function store(Request $request, Article $article)
     {
-        // Validasi data komentar
-        $validator = Validator::make($request->all(), [
-            'body' => 'required|min:3', // Contoh validasi: komentar minimal 3 karakter
+        $this->validateComment($request);
+
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('warning', 'Ita presija login atu komentariu.');
+        }
+
+        ArticleComment::create([
+            'article_id' => $article->id,
+            'author_id'  => Auth::id(),
+            'body'       => $request->body,
+            'parent_id'  => null, // komentar utama
         ]);
 
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }
+        return back()->with('success', 'Komentariu susesu aumenta.');
+    }
 
-        // Pastikan user sudah login untuk bisa berkomentar
+    /**
+     * Simpan balasan dari komentar tertentu.
+     */
+    public function reply(Request $request, Article $article, ArticleComment $comment)
+    {
+        $this->validateComment($request);
+
         if (!Auth::check()) {
-            return redirect()->route('login')->with('warning', 'Anda harus login untuk berkomentar.');
+            return redirect()->route('login')->with('warning', 'Ita presija login atu halo replay.');
         }
 
-        // Buat komentar baru dan kaitkan dengan artikel dan user yang sedang login
-        $comment = new ArticleComment();
-        $comment->article_id = $article->id;
-        $comment->author_id = Auth::id();
-        $comment->body = $request->body;
-        $comment->save();
+        ArticleComment::create([
+            'article_id' => $article->id,
+            'author_id'  => Auth::id(),
+            'body'       => $request->body,
+            'parent_id'  => $comment->id, // balasan ke komentar
+        ]);
 
-        // Redirect kembali ke halaman artikel dengan pesan sukses
-        return back()->with('success', 'Komentar berhasil ditambahkan.');
+        return back()->with('success', 'Replay komentariu susesu.');
+    }
+
+    /**
+     * Validasi isi komentar.
+     */
+    protected function validateComment(Request $request)
+    {
+        Validator::make($request->all(), [
+            'body' => ['required', 'min:3'],
+        ])->validate();
     }
 }

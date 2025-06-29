@@ -56,7 +56,7 @@
                     <div class="d-flex align-items-center mb-4">
                         <div>
                             <a href="{{ route('authors.posts', $post->author->username) }}"
-                               class="text-decoration-none text-dark fw-semibold">
+                                class="text-decoration-none text-dark fw-semibold">
                                 {{ $post->author->name }}
                             </a>
                             <p class="small text-muted mb-0"><i data-feather="user" class="me-1"></i>Autor</p>
@@ -73,53 +73,46 @@
 
             {{-- Comments Section --}}
             <div class="card shadow-sm border-0 mb-4">
-                <div class="card-header bg-white border-0 py-3">
-                    <h5 class="fw-bold mb-0">
-                        <i class="far fa-comments me-2 text-primary"></i> Komentar
-                    </h5>
-                </div>
-                <div class="card-body p-4">
-                    @auth
-                    <form action="{{ route('articles.comments.store', $post->slug) }}" method="POST" class="mb-4">
-                        @csrf
-                        <input type="hidden" name="post_id" value="{{ $post->id }}">
-                        <div class="mb-3">
-                            <textarea name="body" class="form-control" rows="3"
-                                      placeholder="Tulis komentar Anda..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary px-4">
-                            <i class="far fa-paper-plane me-1"></i> Kirim
-                        </button>
-                    </form>
-                    @else
-                    <div class="alert alert-light border mb-4">
-                        <a href="{{ route('login') }}" class="btn btn-sm btn-outline-primary me-2">Login</a>
-                        untuk memberikan komentar.
-                    </div>
-                    @endauth
+    <div class="card-header bg-white border-0 py-3">
+        <h5 class="fw-bold mb-0">
+            <i class="far fa-comments me-2 text-primary"></i> Komentariu
+        </h5>
+    </div>
 
-                    <div class="comments-list">
-                        @forelse ($post->comment as $comment)
-                        <div class="comment-item mb-4 pb-3 border-bottom">
-                            <div>
-                                <div class="d-flex justify-content-between align-items-center mb-1">
-                                    <strong>{{ $comment->user->name }}</strong>
-                                    <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
-                                </div>
-                                <p class="mb-0">{{ $comment->body }}</p>
-                            </div>
-                        </div>
-                        @empty
-                        <div class="text-center py-4">
-                            <i class="far fa-comment-dots fa-2x text-muted mb-2"></i>
-                            <p class="text-muted">Belum ada komentar</p>
-                        </div>
-                        @endforelse
-                    </div>
-                </div>
+    <div class="card-body p-4">
+        {{-- Form tambah komentar baru --}}
+        @auth
+        <form action="{{ route('articles.comments.store', $post->slug) }}" method="POST" class="mb-4">
+            @csrf
+            <div class="mb-3">
+                <textarea name="body" class="form-control" rows="3" placeholder="Prenxe ita nia komentariu..." required></textarea>
             </div>
+            <button type="submit" class="btn btn-primary px-4">
+                <i class="far fa-paper-plane me-1"></i> manda
+            </button>
+        </form>
+        @else
+        <div class="alert alert-light border mb-4">
+            <a href="{{ route('login') }}" class="btn btn-sm btn-outline-primary me-2">Login</a>
+            Atu fo komentariu.
         </div>
+        @endauth
 
+        {{-- Daftar komentar dan balasan --}}
+        <div class="comments-list">
+            @forelse ($post->comment->whereNull('parent_id') as $comment)
+                @include('components.comment', ['comment' => $comment, 'article' => $post, 'level' => 0])
+            @empty
+                <div class="text-center py-4">
+                    <i class="far fa-comment-dots fa-2x text-muted mb-2"></i>
+                    <p class="text-muted">Seidauk iha komentariu</p>
+                </div>
+            @endforelse
+        </div>
+    </div>
+</div>
+
+    </div>
         {{-- Sidebar --}}
         <div class="col-lg-4">            
             {{-- start sidebar --}}
@@ -178,10 +171,23 @@
 
     .article-content p {
         margin-bottom: 1.2rem;
+
+    .comment-item {
+        background-color: #f9f9f9;
+        padding: 15px;
+        border-radius: 6px;
+        border-left: 3px solid #dee2e6;
+        margin-bottom: 10px;
     }
 
-    .comments-list .comment-item:last-child {
-        border-bottom: none;
+    .comments-list textarea {
+        font-size: 0.9rem;
+    }
+
+    .comments-list .btn-sm {
+        font-size: 0.8rem;
+        padding: 4px 12px;
+    }
     }
 </style>
 @endsection

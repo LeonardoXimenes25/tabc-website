@@ -107,6 +107,7 @@ class SongsLyricResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id')->searchable()->sortable()->wrap()->label('Nu.'),
                 TextColumn::make('title')->searchable()->sortable()->wrap()->label('Titulu'),
                 TextColumn::make('artist')->searchable()->sortable()->label('Artista'),
                 TextColumn::make('categorysong.name')->label('Kategoria')->sortable(),
@@ -119,8 +120,8 @@ class SongsLyricResource extends Resource
                 TextColumn::make('author.name')->label('Autor')->sortable(),
                 TextColumn::make('created_at')->dateTime('d-M-Y')->label('Data')->sortable(),
             ])
+            ->defaultSort('created_at', 'desc')
             ->emptyStateHeading('Dadus mamuk')
-            ->defaultSort('date', 'desc')
             ->filters([
                 //
             ])

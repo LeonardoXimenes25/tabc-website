@@ -50,35 +50,29 @@
                     <h6 class="text-muted">{{ $songs->album }}</h6>
                 </div>
                 <div class="d-flex mb-2">
-                  <h6 class="me-2 fw-bold">Tinan Release:</h6>
-                  <h6 class="text-muted">{{ $songs->year }}</h6>
-              </div>
-
-                {{-- Tags --}}
-                <div class="tags mt-3">
-                    <span class="badge bg-primary me-1 mb-1">JPCC</span>
-                    <span class="badge bg-primary me-1 mb-1">Worship</span>
+                    <h6 class="me-2 fw-bold">Tinan Release:</h6>
+                    <h6 class="text-muted">{{ $songs->year }}</h6>
                 </div>
 
                 {{-- YouTube Embed --}}
                 @if ($songs->youtube_embed)
-                      @php
-                          preg_match('/v=([^&]+)/', $songs->youtube_embed, $matches);
-                          $videoId = $matches[1] ?? null;
-                      @endphp
+                        @php
+                            preg_match('/v=([^&]+)/', $songs->youtube_embed, $matches);
+                        $videoId = $matches[1] ?? null;
+                        @endphp
 
-                      @if ($videoId)
-                          <div class="mt-4 d-flex justify-content-center">
-                              <div class="ratio ratio-16x9" style="max-width: 100%; width: 100%; height: auto;">
-                                  <iframe 
-                                      src="https://www.youtube.com/embed/{{ $videoId }}" 
-                                      frameborder="0" 
-                                      allowfullscreen>
-                                  </iframe>
-                              </div>
-                          </div>
-                      @endif
-                  @endif
+                        @if ($videoId)
+                            <div class="mt-4 d-flex justify-content-center">
+                                <div class="ratio ratio-16x9" style="max-width: 100%; width: 100%; height: auto;">
+                                    <iframe 
+                                        src="https://www.youtube.com/embed/{{ $videoId }}" 
+                                        frameborder="0" 
+                                        allowfullscreen>
+                                    </iframe>
+                                </div>
+                            </div>
+                        @endif
+                    @endif
                 {{-- End YouTube Embed --}}
             </div>
         </div>
@@ -98,7 +92,7 @@
         <!-- Column 3: Sidebar -->
         <div class="col-lg-4 mb-4">
             @include('partials.sidebar', [
-                'title' => 'Lagu Terbaru',
+                'title' => 'Letra Musika Foun',
                 'items' => \App\Models\Song::latest()->take(4)->get(),
                 'route' => 'songs.show',
                 'icon' => 'fas fa-music'

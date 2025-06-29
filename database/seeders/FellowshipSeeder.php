@@ -13,6 +13,6 @@ class FellowshipSeeder extends Seeder
      */
     public function run(): void
     {
-       Fellowship::factory()->count(10)->create();
+        Fellowship::factory()->count(10)->create();
     }
 }

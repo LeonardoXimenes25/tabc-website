@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tentang | TABCTL')
+@section('title', 'Konaba-Ami | TABCTL')
 
 @section('content')
 <div class="container my-5">
@@ -21,8 +21,11 @@
         </div>
         <div class="card border-0 shadow-sm">
           <div class="card-body">
-            <p>Gereja kami didirikan pada tahun 1985 oleh Pdt. Dr. Jonathan Susanto dengan jemaat awal sebanyak 30 orang. Awalnya kami berkumpul di sebuah rumah sederhana di pusat kota.</p>
-            <p>Pada tahun 1995, kami pindah ke lokasi saat ini di Jl. Kebangkitan Nasional No. 45. Bangunan gereja yang sekarang merupakan hasil renovasi ketiga yang selesai pada tahun 2015.</p>
+            <p>
+              Igreja The Alliance Bible Church Timor Leste (TABC-TL), iha tempu Indonesia ho naran Gereja 
+              Kebangunan Kalam Allah di Timor Timur (GKKA) hari iha dia 28 Julu 1990 no hola parte husi igreja
+              Gereja Kristus Kalam Allah di Indonesia (GKKAI). Maibe tamba mudansa politika iha ne'ebe Timor Leste sai nasaun independente no iha soberanu rasik maka iha reuniaun Majelis iha tinan 2020, naran igreja muda no traduz ba iha lian ingles sai THE ALLIANCE BIBLE CHURCH di TIMOR LESTE (TABC-TL) to ohin loron
+            </p>
             <div class="text-center mt-3">
               <img src="https://via.placeholder.com/600x300?text=Gedung+Gereja" alt="Gedung Gereja" class="img-fluid rounded">
             </div>
@@ -47,7 +50,7 @@
             <h3 class="h5 mb-0">Visaun</h3>
           </div>
           <div class="card-body">
-            <p class="lead">"Menjadi gereja yang relevan dan menjadi berkat bagi kota dan bangsa."</p>
+            <p class="lead">"Sai Igreja ne'ebe hadomi Nai Maromak no kompaneiru inklui sai eskolante no sasin Kristus hahu husi Timor Leste to mundu tomak"</p>
           </div>
         </div>
         
@@ -57,13 +60,11 @@
             <h3 class="h5 mb-0">Misaun</h3>
           </div>
           <div class="card-body">
-            <ol>
-              <li class="mb-2">Memuridkan setiap anggota jemaat untuk bertumbuh dalam iman</li>
-              <li class="mb-2">Menjangkau masyarakat dengan kasih Kristus</li>
-              <li class="mb-2">Membangun komunitas yang peduli dan saling mengasihi</li>
-              <li class="mb-2">Mengembangkan pelayanan yang kreatif dan relevan</li>
-              <li>Berkontribusi positif bagi pembangunan kota dan bangsa</li>
-            </ol>
+            <p>
+              menjalankan misi Allah bagi dan melalui gereja-Nya, dalam bentuk persekutuan, pelayanan, 
+              dan kesaksian secara tertib dan teratur berdasarkan sistem Gereja Presbiterial, yang digariskan 
+              dalam Tata Gereja (Tager) dan Peraturan Internal Gereja (Pering) TABC-TL. 
+            </p>
           </div>
         </div>
       </section>

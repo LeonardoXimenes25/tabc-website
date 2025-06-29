@@ -26,8 +26,8 @@
           <!-- Level 2 - Wakil Ketua -->
           <div class="org-level text-center mb-4">
             <div class="org-node mx-auto bg-success text-white p-3 rounded" style="width: 260px;">
-              <h3 class="h5 mb-1">Vice-xefe Majelis</h3>
-              <p class="mb-0 small">Sdr. Sergio Cham</p>
+              <h3 class="h5 mb-1">Vice Majelis</h3>
+              {{-- <p class="mb-0 small">Senor. {{ $xefeMajelis->name }}</p> --}}
             </div>
             <div class="org-connector-vertical mx-auto"></div>
           </div>
@@ -36,7 +36,7 @@
           <div class="org-level text-center d-flex justify-content-center gap-3 mb-4">
             <div class="org-node bg-info text-white p-3 rounded" style="width: 240px;">
               <h3 class="h5 mb-1">Sekretaria 1</h3>
-              <p class="mb-0 small">Ibu Ika</p>
+              <p class="mb-0 small">senora Ika</p>
             </div>
             <div class="org-node bg-info text-white p-3 rounded" style="width: 240px;">
               <h3 class="h5 mb-1">Sekretaria 2</h3>
@@ -66,13 +66,17 @@
               <h3 class="h5 mb-1">Bidang Sarana</h3>
               <p class="mb-0 small">Bpk. Robert Chen</p>
             </div>
+            <div class="org-node bg-light p-3 rounded border" style="width: 220px;">
+              <h3 class="h5 mb-1">Bidang Sarana</h3>
+              <p class="mb-0 small">Bpk. Robert Chen</p>
+            </div>
           </div>
         </div>
         
         <!-- Catatan Struktur -->
         <div class="mt-4 p-3 bg-light rounded">
           <p class="small text-muted mb-0">
-            <i class="bi bi-info-circle"></i> <strong>Estrutura Prebisterial:</strong> 
+            <i class="bi bi-info-circle"></i><strong>Estrutura Prebisterial:</strong> 
             Xefe Majelis mak sai lideransa boot iha organisasaun igreja. 
             Maromak nia atan halao ministeriu iha seksaun espiritual ho kordenasaun husi majelis.
           </p>

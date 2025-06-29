@@ -21,26 +21,33 @@ class ArticleController extends Controller
 
     public function show($slug)
     {
-        $post = Article::with(['author', 'category', 'comment.user'])->where('slug', $slug)->firstOrFail();
+    $post = Article::with([
+        'author', 
+        'category', 
+        'comment' => function ($query) {
+            $query->whereNull('parent_id')          // hanya komentar utama
+                  ->with('user', 'replies.user');  // eager load user dan balasan komentar beserta user balasan
+        }
+    ])->where('slug', $slug)->firstOrFail();
 
-        // Ambil artikel terkait berdasarkan kategori
-        $relatedPosts = Article::where('id', '!=', $post->id)
-                               ->latest()
-                               ->take(4)
-                               ->with(['author', 'category'])
-                               ->get();
+    $relatedPosts = Article::where('id', '!=', $post->id)
+                        ->latest()
+                        ->take(4)
+                        ->with(['author', 'category'])
+                        ->get();
 
-        return view('articles.show', compact('post', 'relatedPosts'));
+    return view('articles.show', compact('post', 'relatedPosts'));
     }
+
 
     public function postsByAuthor($username)
     {
         $author = User::where('username', $username)->firstOrFail();
         
         $posts = $author->articles()
-                       ->with('category')
-                       ->latest()
-                       ->paginate(8);
+                    ->with('category')
+                    ->latest()
+                    ->paginate(8);
         
         return view('articles.posts', [
             'title' => "Artikel oleh $author->name",
