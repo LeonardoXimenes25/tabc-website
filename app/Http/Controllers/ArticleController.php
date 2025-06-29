@@ -16,7 +16,7 @@ class ArticleController extends Controller
     {
         // Ambil data artikel dengan relasi author dan category
         $posts = Article::with(['author', 'category'])->latest()->paginate(8);
-        return view('articles.posts', compact('posts', 'posts'));
+        return view('articles.posts', compact('posts'));
     }
 
     public function show($slug)
@@ -24,10 +24,12 @@ class ArticleController extends Controller
     $post = Article::with([
         'author', 
         'category', 
-        'comment' => function ($query) {
-            $query->whereNull('parent_id')          // hanya komentar utama
-                  ->with('user', 'replies.user');  // eager load user dan balasan komentar beserta user balasan
-        }
+        'comments' => function ($query) {
+                $query->whereNull('parent_id')
+                ->with(['user', 'replies' => function($q) {
+                $q->with('user')->orderBy('created_at')->limit(5);
+            }]);
+}
     ])->where('slug', $slug)->firstOrFail();
 
     $relatedPosts = Article::where('id', '!=', $post->id)

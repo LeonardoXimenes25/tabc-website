@@ -2,38 +2,55 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ArticleComment extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['author_id', 'article_id', 'parent_id', 'body'];
+    protected $fillable = [
+        'article_id',
+        'author_id',
+        'body',
+        'parent_id'
+    ];
 
-    // Relasi ke user/author
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class, 'author_id');
-    }
+     // Auto load relasi untuk efisiensi query
+    protected $with = ['replies'];
 
-    // Relasi ke article
+    /**
+     * Relasi ke artikel
+     */
     public function article(): BelongsTo
     {
         return $this->belongsTo(Article::class, 'article_id');
     }
 
-    // Relasi ke parent comment (jika balasan)
+    /**
+     * Relasi ke pengguna yang memberikan komentar
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
+
+    /**
+     * Relasi ke komentar induk
+     */
     public function parent(): BelongsTo
     {
         return $this->belongsTo(ArticleComment::class, 'parent_id');
     }
 
-    // Relasi ke replies (komentar yang membalas comment ini)
-    public function replies(): HasMany
+    /**
+     * Relasi ke balasan komentar ini
+     */
+    public function replies()
     {
-        return $this->hasMany(ArticleComment::class, 'parent_id');
+        return $this->hasMany(ArticleComment::class, 'parent_id')->orderBy('created_at');
     }
+
 }

@@ -98,9 +98,10 @@
         </div>
         @endauth
 
+
         {{-- Daftar komentar dan balasan --}}
         <div class="comments-list">
-            @forelse ($post->comment->whereNull('parent_id') as $comment)
+            @forelse ($post->comments->whereNull('parent_id') as $comment)
                 @include('components.comment', ['comment' => $comment, 'article' => $post, 'level' => 0])
             @empty
                 <div class="text-center py-4">
@@ -173,21 +174,54 @@
         margin-bottom: 1.2rem;
 
     .comment-item {
-        background-color: #f9f9f9;
-        padding: 15px;
-        border-radius: 6px;
-        border-left: 3px solid #dee2e6;
-        margin-bottom: 10px;
-    }
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 6px;
+    border-left: 3px solid #dee2e6;
+    margin-bottom: 10px;
+}
+.replies-list {
+    margin-top: 10px;
+}
 
-    .comments-list textarea {
-        font-size: 0.9rem;
-    }
 
-    .comments-list .btn-sm {
-        font-size: 0.8rem;
-        padding: 4px 12px;
-    }
     }
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    // Toggle form balas
+    document.querySelectorAll('.toggle-reply-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            const id = this.dataset.id;
+            const form = document.getElementById('reply-form-' + id);
+            if (form.style.display === 'none' || form.style.display === '') {
+                form.style.display = 'block';
+                this.textContent = 'kansela';
+            } else {
+                form.style.display = 'none';
+                this.textContent = 'Replay';
+            }
+        });
+    });
+
+    // Toggle semua balasan tersembunyi
+    document.querySelectorAll('.show-more-replies-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            const id = this.dataset.id;
+            const container = document.getElementById('hidden-replies-' + id);
+            if (container.classList.contains('d-none')) {
+                container.classList.remove('d-none');
+                this.textContent = '🔼 Eskonder replay';
+            } else {
+                container.classList.add('d-none');
+                const count = container.children.length;
+                this.textContent = '🔽 Haree ' + count + ' replay';
+            }
+        });
+    });
+});
+
+</script>
+
 @endsection
